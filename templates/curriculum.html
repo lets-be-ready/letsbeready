@@ -653,7 +653,7 @@
   <section class="cur-intro">
     <div class="cur-intro__inner">
       <p class="cur-intro__lead">{{curriculum_intro_lead}}</p>
-      <p class="cur-intro__sub">{{curriculum_intro_sub}}</p>
+      {{#if curriculum_intro_sub}}<p class="cur-intro__sub">{{curriculum_intro_sub}}</p>{{/if}}
     </div>
   </section>
 
@@ -773,7 +773,7 @@
           <span>{{curriculum_supplement_stat3_label}}</span>
         </div>
       </div>
-      <p class="cur-supplement__note">{{curriculum_supplement_note}}</p>
+      {{#if curriculum_supplement_note}}<p class="cur-supplement__note">{{curriculum_supplement_note}}</p>{{/if}}
     </div>
   </section>
 

@@ -569,7 +569,7 @@
   <!-- ====== CTA — Clean, warm ====== -->
   <section class="nut-cta">
     <div class="nut-cta__inner">
-      <h2>{{nutrition_cta_heading}}</h2>
+      {{#if nutrition_cta_heading}}<h2>{{nutrition_cta_heading}}</h2>{{/if}}
       <a href="donate.html" class="btn btn-secondary btn-lg">
         {{nutrition_cta_button}}
       </a>

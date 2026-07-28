@@ -425,12 +425,36 @@ function flattenImages(doc) {
   const out = {};
   for (const [key, value] of Object.entries(doc)) {
     if (value && typeof value === 'object' && value.asset && value.asset._ref) {
-      out[key] = sanityImageUrl(value);
+      const url = sanityImageUrl(value);
+      out[key] = url;
+      // Templates aren't consistent about naming: index.html asks for
+      // {{hero_image_url}} while the Sanity field is called hero_image, but
+      // curriculum.html asks for {{curriculum_hero_image}} directly. Publish
+      // both spellings so an uploaded image reaches the page either way.
+      // Without this, the _url templates silently kept rendering the old
+      // hardcoded photos no matter what an editor uploaded.
+      if (!key.endsWith('_url')) out[`${key}_url`] = url;
     } else {
       out[key] = value;
     }
   }
   return out;
+}
+
+/**
+ * True for content keys that hold a photo rather than text.
+ *
+ * Text and images need opposite fallback rules. Deleting text in the Studio
+ * should delete it on the site, so missing text resolves to empty. Images
+ * are different: no template guards its <img> with an {{#if}}, so blanking a
+ * photo the editor never uploaded would render a broken image. For those we
+ * keep the built-in default and let Sanity override it when one exists.
+ *
+ * Matches hero_image, hero_image_url, logo_url, favicon_url — but not
+ * hero_image_alt, which is text.
+ */
+function isImageKey(key) {
+  return /(^|_)(image|logo|favicon|photo)(_url)?$/.test(key);
 }
 
 /**
@@ -483,8 +507,19 @@ async function fetchSanityData() {
   ]);
 
   // Flatten all singletons into a flat content map keyed by field name (matches templates).
+  //
+  // Only the photo defaults are seeded here, NOT the fallback text. Sanity is
+  // the source of truth for copy: if an editor clears a field in the Studio,
+  // the field is removed from the document, and the site must show nothing
+  // rather than quietly reverting to the sample copy baked into this file.
+  // Seeding all of fallback.content here is what made deleted text immortal.
+  const imageDefaults = {};
+  for (const [key, value] of Object.entries(fallback.content)) {
+    if (isImageKey(key)) imageDefaults[key] = value;
+  }
+
   const content = {
-    ...fallback.content, // start from fallback so missing keys don't break templates
+    ...imageDefaults,
     ...flattenImages(siteSettings || {}),
     ...flattenImages(homepage || {}),
     ...flattenImages(nutritionPage || {}),
@@ -493,6 +528,33 @@ async function fetchSanityData() {
     ...flattenImages(partnersPage || {}),
     ...flattenImages(staffPageDoc || {}),
   };
+
+  // Any remaining key a template might reference resolves to an empty string.
+  // Without this the substitution pass leaves the literal {{key}} on the page
+  // (see processTemplate), and {{#if key}} blocks correctly render nothing.
+  // copyright_year and show_staff_link are computed a few lines below, so they
+  // are expected to be missing here and aren't worth reporting.
+  const COMPUTED_KEYS = ['copyright_year', 'show_staff_link'];
+  const cleared = [];
+  for (const key of Object.keys(fallback.content)) {
+    if (content[key] === undefined) {
+      content[key] = '';
+      if (!COMPUTED_KEYS.includes(key)) cleared.push(key);
+    }
+  }
+  if (cleared.length) {
+    console.log(`Empty in Sanity (rendering blank): ${cleared.length} field(s)`);
+    console.log(`  ${cleared.join(', ')}`);
+  }
+
+  // Photos still on a built-in default because nothing was uploaded in Sanity.
+  const stockPhotos = Object.keys(imageDefaults).filter(
+    (k) => content[k] === imageDefaults[k] && /^https?:/.test(String(imageDefaults[k] || '')),
+  );
+  if (stockPhotos.length) {
+    console.log(`Photos not yet uploaded to Sanity (using built-in default): ${stockPhotos.length}`);
+    console.log(`  ${stockPhotos.join(', ')}`);
+  }
 
   // Synthesize the show_staff_link key from the staffPage.enabled toggle.
   // Falsey values: undefined, null, false, '' — anything else means show.
@@ -667,12 +729,20 @@ function processTemplate(template, data) {
     }
   );
 
-  // 2. Process top-level {{#if key}}...{{/if}} blocks against data.content
+  // 2. Resolve {{#if key}}...{{/if}} blocks and {{key}} substitutions together,
+  // looping until the output stops changing.
+  //
+  // These have to interleave rather than run as separate passes. Partials are
+  // injected as ordinary content keys ({{footer_html}}), so a partial's own
+  // {{#if}} blocks don't exist in the page until a substitution pass has pulled
+  // the partial in. Running all the #if handling first meant any conditional
+  // inside _footer.html survived into the finished HTML as literal text.
   const content = data.content || {};
-  // Loop until no more #if blocks (handles nested or sequential blocks)
   let prev;
+  let safety = 10;
   do {
     prev = html;
+
     html = html.replace(
       /\{\{#if\s+(\w+)\}\}([\s\S]*?)\{\{\/if\}\}/g,
       (m, key, body) => {
@@ -684,19 +754,13 @@ function processTemplate(template, data) {
         return body;
       }
     );
-  } while (html !== prev);
 
-  // 3. Replace {{key}} with content values — repeat until stable so injected partials
-  // (e.g. footer_html) get their own nested keys substituted in subsequent passes.
-  let prevSub;
-  let safety = 5;
-  do {
-    prevSub = html;
     html = html.replace(/\{\{(\w+)\}\}/g, (match, key) => {
       return content[key] !== undefined ? content[key] : match;
     });
+
     safety--;
-  } while (html !== prevSub && safety > 0);
+  } while (html !== prev && safety > 0);
 
   return html;
 }
