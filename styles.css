@@ -2721,6 +2721,20 @@ section {
   transition: all var(--duration-normal) var(--ease-out);
 }
 
+/* Stands in for a board member with no photo uploaded. Deliberately reuses
+   .lp-team__photo so it inherits every size and breakpoint rule the real
+   photo has, and only adds the centring and type. */
+.lp-team__photo--initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.02em;
+}
+
 .lp-team__card:hover {
   box-shadow: var(--shadow-md);
   transform: translateY(-3px);

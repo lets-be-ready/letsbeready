@@ -570,12 +570,22 @@ async function fetchSanityData() {
   content.copyright_year = new Date().getFullYear().toString();
 
   // Map collection docs to the array shapes the templates expect.
-  const team_members = (teamDocs || []).map((t) => ({
-    name: t.name || '',
-    role: t.role || '',
-    bio: t.bio || '',
-    photo_url: sanityImageUrl(t.photo) || '',
-  }));
+  // Not every board member has uploaded a photo. The staff page already
+  // handles that by falling back to initials in a coloured circle; the
+  // homepage grid rendered a bare <img src=""> instead, which browsers draw
+  // as a broken image. Supply the same initials so it can do the same.
+  const team_members = (teamDocs || []).map((t) => {
+    const name = t.name || '';
+    const photo_url = sanityImageUrl(t.photo) || '';
+    return {
+      name,
+      role: t.role || '',
+      bio: t.bio || '',
+      photo_url,
+      no_photo: !photo_url,
+      initials: name.split(/\s+/).filter(Boolean).map((n) => n[0]).join('').toUpperCase().substring(0, 2),
+    };
+  });
 
   const staff_members = (staffDocs || []).map((s) => {
     const name = s.name || '';
