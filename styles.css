@@ -1204,12 +1204,28 @@ section {
   transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
 }
 
-.stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; opacity: 1; transform: translateY(0) translateZ(0); }
-.stagger-children.visible > *:nth-child(2) { transition-delay: 60ms; opacity: 1; transform: translateY(0) translateZ(0); }
-.stagger-children.visible > *:nth-child(3) { transition-delay: 120ms; opacity: 1; transform: translateY(0) translateZ(0); }
-.stagger-children.visible > *:nth-child(4) { transition-delay: 180ms; opacity: 1; transform: translateY(0) translateZ(0); }
-.stagger-children.visible > *:nth-child(5) { transition-delay: 240ms; opacity: 1; transform: translateY(0) translateZ(0); }
-.stagger-children.visible > *:nth-child(6) { transition-delay: 300ms; opacity: 1; transform: translateY(0) translateZ(0); }
+/* Reveal every child, however many there are. The nth-child rules below only
+   stagger the timing.
+
+   These two concerns used to be combined, with opacity: 1 repeated inside each
+   nth-child rule from 1 to 6. That capped the effect at six items: a seventh
+   child never matched a rule, so it kept the opacity: 0 set above and stayed
+   invisible while still occupying its grid cell. Adding a seventh and eighth
+   board member is exactly what triggered it — the cards were in the page the
+   whole time, just transparent. */
+.stagger-children.visible > * {
+  opacity: 1;
+  transform: translateY(0) translateZ(0);
+}
+
+.stagger-children.visible > *:nth-child(1) { transition-delay: 0ms; }
+.stagger-children.visible > *:nth-child(2) { transition-delay: 60ms; }
+.stagger-children.visible > *:nth-child(3) { transition-delay: 120ms; }
+.stagger-children.visible > *:nth-child(4) { transition-delay: 180ms; }
+.stagger-children.visible > *:nth-child(5) { transition-delay: 240ms; }
+.stagger-children.visible > *:nth-child(6) { transition-delay: 300ms; }
+/* Anything past the sixth shares the final delay instead of vanishing. */
+.stagger-children.visible > *:nth-child(n+7) { transition-delay: 360ms; }
 
 /* --- Donate Page --- */
 
