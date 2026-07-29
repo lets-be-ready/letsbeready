@@ -518,8 +518,28 @@ async function fetchSanityData() {
     if (isImageKey(key)) imageDefaults[key] = value;
   }
 
+  // Three text fields are also empty in Sanity, but nobody asked for them to
+  // go away — they went blank only as a consequence of the change above.
+  // Keeping their built-in value means this fix changes exactly what was
+  // reported and nothing else.
+  //
+  // The cost is that clearing one of these three in the Studio still won't
+  // remove it from the site. The proper repair is to write these values into
+  // Sanity and delete this list, at which point they behave like every other
+  // field. Until then the build logs whenever one is in use.
+  const TEXT_DEFAULTS = [
+    'globalgiving_url',           // GlobalGiving link in the footer and on Donate
+    'nutrition_cta_heading',      // headline above the Nutrition page donate button
+    'curriculum_supplement_note', // in-kind donation note on the Curriculum page
+  ];
+  const textDefaults = {};
+  for (const key of TEXT_DEFAULTS) {
+    if (fallback.content[key] !== undefined) textDefaults[key] = fallback.content[key];
+  }
+
   const content = {
     ...imageDefaults,
+    ...textDefaults,
     ...flattenImages(siteSettings || {}),
     ...flattenImages(homepage || {}),
     ...flattenImages(nutritionPage || {}),
@@ -545,6 +565,14 @@ async function fetchSanityData() {
   if (cleared.length) {
     console.log(`Empty in Sanity (rendering blank): ${cleared.length} field(s)`);
     console.log(`  ${cleared.join(', ')}`);
+  }
+
+  // Text still on a built-in default rather than coming from Sanity. Each of
+  // these is a field an editor cannot currently remove from the site.
+  const keptText = TEXT_DEFAULTS.filter((k) => content[k] === fallback.content[k]);
+  if (keptText.length) {
+    console.log(`Text held at a built-in default (not editable in Sanity): ${keptText.length}`);
+    console.log(`  ${keptText.join(', ')}`);
   }
 
   // Photos still on a built-in default because nothing was uploaded in Sanity.
