@@ -2183,6 +2183,12 @@ section {
   margin-top: var(--space-md);
 }
 
+/* Wider than the default container so each card gets more room
+   and every stat value holds a single line */
+.lp-proof .container {
+  max-width: 1360px;
+}
+
 .lp-proof__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -2190,7 +2196,7 @@ section {
 }
 
 .lp-proof__card {
-  padding: var(--space-2xl);
+  padding: var(--space-2xl) var(--space-xl);
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.08);
   border-radius: var(--radius-lg);
@@ -2206,18 +2212,13 @@ section {
 
 .lp-proof__number {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  /* Sized so even the longest value ("8 out of 10") holds one line */
+  font-size: clamp(2rem, 2.9vw, 2.6rem);
   font-weight: 700;
   color: var(--yellow);
   line-height: 1;
-  margin-bottom: var(--space-sm);
-  /* Reserve two number lines so a wrapping value ("8 out of 10")
-     doesn't push its card's label below the others */
-  min-height: 2em;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  white-space: nowrap;
+  margin-bottom: var(--space-md);
 }
 
 .lp-proof__label {
