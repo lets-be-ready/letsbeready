@@ -663,6 +663,18 @@ async function fetchSanityData() {
     };
   }
 
+  // Carousel galleries on the Programs page. Each is an array of images
+  // in Sanity; build() falls back to the section's single image when empty.
+  const toGallery = (arr) =>
+    (arr || []).map((img) => ({ url: sanityImageUrl(img) })).filter((g) => g.url);
+  const garden_gallery = toGallery((curriculumPage || {}).curriculum_garden_gallery);
+  const nuted_gallery = toGallery((curriculumPage || {}).curriculum_nuted_gallery);
+
+  // Instagram post links for the homepage "From the Classroom" band.
+  const instagram_posts = ((homepage || {}).instagram_posts || [])
+    .filter((u) => typeof u === 'string' && /^https?:\/\//.test(u))
+    .map((url) => ({ url }));
+
   // Apply collection fallbacks if Sanity returned empty
   return {
     content,
@@ -671,6 +683,9 @@ async function fetchSanityData() {
     partners: partners.length > 0 ? partners : fallback.partners,
     expense_allocation: expense_allocation.length > 0 ? expense_allocation : fallback.expense_allocation,
     classrooms,
+    garden_gallery,
+    nuted_gallery,
+    instagram_posts,
   };
 }
 
@@ -858,6 +873,27 @@ async function build() {
   const pieChart = generatePieChart(data.expense_allocation);
   data.content.pie_chart_svg = pieChart.svg;
   data.content.pie_chart_legend = pieChart.legend;
+
+  // Programs-page carousels: guarantee at least one slide (the section's
+  // single image) and give every slide the section's alt text.
+  const c = data.content;
+  const withAlt = (slides, alt) => slides.map((s) => ({ ...s, alt: s.alt || alt || '' }));
+  data.garden_gallery = withAlt(
+    data.garden_gallery && data.garden_gallery.length
+      ? data.garden_gallery
+      : [{ url: c.curriculum_garden_image }],
+    c.curriculum_garden_image_alt,
+  );
+  data.nuted_gallery = withAlt(
+    data.nuted_gallery && data.nuted_gallery.length
+      ? data.nuted_gallery
+      : [{ url: c.curriculum_nuted_image }],
+    c.curriculum_nuted_image_alt,
+  );
+
+  // Homepage Instagram band renders only when posts are configured.
+  data.instagram_posts = data.instagram_posts || [];
+  c.has_instagram = data.instagram_posts.length > 0;
 
   // 2. Clean and create dist directory
   if (fs.existsSync(DIST_DIR)) {

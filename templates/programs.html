@@ -304,6 +304,48 @@
       object-fit: cover;
     }
 
+    /* ---- CAROUSEL — photo boxes cycle through their gallery ---- */
+    .cur-carousel .cur-carousel__slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+    }
+
+    .cur-carousel .cur-carousel__slide.is-active {
+      opacity: 1;
+    }
+
+    .cur-carousel__dots {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 2;
+    }
+
+    .cur-carousel__dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.5);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .cur-carousel__dot.is-active {
+      background: var(--white);
+      transform: scale(1.25);
+    }
+
+    .cur-carousel--single .cur-carousel__dots {
+      display: none;
+    }
+
     .cur-feature__text .eyebrow {
       display: inline-block;
       font-size: 0.72rem;
@@ -991,8 +1033,9 @@
   <!-- ====== GARDENING ====== -->
   <section class="cur-feature">
     <div class="cur-feature__grid">
-      <div class="cur-feature__media">
-        <img src="{{curriculum_garden_image}}" alt="{{curriculum_garden_image_alt}}" loading="lazy">
+      <div class="cur-feature__media cur-carousel" data-carousel>
+        {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="cur-carousel__slide">{{/each}}
+        <div class="cur-carousel__dots"></div>
       </div>
       <div class="cur-feature__text">
         <span class="eyebrow">{{curriculum_garden_eyebrow}}</span>
@@ -1011,8 +1054,9 @@
   <!-- ====== NUTRITIONAL EDUCATION ====== -->
   <section class="cur-feature cur-feature--alt">
     <div class="cur-feature__grid cur-feature__grid--reverse">
-      <div class="cur-feature__media">
-        <img src="{{curriculum_nuted_image}}" alt="{{curriculum_nuted_image_alt}}" loading="lazy">
+      <div class="cur-feature__media cur-carousel" data-carousel>
+        {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="cur-carousel__slide">{{/each}}
+        <div class="cur-carousel__dots"></div>
       </div>
       <div class="cur-feature__text">
         <span class="eyebrow">{{curriculum_nuted_eyebrow}}</span>
@@ -1225,6 +1269,46 @@
 
       document.querySelectorAll('[data-countup]').forEach(function(el) {
         countObserver.observe(el);
+      });
+
+      // ---- Photo carousels: crossfade through each gallery ----
+      var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('[data-carousel]').forEach(function(box) {
+        var slides = Array.prototype.slice.call(box.querySelectorAll('.cur-carousel__slide'));
+        if (slides.length === 0) return;
+        if (slides.length === 1) {
+          box.classList.add('cur-carousel--single');
+          slides[0].classList.add('is-active');
+          return;
+        }
+        var dotsWrap = box.querySelector('.cur-carousel__dots');
+        var current = 0;
+        var timer = null;
+        var dots = slides.map(function(_, i) {
+          var b = document.createElement('button');
+          b.className = 'cur-carousel__dot';
+          b.setAttribute('aria-label', 'Photo ' + (i + 1) + ' of ' + slides.length);
+          b.addEventListener('click', function() { go(i); restart(); });
+          dotsWrap.appendChild(b);
+          return b;
+        });
+        function go(i) {
+          slides[current].classList.remove('is-active');
+          dots[current].classList.remove('is-active');
+          current = i;
+          slides[current].classList.add('is-active');
+          dots[current].classList.add('is-active');
+        }
+        function next() { go((current + 1) % slides.length); }
+        function restart() {
+          if (reducedMotion) return;
+          clearInterval(timer);
+          timer = setInterval(next, 4500);
+        }
+        box.addEventListener('mouseenter', function() { clearInterval(timer); });
+        box.addEventListener('mouseleave', restart);
+        go(0);
+        restart();
       });
     })();
   </script>

@@ -4411,3 +4411,49 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+/* ============================================================
+   LP INSTAGRAM — curated posts band ("From the Classroom")
+   ============================================================ */
+.lp-instagram {
+  background: var(--warm-white);
+}
+
+.lp-instagram__header {
+  text-align: center;
+  max-width: var(--max-width-narrow);
+  margin: 0 auto var(--space-2xl);
+  padding: 0 var(--space-xl);
+}
+
+.lp-instagram__grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-xl);
+  justify-items: center;
+}
+
+.lp-instagram__grid .instagram-media {
+  margin: 0 !important;
+  min-width: 0 !important;
+  width: 100% !important;
+  max-width: 400px !important;
+}
+
+.lp-instagram__follow {
+  text-align: center;
+  margin-top: var(--space-2xl);
+}
+
+.lp-instagram__follow a {
+  color: var(--blue);
+  font-weight: 600;
+}
+
+.lp-instagram__follow a:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}

@@ -75,6 +75,15 @@ export default defineType({
       group: 'garden',
     }),
     defineField({name: 'curriculum_garden_image_alt', title: 'Image Alt', type: 'string', group: 'garden'}),
+    defineField({
+      name: 'curriculum_garden_gallery',
+      title: 'Photo Gallery',
+      description:
+        'Add extra photos — the photo box scrolls through them automatically. If empty, only the single Image above shows.',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      group: 'garden',
+    }),
     defineField({name: 'curriculum_garden_point1', title: 'Bullet Point 1', type: 'string', group: 'garden'}),
     defineField({name: 'curriculum_garden_point2', title: 'Bullet Point 2', type: 'string', group: 'garden'}),
     defineField({name: 'curriculum_garden_point3', title: 'Bullet Point 3', type: 'string', group: 'garden'}),
@@ -91,6 +100,15 @@ export default defineType({
       group: 'nuted',
     }),
     defineField({name: 'curriculum_nuted_image_alt', title: 'Image Alt', type: 'string', group: 'nuted'}),
+    defineField({
+      name: 'curriculum_nuted_gallery',
+      title: 'Photo Gallery',
+      description:
+        'Add extra photos — the photo box scrolls through them automatically. If empty, only the single Image above shows.',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: true}}],
+      group: 'nuted',
+    }),
     defineField({name: 'curriculum_nuted_point1', title: 'Bullet Point 1', type: 'string', group: 'nuted'}),
     defineField({name: 'curriculum_nuted_point2', title: 'Bullet Point 2', type: 'string', group: 'nuted'}),
     defineField({name: 'curriculum_nuted_point3', title: 'Bullet Point 3', type: 'string', group: 'nuted'}),

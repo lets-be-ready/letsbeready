@@ -16,9 +16,21 @@ export default defineType({
     {name: 'transparency', title: 'Transparency'},
     {name: 'team', title: 'Team Section'},
     {name: 'quote', title: 'Founder Quote'},
+    {name: 'instagram', title: 'Instagram'},
     {name: 'finalCta', title: 'Final CTA'},
   ],
   fields: [
+    // ============ INSTAGRAM ============
+    defineField({
+      name: 'instagram_posts',
+      title: 'Instagram Post Links',
+      description:
+        'Paste links to 2-3 Instagram posts or reels. They appear in the "From the Classroom" section on the homepage. Leave empty to hide the section.',
+      type: 'array',
+      of: [{type: 'url'}],
+      group: 'instagram',
+    }),
+
     // ============ HERO ============
     defineField({name: 'hero_headline', title: 'Headline', type: 'text', rows: 2, group: 'hero'}),
     defineField({name: 'hero_sub', title: 'Subheadline', type: 'text', rows: 2, group: 'hero'}),
