@@ -14,7 +14,7 @@
 [functions]
   directory = "netlify/functions"
 
-# Clean URLs, same set as vercel.json rewrites.
+# Clean URLs.
 [[redirects]]
   from = "/donate"
   to = "/donate.html"
@@ -26,14 +26,24 @@
   status = 200
 
 [[redirects]]
-  from = "/nutrition"
-  to = "/nutrition.html"
+  from = "/about"
+  to = "/about.html"
   status = 200
 
 [[redirects]]
-  from = "/curriculum"
-  to = "/curriculum.html"
+  from = "/programs"
+  to = "/programs.html"
   status = 200
+
+[[redirects]]
+  from = "/team"
+  to = "/team.html"
+  status = 200
+
+[[redirects]]
+  from = "/our-team"
+  to = "/team.html"
+  status = 301
 
 [[redirects]]
   from = "/staff"
@@ -44,6 +54,27 @@
   from = "/training"
   to = "/training.html"
   status = 200
+
+# Old program URLs — merged into /programs (2026-08)
+[[redirects]]
+  from = "/curriculum"
+  to = "/programs"
+  status = 301
+
+[[redirects]]
+  from = "/curriculum.html"
+  to = "/programs"
+  status = 301
+
+[[redirects]]
+  from = "/nutrition"
+  to = "/programs#nutrition"
+  status = 301
+
+[[redirects]]
+  from = "/nutrition.html"
+  to = "/programs#nutrition"
+  status = 301
 
 [[headers]]
   for = "/*"

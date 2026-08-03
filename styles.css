@@ -4242,3 +4242,157 @@ section {
     filter: none !important;
   }
 }
+
+/* ============================================================
+   PAGE HERO — light header for interior pages (About, Team)
+   ============================================================ */
+.page-hero {
+  padding: calc(var(--nav-height) + var(--space-4xl)) var(--space-xl) var(--space-2xl);
+  background: var(--warm-white);
+  text-align: center;
+}
+
+.page-hero__inner {
+  max-width: var(--max-width-narrow);
+  margin: 0 auto;
+}
+
+.page-hero .eyebrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: var(--space-md);
+}
+
+.page-hero h1 {
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--dark);
+}
+
+.page-hero h1 em {
+  font-style: normal;
+  color: var(--blue);
+}
+
+.page-hero p {
+  margin-top: var(--space-xl);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================================
+   LP STORY — landing teaser link under the 1-in-5 headline
+   ============================================================ */
+.lp-story__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: var(--space-xl);
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.lp-story__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Centered eyebrow row above the mission quote */
+.lp-quote__eyebrow-row {
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+/* ============================================================
+   LP PROGRAMS — two photo tiles linking to the Programs page
+   ============================================================ */
+.lp-programs {
+  background: var(--white);
+}
+
+.lp-programs__header {
+  text-align: center;
+  max-width: var(--max-width-narrow);
+  margin: 0 auto var(--space-2xl);
+  padding: 0 var(--space-xl);
+}
+
+.lp-programs__grid {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.lp-programs__card {
+  position: relative;
+  display: block;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 11;
+  box-shadow: var(--shadow-lg);
+}
+
+.lp-programs__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.lp-programs__card:hover img {
+  transform: scale(1.04);
+}
+
+.lp-programs__card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(30, 23, 60, 0.85) 0%, rgba(30, 23, 60, 0.25) 45%, rgba(30, 23, 60, 0) 70%);
+}
+
+.lp-programs__label {
+  position: absolute;
+  left: var(--space-xl);
+  right: var(--space-xl);
+  bottom: var(--space-xl);
+  z-index: 2;
+  color: var(--white);
+}
+
+.lp-programs__label h3 {
+  color: var(--white);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+}
+
+.lp-programs__label span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@media (max-width: 768px) {
+  .lp-programs__grid {
+    grid-template-columns: 1fr;
+  }
+}

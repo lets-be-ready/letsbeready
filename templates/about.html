@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — Let's Be Ready</title>
+  <meta name="description" content="How Let's Be Ready works: community-run preschools in rural Guatemala, a culturally adapted curriculum, and full financial transparency since 2008.">
+  <meta property="og:title" content="About Us — Let's Be Ready">
+  <meta property="og:description" content="The story, the model, and the open books behind 45 community-run preschools in rural Guatemala.">
+  <meta property="og:image" content="{{og_image_url}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.letsbeready.org/about">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="{{favicon_url}}">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav nav--scrolled" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo">
+        <img src="{{logo_url}}" alt="{{site_name}}" width="40" height="40">
+        {{site_name}}
+      </a>
+      <ul class="nav__links">
+        <li><a href="about.html" class="nav__link nav__link--active">About Us</a></li>
+        <li><a href="programs.html" class="nav__link">Our Programs</a></li>
+        <li><a href="team.html" class="nav__link">Our Team</a></li>
+        <li><a href="partners.html" class="nav__link">Partners</a></li>
+      </ul>
+      <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Donate</a>
+      <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-menu__links">
+      <li><a href="about.html" class="mobile-menu__link">About Us</a></li>
+      <li><a href="programs.html" class="mobile-menu__link">Our Programs</a></li>
+      <li><a href="team.html" class="mobile-menu__link">Our Team</a></li>
+      <li><a href="partners.html" class="mobile-menu__link">Partners</a></li>
+      <li><a href="donate.html" class="btn btn-primary btn-lg" style="margin-top:1rem;">Donate</a></li>
+    </ul>
+  </div>
+
+
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <span class="eyebrow">About Us</span>
+      <h1>What We Do</h1>
+      <p>{{hero_sub}}</p>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE DISPARITY — Stark. Confronting. Short.
+       ============================================================ -->
+  <section class="lp-disparity" id="story">
+    <div class="container container--narrow">
+      <div class="lp-disparity__block reveal">
+        <span class="eyebrow" style="color: var(--text-muted);">{{disparity_eyebrow}}</span>
+        <h2 class="lp-disparity__headline">
+          {{disparity_headline}}
+        </h2>
+      </div>
+
+      <div class="lp-disparity__stats reveal">
+        <div class="lp-disparity__stat">
+          <div class="lp-disparity__stat-visual lp-disparity__stat-visual--problem">
+            <div class="lp-disparity__bar" style="--bar-width: 80%;"></div>
+          </div>
+          <div class="lp-disparity__stat-text">
+            <strong>{{disparity_stat1_value}}</strong> {{disparity_stat1_text}}
+          </div>
+        </div>
+        <div class="lp-disparity__stat">
+          <div class="lp-disparity__stat-visual lp-disparity__stat-visual--problem">
+            <div class="lp-disparity__bar" style="--bar-width: 100%;"></div>
+          </div>
+          <div class="lp-disparity__stat-text">
+            <strong>{{disparity_stat2_value}}</strong> {{disparity_stat2_text}}
+          </div>
+        </div>
+        <div class="lp-disparity__stat">
+          <div class="lp-disparity__stat-visual lp-disparity__stat-visual--problem">
+            <div class="lp-disparity__bar" style="--bar-width: 65%;"></div>
+          </div>
+          <div class="lp-disparity__stat-text">
+            <strong>{{disparity_stat3_value}}</strong> {{disparity_stat3_text}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE TURN — "But" — This is where hope starts
+       ============================================================ -->
+  <section class="lp-turn">
+    <div class="container container--narrow">
+      <div class="lp-turn__content reveal">
+        <div class="lp-turn__word">{{turn_word}}</div>
+        <h2>
+          {{turn_question}}
+        </h2>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE MODEL — Visual storytelling of how it works
+       ============================================================ -->
+  <section class="lp-model">
+    <div class="container">
+      <div class="lp-model__grid">
+
+        <div class="lp-model__step reveal-left">
+          <div class="lp-model__step-number">01</div>
+          <img
+            src="{{model_step1_image_url}}"
+            alt="{{model_step1_image_alt}}"
+            class="lp-model__step-image"
+          >
+          <div class="lp-model__step-content">
+            <h3>{{model_step1_title}}</h3>
+            <p>
+              {{model_step1_text}}
+            </p>
+          </div>
+        </div>
+
+        <div class="lp-model__step lp-model__step--reverse reveal-left">
+          <div class="lp-model__step-number">02</div>
+          <img
+            src="{{model_step2_image_url}}"
+            alt="{{model_step2_image_alt}}"
+            class="lp-model__step-image"
+          >
+          <div class="lp-model__step-content">
+            <h3>{{model_step2_title}}</h3>
+            <p>
+              {{model_step2_text}}
+            </p>
+          </div>
+        </div>
+
+        <div class="lp-model__step reveal-left">
+          <div class="lp-model__step-number">03</div>
+          <img
+            src="{{model_step3_image_url}}"
+            alt="{{model_step3_image_alt}}"
+            class="lp-model__step-image"
+          >
+          <div class="lp-model__step-content">
+            <h3>{{model_step3_title}}</h3>
+            <p>
+              {{model_step3_text}}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE COST — Make the donation feel tangible
+       ============================================================ -->
+  <section class="lp-cost">
+    <div class="container container--narrow">
+      <div class="lp-cost__content reveal">
+        <span class="eyebrow">{{cost_eyebrow}}</span>
+        <div class="lp-cost__comparison">
+          <div class="lp-cost__item">
+            <div class="lp-cost__amount">{{cost_per_classroom}}</div>
+            <div class="lp-cost__desc">
+              {{cost_classroom_desc}}
+            </div>
+          </div>
+        </div>
+        <p class="lp-cost__context">
+          {{cost_context}}
+        </p>
+        <a href="donate.html" class="btn btn-primary btn-lg">
+          {{cost_cta_text}}
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       WHERE IT GOES — Simple, honest
+       ============================================================ -->
+  <section class="lp-allocation">
+    <div class="container">
+      <div class="lp-allocation__grid stagger-children">
+        <div class="lp-allocation__item">
+          <div class="lp-allocation__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="12" r="6" stroke="var(--blue)" stroke-width="2"/><path d="M6 28c0-5.523 4.477-10 10-10s10 4.477 10 10" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h4>{{allocation_item1_title}}</h4>
+          <p>{{allocation_item1_desc}}</p>
+        </div>
+        <div class="lp-allocation__item">
+          <div class="lp-allocation__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="3" stroke="var(--blue)" stroke-width="2"/><path d="M4 14h24M10 4v4M22 4v4" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h4>{{allocation_item2_title}}</h4>
+          <p>{{allocation_item2_desc}}</p>
+        </div>
+        <div class="lp-allocation__item">
+          <div class="lp-allocation__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 6c-4 0-10 2-10 8s4 10 10 12c6-2 10-6 10-12S20 6 16 6z" stroke="var(--blue)" stroke-width="2"/><path d="M12 16l3 3 5-6" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>{{allocation_item3_title}}</h4>
+          <p>{{allocation_item3_desc}}</p>
+        </div>
+        <div class="lp-allocation__item">
+          <div class="lp-allocation__icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 4v6M16 22v6M4 16h6M22 16h6M7.5 7.5l4.2 4.2M20.3 20.3l4.2 4.2M7.5 24.5l4.2-4.2M20.3 11.7l4.2-4.2" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <h4>{{allocation_item4_title}}</h4>
+          <p>{{allocation_item4_desc}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       TRANSPARENCY — Open books, trust signals
+       ============================================================ -->
+  <section class="lp-transparency" id="transparency">
+    <div class="container container--narrow">
+      <div class="lp-transparency__split">
+        <div class="lp-transparency__text reveal">
+          <span class="eyebrow">{{transparency_eyebrow}}</span>
+          <h2>{{transparency_heading}}</h2>
+          <p>
+            {{transparency_text}}
+          </p>
+
+          <!-- Expense Pie Chart (generated from Expense Allocation sheet) -->
+          <div class="lp-transparency__chart">
+            {{pie_chart_svg}}
+            {{pie_chart_legend}}
+            <div class="lp-transparency__financials">
+              <div class="lp-transparency__fin-item">
+                <span class="lp-transparency__fin-label">{{finance_year}} donations received</span>
+                <span class="lp-transparency__fin-value">{{finance_total_donated}}</span>
+              </div>
+              <div class="lp-transparency__fin-item">
+                <span class="lp-transparency__fin-label">{{finance_year}} total expenditures</span>
+                <span class="lp-transparency__fin-value">{{finance_total_spent}}</span>
+              </div>
+            </div>
+          </div>
+          <p class="lp-transparency__contact">
+            Have questions about our finances? <a href="mailto:{{contact_email}}">We're happy to share more.</a>
+          </p>
+
+          <!-- Trust Badges -->
+          <div class="trust-badges">
+            <div class="trust-badge">
+              <div class="trust-badge__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="var(--blue)" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="trust-badge__text">
+                <strong>Verified 501(c)(3)</strong>
+                <span>Tax-deductible nonprofit</span>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="trust-badge__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--blue)" stroke-width="2"/><path d="M12 7v5l3 3" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="trust-badge__text">
+                <strong>17 Years</strong>
+                <span>Proven track record since 2008</span>
+              </div>
+            </div>
+            <div class="trust-badge">
+              <div class="trust-badge__icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5z" stroke="var(--blue)" stroke-width="2"/><path d="M9 12l2 2 4-4" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div class="trust-badge__text">
+                <strong>100% Transparent</strong>
+                <span>Open books, accountable to you</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FINAL CTA — The ask. One button. Clear stakes.
+       ============================================================ -->
+  <section class="lp-final-cta">
+    <div class="container container--narrow">
+      <div class="lp-final-cta__content reveal">
+        <h2>
+          {{final_cta_heading}}
+        </h2>
+        <p>
+          {{final_cta_text}}
+        </p>
+        <a href="donate.html" class="btn btn-secondary btn-lg">
+          {{final_cta_button}}
+        </a>
+        <div class="lp-final-cta__trust">
+          <span>501(c)(3) tax-deductible</span>
+          <span>&middot;</span>
+          <span>100% funds programs</span>
+          <span>&middot;</span>
+          <span>Zero overhead</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  {{footer_html}}
+
+  <script src="main.js"></script>
+</body>
+</html>

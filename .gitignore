@@ -32,3 +32,6 @@ gdoc-photos/
 
 # Sanity local cache
 .sanity/
+
+# Local Netlify folder
+.netlify

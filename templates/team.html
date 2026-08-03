@@ -3,11 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Staff — Let's Be Ready</title>
-  <meta name="description" content="Meet the teachers, coordinators, and field staff who run Let's Be Ready preschools in rural Guatemala.">
-  <meta property="og:title" content="Our Staff — Let's Be Ready">
-  <meta property="og:description" content="The faces behind every classroom.">
+  <title>Our Team — Let's Be Ready</title>
+  <meta name="description" content="Meet the people behind Let's Be Ready — the board, administrators, and Guatemalan women who run 45 community preschools.">
+  <meta property="og:title" content="Our Team — Let's Be Ready">
+  <meta property="og:description" content="Run by Guatemalan women. Supported by people like you.">
   <meta property="og:image" content="{{og_image_url}}">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.letsbeready.org/team">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,21 +19,21 @@
 
   <style>
     /* ========================================
-       STAFF PAGE — Auto-flowing grid, never breaks
+       TEAM PAGE — Board grid + optional staff section
        ======================================== */
 
-    .staff-hero {
-      padding: calc(var(--nav-height) + var(--space-4xl)) var(--space-xl) var(--space-3xl);
+    .team-staff {
+      padding: var(--space-4xl) var(--space-xl) var(--space-5xl);
       background: var(--warm-white);
+    }
+
+    .team-staff__head {
       text-align: center;
-    }
-
-    .staff-hero__inner {
       max-width: var(--max-width-narrow);
-      margin: 0 auto;
+      margin: 0 auto var(--space-2xl);
     }
 
-    .staff-hero .eyebrow {
+    .team-staff__head .eyebrow {
       display: inline-block;
       font-size: 0.75rem;
       font-weight: 700;
@@ -41,40 +43,24 @@
       margin-bottom: var(--space-md);
     }
 
-    .staff-hero h1 {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
+    .team-staff__head h2 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 800;
       line-height: 1.05;
-      letter-spacing: -0.04em;
+      letter-spacing: -0.03em;
       color: var(--dark);
     }
 
-    .staff-hero h1 em {
+    .team-staff__head h2 em {
       font-style: normal;
       color: var(--blue);
     }
 
-    .staff-hero p {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* ---- GRID ---- */
-    .staff-grid {
-      padding: var(--space-3xl) var(--space-xl) var(--space-5xl);
-      background: var(--warm-white);
-    }
-
+    /* Staff cards (same look as the staff page) */
     .staff-grid__inner {
       max-width: var(--max-width);
       margin: 0 auto;
       display: grid;
-      /* Auto-flowing grid: as many columns as fit, each ≥240px */
       grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
       gap: var(--space-xl);
     }
@@ -156,36 +142,6 @@
       line-height: 1.6;
     }
 
-    /* Empty state — never shown if data is present */
-    .staff-empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: var(--space-4xl) var(--space-xl);
-      color: var(--text-muted);
-    }
-
-    /* ---- Back link ---- */
-    .staff-back {
-      padding: 0 var(--space-xl) var(--space-5xl);
-      text-align: center;
-      background: var(--warm-white);
-    }
-
-    .staff-back a {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      color: var(--blue);
-      font-weight: 600;
-      font-size: 0.95rem;
-      text-decoration: none;
-    }
-
-    .staff-back a:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-
     @media (max-width: 600px) {
       .staff-grid__inner {
         grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -213,7 +169,7 @@
       <ul class="nav__links">
         <li><a href="about.html" class="nav__link">About Us</a></li>
         <li><a href="programs.html" class="nav__link">Our Programs</a></li>
-        <li><a href="team.html" class="nav__link">Our Team</a></li>
+        <li><a href="team.html" class="nav__link nav__link--active">Our Team</a></li>
         <li><a href="partners.html" class="nav__link">Partners</a></li>
       </ul>
       <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Donate</a>
@@ -234,18 +190,50 @@
   </div>
 
 
-  <!-- ====== HERO ====== -->
-  <section class="staff-hero">
-    <div class="staff-hero__inner">
-      <span class="eyebrow">{{staff_eyebrow}}</span>
-      <h1>{{staff_heading}}</h1>
-      <p>{{staff_intro}}</p>
+  <!-- ====== PAGE HERO ====== -->
+  <section class="page-hero">
+    <div class="page-hero__inner">
+      <span class="eyebrow">{{team_eyebrow}}</span>
+      <h1>{{team_heading}}</h1>
     </div>
   </section>
 
 
-  <!-- ====== GRID ====== -->
-  <section class="staff-grid">
+  <!-- ============================================================
+       TEAM — Faces. Real people. Brief.
+       ============================================================ -->
+  <section class="lp-team" id="team">
+    <div class="container">
+      <div class="lp-team__grid stagger-children">
+        {{#each team_members}}
+        <div class="lp-team__card">
+          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" class="lp-team__photo">{{/if}}
+          {{#if no_photo}}<div class="lp-team__photo lp-team__photo--initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
+          <div class="lp-team__name">{{name}}</div>
+          <div class="lp-team__role">{{role}}</div>
+          <p>{{bio}}</p>
+        </div>
+        {{/each}}
+      </div>
+
+      <div class="lp-team__footer reveal">
+        <p>
+          {{team_footer_text}}
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       STAFF — appears when the staff toggle is enabled in Sanity
+       ============================================================ -->
+  {{#if show_staff_link}}
+  <section class="team-staff" id="staff">
+    <div class="team-staff__head">
+      <span class="eyebrow">{{staff_eyebrow}}</span>
+      <h2>{{staff_heading}}</h2>
+    </div>
     <div class="staff-grid__inner">
       {{#each staff_members}}
       <div class="staff-card">
@@ -261,12 +249,7 @@
       {{/each}}
     </div>
   </section>
-
-
-  <!-- ====== BACK LINK ====== -->
-  <section class="staff-back">
-    <a href="index.html">&larr; Back to home</a>
-  </section>
+  {{/if}}
 
 
   {{footer_html}}

@@ -872,7 +872,7 @@ async function build() {
   }
 
   // 4. Process templates (skip files starting with _ — they're partials)
-  const templateFiles = ['index.html', 'donate.html', 'partners.html', 'nutrition.html', 'curriculum.html', 'staff.html'];
+  const templateFiles = ['index.html', 'about.html', 'programs.html', 'team.html', 'donate.html', 'partners.html', 'staff.html'];
   for (const file of templateFiles) {
     const templatePath = path.join(TEMPLATES_DIR, file);
     if (!fs.existsSync(templatePath)) {
