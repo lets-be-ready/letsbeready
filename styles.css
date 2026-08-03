@@ -2246,19 +2246,17 @@ section {
 
 .lp-map__layout {
   display: grid;
-  grid-template-columns: 340px 1fr;
+  grid-template-columns: 400px 1fr;
   gap: var(--space-3xl);
-  align-items: start;
-}
-
-.lp-map__text {
-  padding-top: var(--space-lg);
+  align-items: center;
 }
 
 .lp-map__text h2 {
   margin-top: var(--space-md);
   margin-bottom: var(--space-lg);
-  line-height: 1.2;
+  /* Sized so "5 departments." holds one line in the 400px column */
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  line-height: 1.15;
 }
 
 .lp-map__text p {
