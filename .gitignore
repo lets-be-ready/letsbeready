@@ -35,3 +35,4 @@ gdoc-photos/
 
 # Local Netlify folder
 .netlify
+.wrangler/
