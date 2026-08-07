@@ -671,9 +671,14 @@ async function fetchSanityData() {
   const nuted_gallery = toGallery((curriculumPage || {}).curriculum_nuted_gallery);
 
   // Instagram post links for the homepage "From the Classroom" band.
+  // Editors paste URLs as the browser shows them (instagram.com/account/p/CODE/),
+  // but embed.js only reliably renders the canonical instagram.com/p/CODE/ form.
   const instagram_posts = ((homepage || {}).instagram_posts || [])
     .filter((u) => typeof u === 'string' && /^https?:\/\//.test(u))
-    .map((url) => ({ url }));
+    .map((url) => {
+      const m = url.match(/instagram\.com\/(?:[^/]+\/)?(p|reel|tv)\/([A-Za-z0-9_-]+)/i);
+      return { url: m ? `https://www.instagram.com/${m[1].toLowerCase()}/${m[2]}/` : url };
+    });
 
   // Apply collection fallbacks if Sanity returned empty
   return {
