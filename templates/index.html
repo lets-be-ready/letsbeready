@@ -242,13 +242,16 @@
     </div>
     <div class="lp-instagram__grid">
       {{#each instagram_posts}}
-      <blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>
+      {{#if image}}<a class="lp-ig-tile reveal" href="{{url}}" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="{{image}}" alt="{{alt}}" loading="lazy"></a>{{/if}}
+      {{#if needs_embed}}<blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>{{/if}}
       {{/each}}
     </div>
     <p class="lp-instagram__follow">
       <a href="{{social_instagram}}" target="_blank" rel="noopener">Follow us on Instagram &rarr;</a>
     </p>
   </section>
+  {{/if}}
+  {{#if has_instagram_fallback}}
   <script async src="https://www.instagram.com/embed.js"></script>
   {{/if}}
 

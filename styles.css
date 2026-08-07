@@ -4443,6 +4443,27 @@ section {
   max-width: 400px !important;
 }
 
+/* Self-hosted photo tiles — just the image, linking to the post */
+.lp-ig-tile {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.lp-ig-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.lp-ig-tile:hover img {
+  transform: scale(1.04);
+}
+
 .lp-instagram__follow {
   text-align: center;
   margin-top: var(--space-2xl);
