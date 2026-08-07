@@ -865,66 +865,6 @@ function copyDirSync(src, dest) {
  *   5. Write classrooms.json for the Leaflet map
  *   6. Copy static files and asset directories to dist/
  */
-/**
- * Fetch each Instagram post's photo at build time so the homepage band can
- * render quiet self-hosted image tiles instead of Instagram's embed card.
- *
- * Instagram serves og:image metadata to link-preview crawlers (that's how
- * WhatsApp/Slack previews work), while plain browser-UA fetches get a login
- * shell — so this request must identify as facebookexternalhit.
- *
- * Mutates each post in place: on success sets `image` (local dist path),
- * `alt`, and stashes the downloaded bytes on `_bytes` for build() to write
- * after the dist directory exists. On any failure the post keeps
- * `needs_embed`, which makes the template fall back to the official embed —
- * the band degrades, it never disappears.
- */
-const IG_CRAWLER_UA = 'facebookexternalhit/1.1 (+http://www.facebook.com/externalhit_uatext.php)';
-
-async function resolveInstagramTiles(posts) {
-  for (const post of posts) {
-    post.image = '';
-    post.needs_embed = '1';
-    try {
-      const m = post.url.match(/instagram\.com\/(p|reel|tv)\/([A-Za-z0-9_-]+)/i);
-      if (!m) continue;
-      const code = m[2];
-      const res = await fetch(post.url, {
-        headers: { 'User-Agent': IG_CRAWLER_UA, 'Accept-Language': 'en-US,en;q=0.9' },
-      });
-      if (!res.ok) {
-        console.warn(`Instagram tile: post page ${res.status} for ${post.url}`);
-        continue;
-      }
-      const html = await res.text();
-      const imgTag = (html.match(/<meta[^>]+og:image[^>]*>/) || [])[0];
-      const src = imgTag && (imgTag.match(/content="([^"]+)"/) || [])[1];
-      if (!src) {
-        console.warn(`Instagram tile: no og:image served for ${post.url}`);
-        continue;
-      }
-      const imgRes = await fetch(src.replace(/&amp;/g, '&'), {
-        headers: { 'User-Agent': IG_CRAWLER_UA },
-      });
-      if (!imgRes.ok) {
-        console.warn(`Instagram tile: photo fetch ${imgRes.status} for ${post.url}`);
-        continue;
-      }
-      post._bytes = Buffer.from(await imgRes.arrayBuffer());
-      const titleTag = (html.match(/<meta[^>]+og:title[^>]*>/) || [])[0];
-      const rawAlt = (titleTag && (titleTag.match(/content="([^"]+)"/) || [])[1]) || '';
-      post.alt =
-        rawAlt.replace(/&amp;/g, '&').replace(/["<>]/g, '').slice(0, 300) ||
-        "Instagram post from Let's Be Ready";
-      post.image = `assets/ig-${code}.jpg`;
-      post.needs_embed = '';
-      console.log(`Instagram tile: ${code} (${Math.round(post._bytes.length / 1024)} KB)`);
-    } catch (e) {
-      console.warn(`Instagram tile failed for ${post.url}: ${e.message}`);
-    }
-  }
-}
-
 async function build() {
   console.log('Building Let\'s Be Ready website...\n');
 
@@ -959,12 +899,6 @@ async function build() {
   // Homepage Instagram band renders only when posts are configured.
   data.instagram_posts = data.instagram_posts || [];
   c.has_instagram = data.instagram_posts.length > 0;
-
-  // Self-host each post's photo so the band shows quiet image tiles.
-  // Posts whose photo can't be fetched fall back to the official embed,
-  // and only that fallback needs Instagram's script.
-  await resolveInstagramTiles(data.instagram_posts);
-  c.has_instagram_fallback = data.instagram_posts.some((p) => p.needs_embed) ? '1' : '';
 
   // 2. Clean and create dist directory
   if (fs.existsSync(DIST_DIR)) {
@@ -1029,16 +963,6 @@ async function build() {
       copyDirSync(srcPath, path.join(DIST_DIR, dir));
       console.log(`Copied: ${dir}/`);
     }
-  }
-
-  // 6. Write the self-hosted Instagram photos (bytes fetched in step 1)
-  const igTiles = (data.instagram_posts || []).filter((p) => p._bytes);
-  if (igTiles.length) {
-    ensureDir(path.join(DIST_DIR, 'assets'));
-    for (const p of igTiles) {
-      fs.writeFileSync(path.join(DIST_DIR, p.image), p._bytes);
-    }
-    console.log(`Wrote ${igTiles.length} Instagram photo(s) to assets/`);
   }
 
   console.log(`\nBuild complete! Output in: ${DIST_DIR}`);
