@@ -90,3 +90,57 @@
   letter-spacing: -0.03em;
   line-height: 1.08;
 }
+
+/* ============================================================
+   CONTRAST v2 — the identity, louder where it counts
+   ============================================================ */
+
+/* --- The 1-in-5 gets the yellow marker: attention means yellow --- */
+.rd-contrast .lp-disparity {
+  background: var(--white);
+}
+.rd-contrast .lp-disparity__headline em {
+  font-style: normal;
+  background: var(--yellow);
+  color: var(--dark);
+  padding: 0 0.16em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* --- Hero: the em keeps its yellow, everything else calms --- */
+.rd-contrast .lp-hero__headline {
+  font-size: clamp(2.8rem, 6.4vw, 5rem);
+}
+
+/* --- Section eyebrows: a short blue stroke above, like a chapter mark --- */
+.rd-contrast .lp-programs__header .eyebrow,
+.rd-contrast .lp-map__text .eyebrow,
+.rd-contrast .lp-instagram__header .eyebrow {
+  position: relative;
+  padding-top: 0.85rem;
+}
+.rd-contrast .lp-programs__header .eyebrow::before,
+.rd-contrast .lp-map__text .eyebrow::before,
+.rd-contrast .lp-instagram__header .eyebrow::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2.25rem;
+  height: 3px;
+  background: var(--blue);
+}
+.rd-contrast .lp-map__text .eyebrow::before {
+  left: 0;
+  transform: none;
+}
+
+/* --- IG tiles: crisp squares, tiny radius to match the system --- */
+.rd-contrast .lp-instagram__grid {
+  gap: 0.75rem;
+}
+.rd-contrast .lp-ig-tile {
+  border-radius: 10px;
+}
