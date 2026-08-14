@@ -15,10 +15,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="redesign.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="icon" href="{{favicon_url}}">
 </head>
-<body>
+<body class="rd-flow">
 
   <!-- ========== NAV — minimal, transparent, out of the way ========== -->
   <nav class="nav nav--hero" id="nav">
@@ -103,24 +104,6 @@
 
 
   <!-- ============================================================
-       OUR MISSION — One statement, straight after the stakes
-       ============================================================ -->
-  <section class="lp-quote" id="mission">
-    <div class="container container--narrow">
-      <div class="lp-quote__eyebrow-row">
-        <span class="eyebrow">Our Mission</span>
-      </div>
-      <blockquote class="lp-quote__block reveal">
-        <p>
-          {{founder_quote}}
-        </p>
-        <cite>{{founder_quote_cite}}</cite>
-      </blockquote>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
        THE PROOF — Numbers don't lie. Animated, visceral.
        ============================================================ -->
   <section class="lp-proof" id="proof">
@@ -164,6 +147,24 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       OUR MISSION — The human voice, straight after the numbers
+       ============================================================ -->
+  <section class="lp-quote" id="mission">
+    <div class="container container--narrow">
+      <div class="lp-quote__eyebrow-row">
+        <span class="eyebrow">Our Mission</span>
+      </div>
+      <blockquote class="lp-quote__block reveal">
+        <p>
+          {{founder_quote}}
+        </p>
+        <cite>{{founder_quote_cite}}</cite>
+      </blockquote>
     </div>
   </section>
 

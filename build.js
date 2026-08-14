@@ -28,7 +28,7 @@ const SANITY_API_VERSION = '2024-01-01';
 
 const TEMPLATES_DIR = path.join(__dirname, 'templates');
 const DIST_DIR = path.join(__dirname, 'dist');
-const STATIC_FILES = ['styles.css', 'main.js', 'map.js', 'training.html'];
+const STATIC_FILES = ['styles.css', 'redesign.css', 'main.js', 'map.js', 'training.html'];
 const STATIC_DIRS = ['assets', '.well-known'];
 
 /**

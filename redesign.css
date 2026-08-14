@@ -1,0 +1,38 @@
+/* ============================================================
+   REDESIGN TAKE — FLOW
+   Same skin, sharper story: stakes and proof welded into one
+   problem-then-evidence movement, the mission quote lands as
+   the human beat after the numbers, duplicate stats cut.
+   Scoped to body.rd-flow — homepage only, inner pages untouched.
+   ============================================================ */
+
+/* --- Weld the stakes to the proof: one movement, no dead air --- */
+.rd-flow .lp-disparity {
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+.rd-flow .lp-proof {
+  padding-top: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+/* --- The stakes line reads as a question the proof answers --- */
+.rd-flow .lp-disparity__headline {
+  margin-bottom: 1.25rem;
+}
+
+/* --- Mission quote: the exhale after the evidence --- */
+.rd-flow .lp-quote {
+  padding-top: clamp(4rem, 8vw, 6rem);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+.rd-flow .lp-quote__block p {
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  line-height: 1.5;
+}
+
+/* --- Map: the pins carry the numbers; the duplicate stat row goes --- */
+.rd-flow .lp-map__stat-row {
+  display: none;
+}
+.rd-flow .lp-map__text p {
+  margin-bottom: 0;
+}
