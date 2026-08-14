@@ -190,6 +190,8 @@ body[class*="rd-"] {
   object-fit: cover;
 }
 .hp-trust {
+  display: block;
+  max-width: none;
   text-align: center;
   font-size: 0.78rem;
   font-weight: 600;
@@ -197,10 +199,9 @@ body[class*="rd-"] {
   text-transform: uppercase;
   color: var(--hp-muted);
   margin: 1.75rem 0 0;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+}
+.hp-trust span {
+  margin-inline: 0.35rem;
 }
 
 /* ---------- Statement ---------- */
@@ -222,6 +223,7 @@ body[class*="rd-"] {
   color: var(--hp-blue);
 }
 .hp-statement__link {
+  max-width: none;
   text-align: center;
   margin: 1.75rem 0 0;
 }
@@ -336,6 +338,7 @@ body[class*="rd-"] {
   text-align: center;
 }
 .hp-quote p {
+  max-width: none;
   font-size: clamp(1.35rem, 2.4vw, 1.85rem);
   line-height: 1.5;
   font-weight: 500;
@@ -477,7 +480,7 @@ body[class*="rd-"] {
 /* ---------- CTA (full-bleed ink) ---------- */
 
 .hp-cta {
-  background: var(--hp-ink);
+  background: var(--hp-blue);
   padding-block: clamp(5rem, 10vw, 7.5rem);
   text-align: center;
 }
@@ -493,7 +496,7 @@ body[class*="rd-"] {
 .hp-cta p {
   font-size: 1.05rem;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.9);
   max-width: 46ch;
   margin: 0 auto 2rem;
 }
@@ -504,7 +507,7 @@ body[class*="rd-"] {
   gap: 0.6rem;
   margin-top: 1.75rem;
   font-size: 0.82rem;
-  color: rgba(255, 255, 255, 0.65);
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ============================================================
@@ -531,7 +534,7 @@ body[class*="rd-"] {
   margin-top: 3.5rem;
 }
 .rd-rhythm .hp-trust {
-  justify-content: flex-start;
+  text-align: left;
   padding-inline: clamp(1.25rem, 4vw, 2.5rem);
 }
 
@@ -545,8 +548,59 @@ body[class*="rd-"] {
    TAKE — CONTRAST: tint rotation + yellow marks
    ============================================================ */
 
+/* Hero on the brand blue — white type, yellow action, filmstrip
+   straddling the blue edge */
 .rd-contrast .hp-hero {
-  background: linear-gradient(180deg, var(--hp-tint) 0%, var(--hp-paper) 88%);
+  background: linear-gradient(
+    180deg,
+    var(--hp-blue) 0%,
+    var(--hp-blue) calc(100% - 270px),
+    var(--hp-paper) calc(100% - 270px)
+  );
+}
+.rd-contrast .hp-hero .hp-kicker {
+  color: rgba(255, 255, 255, 0.78);
+}
+.rd-contrast .hp-hero .hp-display {
+  color: #fff;
+}
+.rd-contrast .hp-hero__sub {
+  color: rgba(255, 255, 255, 0.9);
+}
+.rd-contrast .hp-hero .hp-btn--primary {
+  background: var(--hp-yellow);
+  color: var(--hp-ink);
+}
+.rd-contrast .hp-hero .hp-btn--primary:hover {
+  background: var(--hp-yellow);
+  box-shadow: 0 10px 24px -10px rgba(0, 0, 0, 0.4);
+}
+.rd-contrast .hp-hero .hp-btn--outline {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #fff;
+}
+.rd-contrast .hp-hero .hp-btn--outline:hover {
+  border-color: rgba(255, 255, 255, 0.85);
+}
+.rd-contrast .nav--hero {
+  background: transparent;
+}
+.rd-contrast .nav--hero .nav__logo,
+.rd-contrast .nav--hero .nav__link {
+  color: #fff;
+}
+.rd-contrast .nav--hero .nav__link:hover {
+  color: rgba(255, 255, 255, 0.8);
+}
+.rd-contrast .nav--hero .nav__link::after {
+  background: #fff;
+}
+.rd-contrast .nav--hero .nav__hamburger span {
+  background: #fff;
+}
+.rd-contrast .nav--hero .nav__cta {
+  background: var(--hp-yellow);
+  color: var(--hp-ink);
 }
 .rd-contrast .hp-statement em {
   color: var(--hp-ink);
@@ -647,5 +701,16 @@ body[class*="rd-"] {
   }
   .hp-btn:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .rd-contrast .hp-hero {
+    background: linear-gradient(
+      180deg,
+      var(--hp-blue) 0%,
+      var(--hp-blue) calc(100% - 420px),
+      var(--hp-paper) calc(100% - 420px)
+    );
   }
 }
