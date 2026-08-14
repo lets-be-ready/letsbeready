@@ -36,3 +36,78 @@
 .rd-flow .lp-map__text p {
   margin-bottom: 0;
 }
+
+/* ============================================================
+   FLOW v2 — denser, punchier: the page in one breath
+   ============================================================ */
+
+/* --- The hook line is the biggest thing on the page after the hero --- */
+.rd-flow .lp-disparity__headline {
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+}
+
+/* --- Proof as a scoreboard: huge bare numerals, no boxes --- */
+.rd-flow .lp-proof__card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0.5rem 1rem;
+}
+.rd-flow .lp-proof__card:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+.rd-flow .lp-proof__number {
+  font-size: clamp(3rem, 4.6vw, 4.2rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+.rd-flow .lp-proof__label {
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.rd-flow .lp-proof__context {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  opacity: 0.72;
+}
+
+/* --- Quote: one italic breath, no tinted room --- */
+.rd-flow .lp-quote {
+  background: var(--white);
+}
+.rd-flow .lp-quote__block {
+  border: none;
+  text-align: center;
+}
+.rd-flow .lp-quote__block p {
+  font-style: italic;
+}
+.rd-flow .lp-quote__block cite {
+  display: block;
+  margin-top: 1rem;
+}
+
+/* --- Everything tighter: the page reads in one scroll --- */
+.rd-flow .lp-programs,
+.rd-flow .lp-map,
+.rd-flow .lp-instagram,
+.rd-flow .lp-final-cta {
+  padding-top: clamp(3.5rem, 7vw, 5rem);
+  padding-bottom: clamp(3.5rem, 7vw, 5rem);
+}
+
+/* --- Hero: shorter, gets you to the story faster --- */
+.rd-flow .lp-hero {
+  min-height: 86vh;
+}
+
+/* --- IG tiles: tight grid --- */
+.rd-flow .lp-instagram__grid {
+  gap: 0.6rem;
+}
