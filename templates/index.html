@@ -80,31 +80,28 @@
   <!-- ============================================================
        THE STAKES — the statement, then three flat reality cards
        ============================================================ -->
-  <section class="hp-statement-sec" id="story">
-    <div class="hp-container hp-container--mid">
-      <div class="reveal">
-        <span class="hp-kicker hp-kicker--center">{{disparity_eyebrow}}</span>
-        <h2 class="hp-statement">{{disparity_headline}}</h2>
-        <p class="hp-statement__link"><a href="about.html" class="hp-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a></p>
-      </div>
-    </div>
-  </section>
-
-  <section class="hp-reality">
+  <section class="hp-reality" id="story">
     <div class="hp-container">
-      <div class="hp-reality__grid stagger-children">
-        <!-- Copy proposed for the redesign — write into Sanity if this design ships -->
-        <div class="hp-reality__card">
-          <strong>80%</strong>
-          <p>of rural children never finish primary school.</p>
+      <div class="hp-reality__split">
+        <div class="hp-reality__leadcol reveal">
+          <span class="hp-kicker">{{disparity_eyebrow}}</span>
+          <h2 class="hp-statement">{{disparity_headline}}</h2>
+          <a href="about.html" class="hp-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
         </div>
-        <div class="hp-reality__card">
-          <strong>Zero</strong>
-          <p>preschools in most rural villages.</p>
-        </div>
-        <div class="hp-reality__card">
-          <strong>Invisible</strong>
-          <p>communities the system can't see.</p>
+        <div class="hp-reality__facts stagger-children">
+          <!-- Copy proposed for the redesign — write into Sanity if this design ships -->
+          <div class="hp-reality__fact">
+            <strong>80%</strong>
+            <p>of rural children never finish primary school.</p>
+          </div>
+          <div class="hp-reality__fact">
+            <strong>Zero</strong>
+            <p>preschools in most rural villages.</p>
+          </div>
+          <div class="hp-reality__fact">
+            <strong>Invisible</strong>
+            <p>communities the system can't see.</p>
+          </div>
         </div>
       </div>
     </div>
