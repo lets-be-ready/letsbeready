@@ -728,3 +728,20 @@ body[class*="rd-"] {
 .rd-contrast .hp-ig__tile {
   border-radius: 0;
 }
+
+/* Reality band — columns with ink rules instead of boxes */
+.rd-contrast .hp-reality__grid {
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+}
+.rd-contrast .hp-reality__card {
+  background: transparent;
+  padding: 1.4rem 0 0;
+  border-top: 2px solid var(--hp-ink);
+}
+.rd-contrast .hp-reality__card strong {
+  font-size: clamp(2rem, 3vw, 2.6rem);
+}
+.rd-contrast .hp-reality__card p {
+  font-size: 1rem;
+  color: var(--hp-ink-soft);
+}
