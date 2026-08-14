@@ -509,6 +509,7 @@ body[class*="rd-"] {
   color: #fff;
 }
 .hp-cta__band h2 {
+  color: #fff;
   font-size: clamp(2rem, 3.8vw, 3rem);
   font-weight: 800;
   letter-spacing: -0.03em;
