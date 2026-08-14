@@ -719,3 +719,12 @@ body[class*="rd-"] {
     );
   }
 }
+
+/* Sharp edges — contrast take: surfaces go square */
+.rd-contrast .hp-film__panel,
+.rd-contrast .hp-reality__card,
+.rd-contrast .hp-map__frame,
+.rd-contrast .hp-program-card,
+.rd-contrast .hp-ig__tile {
+  border-radius: 0;
+}
