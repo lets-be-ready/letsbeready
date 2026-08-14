@@ -1,0 +1,147 @@
+/* ============================================================
+   REDESIGN TAKE — RHYTHM
+   Same identity, every screw tightened: one paper tone, one
+   section cadence, one type scale, stats as clean columns.
+   Scoped to body.rd-rhythm — homepage only, inner pages untouched.
+   ============================================================ */
+
+/* --- One ground: every light section sits on the same paper --- */
+.rd-rhythm .lp-disparity,
+.rd-rhythm .lp-quote,
+.rd-rhythm .lp-programs,
+.rd-rhythm .lp-map,
+.rd-rhythm .lp-instagram {
+  background: var(--warm-white);
+}
+
+/* --- One cadence: identical breathing room between sections --- */
+.rd-rhythm .lp-disparity,
+.rd-rhythm .lp-quote,
+.rd-rhythm .lp-proof,
+.rd-rhythm .lp-map,
+.rd-rhythm .lp-final-cta {
+  padding-top: clamp(4.5rem, 9vw, 7rem);
+  padding-bottom: clamp(4.5rem, 9vw, 7rem);
+}
+.rd-rhythm .lp-programs,
+.rd-rhythm .lp-instagram {
+  padding-top: clamp(4.5rem, 9vw, 7rem);
+  padding-bottom: clamp(4.5rem, 9vw, 7rem);
+}
+
+/* --- One headline scale for every section --- */
+.rd-rhythm .lp-disparity__headline,
+.rd-rhythm .lp-proof__header h2,
+.rd-rhythm .lp-programs__header h2,
+.rd-rhythm .lp-map__text h2,
+.rd-rhythm .lp-instagram__header h2,
+.rd-rhythm .lp-final-cta__content h2 {
+  font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  line-height: 1.12;
+}
+
+/* --- Eyebrows: one voice, one distance from their headline --- */
+.rd-rhythm .eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  margin-bottom: 1rem;
+  color: var(--blue) !important;
+}
+.rd-rhythm .lp-proof .eyebrow {
+  color: var(--yellow) !important;
+}
+
+/* --- Hero: quieter shadow, tighter measure, solid button --- */
+.rd-rhythm .lp-hero__headline {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  max-width: 17ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+.rd-rhythm .lp-hero__headline em {
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
+}
+.rd-rhythm .lp-hero__sub {
+  max-width: 44ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+.rd-rhythm .lp-hero__actions .btn-glass {
+  background: var(--white);
+  color: var(--dark);
+  border: none;
+  backdrop-filter: none;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.rd-rhythm .lp-hero__actions .btn-glass:hover {
+  background: var(--white);
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+.rd-rhythm .btn-glass__shimmer {
+  display: none;
+}
+
+/* --- Proof: boxes out, columns in. Hairline dividers do the work --- */
+.rd-rhythm .lp-proof__grid {
+  gap: 0;
+}
+.rd-rhythm .lp-proof__card {
+  background: transparent;
+  border: none;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 0;
+  padding: 0.5rem 2rem;
+  text-align: left;
+}
+.rd-rhythm .lp-proof__card:hover {
+  background: transparent;
+  transform: none;
+  box-shadow: none;
+}
+.rd-rhythm .lp-proof__number {
+  font-size: clamp(2.4rem, 3.4vw, 3.1rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.rd-rhythm .lp-proof__label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.rd-rhythm .lp-proof__context {
+  font-size: 0.875rem;
+  line-height: 1.55;
+  opacity: 0.75;
+}
+
+/* --- Mission quote: hairline frame instead of a tinted room --- */
+.rd-rhythm .lp-quote__block {
+  border-left: 3px solid var(--blue);
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* --- Map stat row: numbers aligned to one baseline --- */
+.rd-rhythm .lp-map__stat strong {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* --- Mobile: keep the column dividers honest --- */
+@media (max-width: 768px) {
+  .rd-rhythm .lp-proof__card {
+    border-left: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 1.25rem 0.25rem;
+  }
+  .rd-rhythm .lp-proof__card:first-child {
+    border-top: none;
+  }
+}
