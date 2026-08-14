@@ -1,0 +1,92 @@
+/* ============================================================
+   REDESIGN TAKE — CONTRAST
+   The identity used with discipline: blue carries the evidence,
+   ink carries the ask, yellow appears only where you act.
+   Grounds calmed so the two color moments actually land.
+   Scoped to body.rd-contrast — homepage only, inner pages untouched.
+   ============================================================ */
+
+/* --- Calm the grounds so the color bands do the talking --- */
+.rd-contrast .lp-disparity,
+.rd-contrast .lp-map {
+  background: var(--warm-white);
+}
+.rd-contrast .lp-quote,
+.rd-contrast .lp-programs,
+.rd-contrast .lp-instagram {
+  background: var(--white);
+}
+
+/* --- Mission quote: blue rule instead of a tinted room --- */
+.rd-contrast .lp-quote__block {
+  border-left: 3px solid var(--blue);
+  padding-left: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* --- The proof band: solid brand blue, white numerals --- */
+.rd-contrast .lp-proof__bg {
+  background: var(--blue);
+}
+.rd-contrast .lp-proof .eyebrow {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+.rd-contrast .lp-proof__card {
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 10px;
+}
+.rd-contrast .lp-proof__number {
+  color: var(--white);
+}
+.rd-contrast .lp-proof__context {
+  color: rgba(255, 255, 255, 0.82);
+}
+.rd-contrast .lp-proof__context strong {
+  color: var(--white);
+}
+
+/* --- The ask: deep ink, and the only yellow button on the page --- */
+.rd-contrast .lp-final-cta {
+  background: var(--dark);
+}
+.rd-contrast .lp-final-cta .btn-secondary {
+  background: var(--yellow);
+  color: var(--dark);
+}
+
+/* --- Yellow discipline: hero button goes clean white --- */
+.rd-contrast .lp-hero__actions .btn-glass {
+  background: var(--white);
+  color: var(--dark);
+  border: none;
+  backdrop-filter: none;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+}
+.rd-contrast .lp-hero__actions .btn-glass:hover {
+  background: var(--white);
+  color: var(--dark);
+  transform: translateY(-2px);
+}
+.rd-contrast .btn-glass__shimmer {
+  display: none;
+}
+
+/* --- Crisper edges everywhere --- */
+.rd-contrast .lp-programs__card {
+  border-radius: 10px;
+}
+.rd-contrast .lp-map__container,
+.rd-contrast #classroomMap {
+  border-radius: 10px;
+}
+
+/* --- Scale contrast: headlines step up, everything else holds --- */
+.rd-contrast .lp-disparity__headline,
+.rd-contrast .lp-proof__header h2,
+.rd-contrast .lp-programs__header h2,
+.rd-contrast .lp-map__text h2,
+.rd-contrast .lp-final-cta__content h2 {
+  font-size: clamp(2.1rem, 3.8vw, 3rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
