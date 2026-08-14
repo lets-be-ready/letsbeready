@@ -1,9 +1,81 @@
 /* ============================================================
    REDESIGN TAKE — RHYTHM
-   Same identity, every screw tightened: one paper tone, one
-   section cadence, one type scale, stats as clean columns.
-   Scoped to body.rd-rhythm — homepage only, inner pages untouched.
+   The airy, editorial-calm version: split hero on paper (no dark
+   overlay), one ground, one cadence, one type scale, stats as
+   clean columns. Scoped to body.rd-rhythm — homepage only.
    ============================================================ */
+
+/* --- Split hero: headline on paper, photo beside it, no veil --- */
+.rd-rhythm .lp-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  align-items: center;
+  min-height: 92vh;
+  padding: 0;
+  background: var(--warm-white);
+}
+.rd-rhythm .lp-hero__media {
+  position: relative;
+  order: 2;
+  align-self: stretch;
+  min-height: 92vh;
+}
+.rd-rhythm .lp-hero__overlay {
+  display: none;
+}
+.rd-rhythm .lp-hero__content {
+  max-width: none;
+  margin: 0;
+  padding: clamp(4rem, 8vw, 7rem) clamp(2rem, 5vw, 5rem);
+  padding-top: calc(var(--nav-height) + clamp(3rem, 6vw, 5rem));
+}
+.rd-rhythm .lp-hero__headline {
+  color: var(--dark);
+  text-shadow: none;
+  font-size: clamp(2.5rem, 4.6vw, 4rem);
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  max-width: 14ch;
+}
+.rd-rhythm .lp-hero__headline em {
+  color: var(--blue);
+  text-shadow: none;
+}
+.rd-rhythm .lp-hero__sub {
+  color: var(--text-muted);
+  text-shadow: none;
+  max-width: 40ch;
+}
+.rd-rhythm .lp-hero__actions .btn-glass {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  backdrop-filter: none;
+  box-shadow: 0 8px 24px rgba(20, 107, 246, 0.28);
+}
+.rd-rhythm .lp-hero__actions .btn-glass:hover {
+  background: var(--blue-dark);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.rd-rhythm .btn-glass__shimmer,
+.rd-rhythm .lp-hero__scroll-hint {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .rd-rhythm .lp-hero {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .rd-rhythm .lp-hero__media {
+    order: -1;
+    min-height: 46vh;
+  }
+  .rd-rhythm .lp-hero__content {
+    padding: 2.5rem 1.5rem 3.5rem;
+  }
+}
 
 /* --- One ground: every light section sits on the same paper --- */
 .rd-rhythm .lp-disparity,
@@ -19,10 +91,7 @@
 .rd-rhythm .lp-quote,
 .rd-rhythm .lp-proof,
 .rd-rhythm .lp-map,
-.rd-rhythm .lp-final-cta {
-  padding-top: clamp(4.5rem, 9vw, 7rem);
-  padding-bottom: clamp(4.5rem, 9vw, 7rem);
-}
+.rd-rhythm .lp-final-cta,
 .rd-rhythm .lp-programs,
 .rd-rhythm .lp-instagram {
   padding-top: clamp(4.5rem, 9vw, 7rem);
@@ -52,40 +121,6 @@
 }
 .rd-rhythm .lp-proof .eyebrow {
   color: var(--yellow) !important;
-}
-
-/* --- Hero: quieter shadow, tighter measure, solid button --- */
-.rd-rhythm .lp-hero__headline {
-  font-size: clamp(2.6rem, 6vw, 4.6rem);
-  letter-spacing: -0.035em;
-  line-height: 1.06;
-  max-width: 17ch;
-  margin-left: auto;
-  margin-right: auto;
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
-}
-.rd-rhythm .lp-hero__headline em {
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.45);
-}
-.rd-rhythm .lp-hero__sub {
-  max-width: 44ch;
-  margin-left: auto;
-  margin-right: auto;
-}
-.rd-rhythm .lp-hero__actions .btn-glass {
-  background: var(--white);
-  color: var(--dark);
-  border: none;
-  backdrop-filter: none;
-  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
-}
-.rd-rhythm .lp-hero__actions .btn-glass:hover {
-  background: var(--white);
-  color: var(--dark);
-  transform: translateY(-2px);
-}
-.rd-rhythm .btn-glass__shimmer {
-  display: none;
 }
 
 /* --- Proof: boxes out, columns in. Hairline dividers do the work --- */
@@ -132,6 +167,14 @@
   font-size: 1.9rem;
   font-weight: 800;
   letter-spacing: -0.02em;
+}
+
+/* --- Instagram tiles: flush grid, square, quiet --- */
+.rd-rhythm .lp-instagram__grid {
+  gap: 0.75rem;
+}
+.rd-rhythm .lp-ig-tile {
+  border-radius: 0;
 }
 
 /* --- Mobile: keep the column dividers honest --- */
