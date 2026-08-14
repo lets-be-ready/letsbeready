@@ -21,7 +21,7 @@
 </head>
 <body class="rd-rhythm">
 
-  <!-- ========== NAV — minimal, transparent, out of the way ========== -->
+  <!-- ========== NAV (shared markup — main.js drives scroll + mobile menu) ========== -->
   <nav class="nav nav--hero" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
@@ -53,116 +53,152 @@
 
 
   <!-- ============================================================
-       HERO — Full viewport. One image. One line. One feeling.
+       HERO — copy + framed photograph, composed per take
        ============================================================ -->
-  <section class="lp-hero">
-    <div class="lp-hero__media">
-      <img
-        src="{{hero_image_url}}"
-        alt="{{hero_image_alt}}"
-        class="lp-hero__media-img"
-        loading="eager"
-      >
-      <div class="lp-hero__overlay"></div>
-    </div>
-
-    <div class="lp-hero__content">
-      <h1 class="lp-hero__headline">
-        {{hero_headline}}
-      </h1>
-      <p class="lp-hero__sub">
-        {{hero_sub}}
-      </p>
-      <div class="lp-hero__actions">
-        <a href="donate.html" class="btn btn-glass btn-lg">
-          <span class="btn-glass__shimmer"></span>
-          {{hero_cta_text}}
-        </a>
+  <header class="hp-hero">
+    <div class="hp-container hp-hero__inner">
+      <div class="hp-hero__copy">
+        <span class="hp-chip"><span class="hp-chip__dot" aria-hidden="true"></span>{{trust_pill_3}}</span>
+        <h1 class="hp-display">{{hero_headline}}</h1>
+        <p class="hp-lead">{{hero_sub}}</p>
+        <div class="hp-actions">
+          <a href="donate.html" class="hp-btn hp-btn--primary">{{hero_cta_text}}</a>
+          <a href="programs.html" class="hp-btn hp-btn--ghost">Our Programs</a>
+        </div>
       </div>
-      <div class="lp-hero__scroll-hint" aria-hidden="true">
-        <span></span>
+      <figure class="hp-hero__media">
+        <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager">
+      </figure>
+    </div>
+  </header>
+
+
+  <!-- ============================================================
+       THE STAKES — the 1-in-5 statement + the three reality stats
+       ============================================================ -->
+  <section class="hp-stakes" id="story">
+    <div class="hp-container">
+      <div class="hp-stakes__statement reveal">
+        <span class="hp-label">{{disparity_eyebrow}}</span>
+        <h2 class="hp-statement">{{disparity_headline}}</h2>
+        <a href="about.html" class="hp-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="hp-stakes__grid stagger-children">
+        <div class="hp-stakes__item">
+          <strong>{{disparity_stat1_value}}</strong>
+          <p>{{disparity_stat1_text}}</p>
+        </div>
+        <div class="hp-stakes__item">
+          <strong>{{disparity_stat2_value}}</strong>
+          <p>{{disparity_stat2_text}}</p>
+        </div>
+        <div class="hp-stakes__item">
+          <strong>{{disparity_stat3_value}}</strong>
+          <p>{{disparity_stat3_text}}</p>
+        </div>
       </div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       THE STAKES — The 1-in-5 line. The hook, one breath.
-       Full story lives on the About page.
+       THE PROOF — four numbers, counted up in view
        ============================================================ -->
-  <section class="lp-disparity" id="story">
-    <div class="container container--narrow">
-      <div class="lp-disparity__block reveal">
-        <span class="eyebrow" style="color: var(--text-muted);">{{disparity_eyebrow}}</span>
-        <h2 class="lp-disparity__headline">
-          {{disparity_headline}}
-        </h2>
-        <a href="about.html" class="lp-story__link">Read the full story &rarr;</a>
+  <section class="hp-proof" id="proof">
+    <div class="hp-container">
+      <div class="hp-section-head reveal">
+        <span class="hp-label">{{proof_eyebrow}}</span>
+        <h2 class="hp-h2">{{proof_heading}}</h2>
+      </div>
+      <div class="hp-proof__grid stagger-children">
+        <div class="hp-proof__card">
+          <div class="hp-proof__number"><span data-count="{{stat_pass_rate}}" data-suffix="%">0</span></div>
+          <div class="hp-proof__label">{{stat_pass_rate_label}}</div>
+          <p class="hp-proof__context">{{stat_pass_rate_context}}</p>
+        </div>
+        <div class="hp-proof__card">
+          <div class="hp-proof__number"><span data-count="{{stat_children}}">0</span></div>
+          <div class="hp-proof__label">{{stat_children_label}}</div>
+          <p class="hp-proof__context">{{stat_children_context}}</p>
+        </div>
+        <div class="hp-proof__card">
+          <div class="hp-proof__number">{{stat_graduation_value}}</div>
+          <div class="hp-proof__label">{{stat_graduation_label}}</div>
+          <p class="hp-proof__context">{{stat_graduation_context}}</p>
+        </div>
+        <div class="hp-proof__card">
+          <div class="hp-proof__number">{{stat_years_value}}</div>
+          <div class="hp-proof__label">{{stat_years_label}}</div>
+          <p class="hp-proof__context">{{stat_years_context}}</p>
+        </div>
       </div>
     </div>
   </section>
 
 
   <!-- ============================================================
-       OUR MISSION — One statement, straight after the stakes
+       MISSION — one human sentence between the numbers and the work
        ============================================================ -->
-  <section class="lp-quote" id="mission">
-    <div class="container container--narrow">
-      <div class="lp-quote__eyebrow-row">
-        <span class="eyebrow">Our Mission</span>
-      </div>
-      <blockquote class="lp-quote__block reveal">
-        <p>
-          {{founder_quote}}
-        </p>
-        <cite>{{founder_quote_cite}}</cite>
+  <section class="hp-mission" id="mission">
+    <div class="hp-container hp-container--narrow">
+      <blockquote class="hp-quote reveal">
+        <p>{{founder_quote}}</p>
+        {{#if founder_quote_cite}}<cite>{{founder_quote_cite}}</cite>{{/if}}
       </blockquote>
     </div>
   </section>
 
 
   <!-- ============================================================
-       THE PROOF — Numbers don't lie. Animated, visceral.
+       PROGRAMS — two doors, photographed
        ============================================================ -->
-  <section class="lp-proof" id="proof">
-    <div class="lp-proof__bg"></div>
-    <div class="container">
-      <div class="lp-proof__header reveal">
-        <span class="eyebrow" style="color: var(--yellow);">{{proof_eyebrow}}</span>
-        <h2>{{proof_heading}}</h2>
+  <section class="hp-programs" id="programs">
+    <div class="hp-container">
+      <div class="hp-section-head reveal">
+        <span class="hp-label">What We Teach</span>
+        <h2 class="hp-h2">Our Programs</h2>
       </div>
-
-      <div class="lp-proof__grid stagger-children">
-        <div class="lp-proof__card">
-          <div class="lp-proof__number" data-count="{{stat_pass_rate}}" data-suffix="%">0</div>
-          <div class="lp-proof__label">{{stat_pass_rate_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_pass_rate_context}}
+      <div class="hp-programs__grid stagger-children">
+        <a href="programs.html" class="hp-program-card">
+          <figure><img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy"></figure>
+          <div class="hp-program-card__row">
+            <div>
+              <h3>Education+</h3>
+              <p>Curriculum, gardening, art &amp; more</p>
+            </div>
+            <span class="hp-program-card__arrow" aria-hidden="true">&rarr;</span>
           </div>
+        </a>
+        <a href="programs.html#nutrition" class="hp-program-card">
+          <figure><img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy"></figure>
+          <div class="hp-program-card__row">
+            <div>
+              <h3>Nutrition</h3>
+              <p>Every child eats before they learn</p>
+            </div>
+            <span class="hp-program-card__arrow" aria-hidden="true">&rarr;</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       THE COST — what a dollar actually does
+       ============================================================ -->
+  <section class="hp-cost">
+    <div class="hp-container">
+      <div class="hp-cost__card reveal">
+        <div class="hp-cost__main">
+          <span class="hp-label">{{cost_eyebrow}}</span>
+          <div class="hp-cost__figure">{{cost_per_child}}</div>
+          <div class="hp-cost__unit">per child &middot; per year</div>
         </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number" data-count="{{stat_children}}" data-prefix="">0</div>
-          <div class="lp-proof__label">{{stat_children_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_children_context}}
-          </div>
-        </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number">{{stat_graduation_value}}</div>
-          <div class="lp-proof__label">{{stat_graduation_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_graduation_context}}
-          </div>
-        </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number">{{stat_years_value}}</div>
-          <div class="lp-proof__label">{{stat_years_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_years_context}}
-          </div>
+        <div class="hp-cost__body">
+          {{#if cost_context}}<p>{{cost_context}}</p>{{/if}}
+          <p class="hp-cost__secondary"><strong>{{cost_per_classroom}}</strong> &mdash; {{cost_classroom_desc}}</p>
+          <a href="donate.html" class="hp-btn hp-btn--primary">{{cost_cta_text}}</a>
         </div>
       </div>
     </div>
@@ -170,60 +206,22 @@
 
 
   <!-- ============================================================
-       OUR PROGRAMS — Two photo doors into the Programs page
+       THE MAP — every pin is a real classroom
        ============================================================ -->
-  <section class="lp-programs" id="programs">
-    <div class="lp-programs__header reveal">
-      <span class="eyebrow">What We Teach</span>
-      <h2>Our Programs</h2>
-    </div>
-    <div class="lp-programs__grid stagger-children">
-      <a href="programs.html" class="lp-programs__card">
-        <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy">
-        <div class="lp-programs__label">
-          <h3>Education+</h3>
-          <span>Curriculum, gardening, art &amp; more &rarr;</span>
-        </div>
-      </a>
-      <a href="programs.html#nutrition" class="lp-programs__card">
-        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy">
-        <div class="lp-programs__label">
-          <h3>Nutrition</h3>
-          <span>Every child eats before they learn &rarr;</span>
-        </div>
-      </a>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       THE MAP — See where your donation works
-       ============================================================ -->
-  <section class="lp-map" id="impact-map">
-    <div class="container">
-      <div class="lp-map__layout">
-        <div class="lp-map__text">
-          <span class="eyebrow">{{map_eyebrow}}</span>
-          <h2>{{map_heading}}</h2>
-          <p>
-            {{map_description}}
-          </p>
-          <div class="lp-map__stat-row">
-            <div class="lp-map__stat">
-              <strong id="mapCommunities">45</strong>
-              <span>Communities</span>
-            </div>
-            <div class="lp-map__stat">
-              <strong id="mapTeachers">45</strong>
-              <span>Teachers</span>
-            </div>
-            <div class="lp-map__stat">
-              <strong id="mapChildren">600</strong>
-              <span>Children</span>
-            </div>
+  <section class="hp-map" id="impact-map">
+    <div class="hp-container">
+      <div class="hp-map__layout">
+        <div class="hp-map__text reveal">
+          <span class="hp-label">{{map_eyebrow}}</span>
+          <h2 class="hp-h2">{{map_heading}}</h2>
+          <p>{{map_description}}</p>
+          <div class="hp-map__stats">
+            <span><strong id="mapCommunities">45</strong> communities</span>
+            <span><strong id="mapTeachers">45</strong> teachers</span>
+            <span><strong id="mapChildren">600</strong> children</span>
           </div>
         </div>
-        <div class="lp-map__container">
+        <div class="hp-map__frame">
           <div id="classroomMap"></div>
         </div>
       </div>
@@ -232,24 +230,25 @@
 
 
   <!-- ============================================================
-       FROM THE CLASSROOM — curated Instagram posts (renders only
-       when post links are configured in Sanity)
+       FROM THE CLASSROOM — the photo grid
        ============================================================ -->
   {{#if has_instagram}}
-  <section class="lp-instagram" id="from-the-classroom">
-    <div class="lp-instagram__header reveal">
-      <span class="eyebrow">From the Classroom</span>
-      <h2>Moments from our socials</h2>
+  <section class="hp-ig" id="from-the-classroom">
+    <div class="hp-container">
+      <div class="hp-section-head reveal">
+        <span class="hp-label">From the Classroom</span>
+        <h2 class="hp-h2">Moments from our socials</h2>
+      </div>
+      <div class="hp-ig__grid stagger-children">
+        {{#each instagram_posts}}
+        {{#if image}}<a class="hp-ig__tile" href="{{url}}" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="{{image}}" alt="{{alt}}" loading="lazy"></a>{{/if}}
+        {{#if needs_embed}}<blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>{{/if}}
+        {{/each}}
+      </div>
+      <p class="hp-ig__follow">
+        <a href="{{social_instagram}}" class="hp-textlink" target="_blank" rel="noopener">Follow us on Instagram <span aria-hidden="true">&rarr;</span></a>
+      </p>
     </div>
-    <div class="lp-instagram__grid">
-      {{#each instagram_posts}}
-      {{#if image}}<a class="lp-ig-tile reveal" href="{{url}}" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="{{image}}" alt="{{alt}}" loading="lazy"></a>{{/if}}
-      {{#if needs_embed}}<blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>{{/if}}
-      {{/each}}
-    </div>
-    <p class="lp-instagram__follow">
-      <a href="{{social_instagram}}" target="_blank" rel="noopener">Follow us on Instagram &rarr;</a>
-    </p>
   </section>
   {{/if}}
   {{#if has_instagram_fallback}}
@@ -258,25 +257,19 @@
 
 
   <!-- ============================================================
-       FINAL CTA — The ask. One button. Clear stakes.
+       THE ASK — one rounded band, one button
        ============================================================ -->
-  <section class="lp-final-cta">
-    <div class="container container--narrow">
-      <div class="lp-final-cta__content reveal">
-        <h2>
-          {{final_cta_heading}}
-        </h2>
-        <p>
-          {{final_cta_text}}
-        </p>
-        <a href="donate.html" class="btn btn-secondary btn-lg">
-          {{final_cta_button}}
-        </a>
-        <div class="lp-final-cta__trust">
+  <section class="hp-cta">
+    <div class="hp-container">
+      <div class="hp-cta__band reveal">
+        <h2>{{final_cta_heading}}</h2>
+        <p>{{final_cta_text}}</p>
+        <a href="donate.html" class="hp-btn hp-btn--cta">{{final_cta_button}}</a>
+        <div class="hp-cta__trust">
           <span>501(c)(3) tax-deductible</span>
-          <span>&middot;</span>
+          <span aria-hidden="true">&middot;</span>
           <span>100% funds programs</span>
-          <span>&middot;</span>
+          <span aria-hidden="true">&middot;</span>
           <span>Zero overhead</span>
         </div>
       </div>
