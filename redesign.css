@@ -554,8 +554,8 @@ body[class*="rd-"] {
   background: linear-gradient(
     180deg,
     var(--hp-blue) 0%,
-    var(--hp-blue) calc(100% - 270px),
-    var(--hp-paper) calc(100% - 270px)
+    var(--hp-blue) calc(100% - 330px),
+    var(--hp-paper) calc(100% - 330px)
   );
 }
 .rd-contrast .hp-hero .hp-kicker {
@@ -582,20 +582,25 @@ body[class*="rd-"] {
 .rd-contrast .hp-hero .hp-btn--outline:hover {
   border-color: rgba(255, 255, 255, 0.85);
 }
+
+/* One photograph instead of the filmstrip */
+.rd-contrast .hp-film {
+  display: block;
+  max-width: 1180px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+}
+.rd-contrast .hp-film__panel {
+  border-radius: var(--hp-radius);
+}
+.rd-contrast .hp-film__panel:nth-child(n + 2) {
+  display: none;
+}
+.rd-contrast .hp-film__panel img {
+  aspect-ratio: 21 / 10;
+  object-position: center 30%;
+}
 .rd-contrast .nav--hero {
-  background: transparent;
-}
-.rd-contrast .nav--hero .nav__logo,
-.rd-contrast .nav--hero .nav__link {
-  color: #fff;
-}
-.rd-contrast .nav--hero .nav__link:hover {
-  color: rgba(255, 255, 255, 0.8);
-}
-.rd-contrast .nav--hero .nav__link::after {
-  background: #fff;
-}
-.rd-contrast .nav--hero .nav__hamburger span {
   background: #fff;
 }
 .rd-contrast .nav--hero .nav__cta {
