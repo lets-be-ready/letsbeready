@@ -50,19 +50,17 @@
     </ul>
   </div>
 
-  <!-- Hero: blue panel left, full-height photo right -->
-  <header class="fd-shero">
-    <div class="fd-shero__panel">
+  <!-- Hero: copy over a full-bleed photograph -->
+  <header class="fd-phero">
+    <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager">
+    <div class="fd-phero__copy">
       <span class="fd-hero__kicker">Since 2008 &middot; Rural Guatemala</span>
-      <h1 class="fd-shero__headline">Transforming<br>Preschool<br>Education in<br>Guatemala</h1>
-      <p class="fd-shero__sub">In rural Guatemala, preschools are rare. We're changing that, one village at a time.</p>
+      <h1 class="fd-phero__headline">Transforming Preschool<br>Education in Guatemala</h1>
+      <p class="fd-phero__sub">In rural Guatemala, preschools are rare. We're changing that, one village at a time.</p>
       <div class="fd-actions">
         <a href="donate.html" class="fd-btn fd-btn--yellow">Donate Now</a>
         <a href="programs.html" class="fd-btn fd-btn--outline-white">Our Programs</a>
       </div>
-    </div>
-    <div class="fd-shero__media">
-      <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager">
     </div>
   </header>
 
@@ -73,77 +71,116 @@
       <h2 class="fd-statement reveal">A child born in a rural Mayan village has a <em>1 in 5</em> chance of finishing primary school.</h2>
       <a href="about.html" class="fd-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
 
+      <div class="fd-triptych stagger-children">
+        <img src="{{model_step1_image_url}}" alt="{{model_step1_image_alt}}" loading="lazy">
+        <img src="{{model_step3_image_url}}" alt="{{model_step3_image_alt}}" loading="lazy">
+        <img src="{{model_step2_image_url}}" alt="{{model_step2_image_alt}}" loading="lazy">
+      </div>
+
     </div>
   </section>
 
-  <!-- Proof: the impact bento -->
-  <section class="fd-bento-sec" id="impact-map">
+  <!-- What every classroom holds -->
+  <section class="fd-holds" id="programs">
     <div class="fd-container">
-      <div class="fd-bento">
-        <div class="fd-bento__row">
-          <div class="fd-bento__map">
-            <div class="fd-bento__map-head">
-              <span class="fd-kicker">See the Impact</span>
-              <strong>45 classrooms. 5 departments.</strong>
-            </div>
-            <div id="classroomMap"></div>
-          </div>
-          <div class="fd-bento__col">
-            <div class="fd-bento__stat">
-              <div class="fd-bento__number"><span data-count="95" data-suffix="%">0</span></div>
-              <strong>of our students pass first grade</strong>
-              <p>The national rural average is under 20%.</p>
-            </div>
-            <div class="fd-bento__stat fd-bento__stat--navy">
-              <div class="fd-bento__number"><span data-count="600">0</span></div>
-              <strong>children learning right now</strong>
-              <p>Ages 4 to 6, learning in small groups.</p>
-            </div>
-          </div>
+      <div class="fd-section-head fd-section-head--center reveal">
+        <span class="fd-kicker fd-kicker--center">What We Teach</span>
+        <h2 class="fd-h2">What every classroom holds</h2>
+      </div>
+      <div class="fd-holds__grid stagger-children">
+        <div class="fd-hold">
+          <span class="fd-hold__chip">Education+</span>
+          <h3>Curriculum</h3>
+          <p>Three manuals built for Mayan communities.</p>
         </div>
-        <div class="fd-bento__row">
-          <div class="fd-bento__col" style="width: 34.5%;">
-            <div class="fd-bento__stat">
-              <div class="fd-bento__number">8 of 10</div>
-              <strong>of our students finish primary school</strong>
-              <p>Most rural children drop out in year one.</p>
-            </div>
-          </div>
-          <div class="fd-bento__wide">
-            <div class="fd-bento__stat fd-bento__stat--stone">
-              <div class="fd-bento__number">18 yrs</div>
-              <strong>of a proven, replicable model</strong>
-              <p>Not a pilot, not an experiment.</p>
-            </div>
-          </div>
-          <img class="fd-bento__photo" src="assets/redesign/community.jpg" alt="Teachers and community members of Let's Be Ready" loading="lazy">
+        <div class="fd-hold">
+          <span class="fd-hold__chip">Nutrition</span>
+          <h3>A daily meal</h3>
+          <p>Every child eats before they learn.</p>
+        </div>
+        <div class="fd-hold">
+          <span class="fd-hold__chip">Education+</span>
+          <h3>Gardening &amp; art</h3>
+          <p>Learning that uses hands as much as words.</p>
+        </div>
+        <div class="fd-hold">
+          <span class="fd-hold__chip">Education+</span>
+          <h3>Social-emotional skills</h3>
+          <p>Ready for first grade, and for a different kind of life.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Programs: photo + panel rows -->
-  <section class="fd-programs" id="programs">
+  <!-- Mission, over a photograph -->
+  <section class="fd-quoteband" id="mission">
+    <img src="{{model_step2_image_url}}" alt="">
+    <div class="fd-quoteband__copy reveal">
+      <span class="fd-kicker">Our Mission</span>
+      <p>High-quality early education and daily nutrition for indigenous children in rural Guatemala, so they enter first grade healthy, confident, and ready to learn.</p>
+    </div>
+  </section>
+
+  <!-- Proof: bare numerals with hairlines -->
+  <section class="fd-proof" id="proof">
     <div class="fd-container">
       <div class="fd-section-head reveal">
-        <span class="fd-kicker">What We Teach</span>
-        <h2 class="fd-h2">Our Programs</h2>
+        <span class="fd-kicker">Proof, Not Promises</span>
+        <h2 class="fd-h2">Our model works. Here are the numbers.</h2>
       </div>
-      <div class="fd-prow">
-        <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy">
-        <div class="fd-prow__panel">
-          <h3>Education+</h3>
-          <p>Curriculum, gardening, art &amp; more</p>
-          <a href="programs.html" class="fd-textlink">Explore the program <span aria-hidden="true">&rarr;</span></a>
+      <div class="fd-stats stagger-children">
+        <div class="fd-stats__item">
+          <div class="fd-stats__number"><span data-count="95" data-suffix="%">0</span></div>
+          <div class="fd-stats__label">of our students pass first grade</div>
+          <p>The national rural average is under 20%.</p>
+        </div>
+        <div class="fd-stats__item">
+          <div class="fd-stats__number"><span data-count="600">0</span></div>
+          <div class="fd-stats__label">children learning right now</div>
+          <p>Ages 4 to 6, learning in small groups.</p>
+        </div>
+        <div class="fd-stats__item">
+          <div class="fd-stats__number">8 of 10</div>
+          <div class="fd-stats__label">of our students finish primary school</div>
+          <p>Most rural children drop out in year one.</p>
+        </div>
+        <div class="fd-stats__item">
+          <div class="fd-stats__number">18 yrs</div>
+          <div class="fd-stats__label">of a proven, replicable model</div>
+          <p>Not a pilot, not an experiment.</p>
         </div>
       </div>
-      <div class="fd-prow fd-prow--flip">
-        <div class="fd-prow__panel">
-          <h3>Nutrition</h3>
-          <p>Every child eats before they learn</p>
-          <a href="programs.html#nutrition" class="fd-textlink">Explore the program <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </section>
+
+  <!-- The people (photos live in Sanity; Sanity-driven at ship time) -->
+  <section class="fd-team" id="team">
+    <div class="fd-container">
+      <div class="fd-section-head fd-section-head--center reveal">
+        <span class="fd-kicker fd-kicker--center">The People</span>
+        <h2 class="fd-h2">The team behind the classrooms</h2>
+      </div>
+      <div class="fd-team__grid stagger-children">
+        <div class="fd-team__card">
+          <img src="https://cdn.sanity.io/images/juhmq0dg/production/fb1b46e8c82685ba5048a3a598ed1b09c2b31e94-1080x1058.jpg?w=800" alt="Sara Tun" loading="lazy">
+          <strong>Sara Tun</strong>
+          <span>Program Administrator</span>
         </div>
-        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy" style="object-position: center 10%;">
+        <div class="fd-team__card">
+          <img src="https://cdn.sanity.io/images/juhmq0dg/production/2ac4baa6fea934e43e1d68bc2ffd87713534b7f7-817x817.jpg?w=800" alt="Lucila Diaz" loading="lazy">
+          <strong>Lucila Diaz</strong>
+          <span>Program Administrator</span>
+        </div>
+        <div class="fd-team__card">
+          <img src="https://cdn.sanity.io/images/juhmq0dg/production/7568cdd14f1e86ffed1ae34d501c710a5feb63b4-2055x2424.jpg?w=800" alt="Janice Stradford" loading="lazy">
+          <strong>Janice Stradford</strong>
+          <span>Board Member</span>
+        </div>
+        <div class="fd-team__card">
+          <img src="https://cdn.sanity.io/images/juhmq0dg/production/32e1a506e7b8584728aab841c8d7b6aacf0cade4-480x640.jpg?w=800" alt="John Reed III" loading="lazy">
+          <strong>John Reed III</strong>
+          <span>Board Member</span>
+        </div>
       </div>
     </div>
   </section>
