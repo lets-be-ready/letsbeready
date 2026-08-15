@@ -198,8 +198,7 @@
     </div>
   </section>
 
-  <!-- From the classroom -->
-  {{#if has_instagram}}
+  <!-- From the classroom (post photos committed; links to the real posts) -->
   <section class="fd-ig" id="from-the-classroom">
     <div class="fd-container">
       <div class="fd-ig__head reveal">
@@ -210,17 +209,12 @@
         <a href="{{social_instagram}}" class="fd-textlink" target="_blank" rel="noopener">Follow us on Instagram <span aria-hidden="true">&rarr;</span></a>
       </div>
       <div class="fd-ig__grid stagger-children">
-        {{#each instagram_posts}}
-        {{#if image}}<a class="fd-ig__tile" href="{{url}}" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="{{image}}" alt="{{alt}}" loading="lazy"></a>{{/if}}
-        {{#if needs_embed}}<blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>{{/if}}
-        {{/each}}
+        <a class="fd-ig__tile" href="https://www.instagram.com/letsbe_ready/p/DYTDxy6NTrW/" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="assets/redesign/ig-1.jpg" alt="Let's Be Ready on Instagram" loading="lazy"></a>
+        <a class="fd-ig__tile" href="https://www.instagram.com/letsbe_ready/p/DYw_3b2RN3E/" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="assets/redesign/ig-2.jpg" alt="Let's Be Ready on Instagram" loading="lazy"></a>
+        <a class="fd-ig__tile" href="https://www.instagram.com/letsbe_ready/p/DZ6DrIbtk6W/" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="assets/redesign/ig-3.jpg" alt="Let's Be Ready on Instagram" loading="lazy"></a>
       </div>
     </div>
   </section>
-  {{/if}}
-  {{#if has_instagram_fallback}}
-  <script async src="https://www.instagram.com/embed.js"></script>
-  {{/if}}
 
   <!-- The ask -->
   <section class="fd-ask">
