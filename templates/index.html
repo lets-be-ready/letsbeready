@@ -13,14 +13,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="redesign.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="icon" href="{{favicon_url}}">
 </head>
-<body>
+<body class="fd-demo3">
 
-  <!-- ========== NAV — minimal, transparent, out of the way ========== -->
   <nav class="nav nav--hero" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
@@ -50,238 +50,165 @@
     </ul>
   </div>
 
-
-  <!-- ============================================================
-       HERO — Full viewport. One image. One line. One feeling.
-       ============================================================ -->
-  <section class="lp-hero">
-    <div class="lp-hero__media">
-      <img
-        src="{{hero_image_url}}"
-        alt="{{hero_image_alt}}"
-        class="lp-hero__media-img"
-        loading="eager"
-      >
-      <div class="lp-hero__overlay"></div>
+  <!-- Hero: blue panel left, full-height photo right -->
+  <header class="fd-shero">
+    <div class="fd-shero__panel">
+      <span class="fd-hero__kicker">Since 2008 &middot; Rural Guatemala</span>
+      <h1 class="fd-shero__headline">Transforming<br>Preschool<br>Education in<br>Guatemala</h1>
+      <p class="fd-shero__sub">In rural Guatemala, preschools are rare. We're changing that, one village at a time.</p>
+      <div class="fd-actions">
+        <a href="donate.html" class="fd-btn fd-btn--yellow">Donate Now</a>
+        <a href="programs.html" class="fd-btn fd-btn--outline-white">Our Programs</a>
+      </div>
     </div>
+    <div class="fd-shero__media">
+      <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager">
+    </div>
+  </header>
 
-    <div class="lp-hero__content">
-      <h1 class="lp-hero__headline">
-        {{hero_headline}}
-      </h1>
-      <p class="lp-hero__sub">
-        {{hero_sub}}
-      </p>
-      <div class="lp-hero__actions">
-        <a href="donate.html" class="btn btn-glass btn-lg">
-          <span class="btn-glass__shimmer"></span>
-          {{hero_cta_text}}
-        </a>
-      </div>
-      <div class="lp-hero__scroll-hint" aria-hidden="true">
-        <span></span>
-      </div>
+  <!-- The Reality: centered statement -->
+  <section class="fd-statement-sec" id="story">
+    <div class="fd-container">
+      <span class="fd-kicker fd-kicker--center reveal">The Reality</span>
+      <h2 class="fd-statement reveal">A child born in a rural Mayan village has a <em>1 in 5</em> chance of finishing primary school.</h2>
+      <a href="about.html" class="fd-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
+
     </div>
   </section>
 
-
-  <!-- ============================================================
-       THE STAKES — The 1-in-5 line. The hook, one breath.
-       Full story lives on the About page.
-       ============================================================ -->
-  <section class="lp-disparity" id="story">
-    <div class="container container--narrow">
-      <div class="lp-disparity__block reveal">
-        <span class="eyebrow" style="color: var(--text-muted);">{{disparity_eyebrow}}</span>
-        <h2 class="lp-disparity__headline">
-          {{disparity_headline}}
-        </h2>
-        <a href="about.html" class="lp-story__link">Read the full story &rarr;</a>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       OUR MISSION — One statement, straight after the stakes
-       ============================================================ -->
-  <section class="lp-quote" id="mission">
-    <div class="container container--narrow">
-      <div class="lp-quote__eyebrow-row">
-        <span class="eyebrow">Our Mission</span>
-      </div>
-      <blockquote class="lp-quote__block reveal">
-        <p>
-          {{founder_quote}}
-        </p>
-        <cite>{{founder_quote_cite}}</cite>
-      </blockquote>
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       THE PROOF — Numbers don't lie. Animated, visceral.
-       ============================================================ -->
-  <section class="lp-proof" id="proof">
-    <div class="lp-proof__bg"></div>
-    <div class="container">
-      <div class="lp-proof__header reveal">
-        <span class="eyebrow" style="color: var(--yellow);">{{proof_eyebrow}}</span>
-        <h2>{{proof_heading}}</h2>
-      </div>
-
-      <div class="lp-proof__grid stagger-children">
-        <div class="lp-proof__card">
-          <div class="lp-proof__number" data-count="{{stat_pass_rate}}" data-suffix="%">0</div>
-          <div class="lp-proof__label">{{stat_pass_rate_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_pass_rate_context}}
+  <!-- Proof: the impact bento -->
+  <section class="fd-bento-sec" id="impact-map">
+    <div class="fd-container">
+      <div class="fd-bento">
+        <div class="fd-bento__row">
+          <div class="fd-bento__map">
+            <div class="fd-bento__map-head">
+              <span class="fd-kicker">See the Impact</span>
+              <strong>45 classrooms. 5 departments.</strong>
+            </div>
+            <div id="classroomMap"></div>
+          </div>
+          <div class="fd-bento__col">
+            <div class="fd-bento__stat">
+              <div class="fd-bento__number"><span data-count="95" data-suffix="%">0</span></div>
+              <strong>of our students pass first grade</strong>
+              <p>The national rural average is under 20%.</p>
+            </div>
+            <div class="fd-bento__stat fd-bento__stat--navy">
+              <div class="fd-bento__number"><span data-count="600">0</span></div>
+              <strong>children learning right now</strong>
+              <p>Ages 4 to 6, learning in small groups.</p>
+            </div>
           </div>
         </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number" data-count="{{stat_children}}" data-prefix="">0</div>
-          <div class="lp-proof__label">{{stat_children_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_children_context}}
+        <div class="fd-bento__row">
+          <div class="fd-bento__col" style="width: 34.5%;">
+            <div class="fd-bento__stat">
+              <div class="fd-bento__number">8 of 10</div>
+              <strong>of our students finish primary school</strong>
+              <p>Most rural children drop out in year one.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number">{{stat_graduation_value}}</div>
-          <div class="lp-proof__label">{{stat_graduation_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_graduation_context}}
+          <div class="fd-bento__wide">
+            <div class="fd-bento__stat fd-bento__stat--stone">
+              <div class="fd-bento__number">18 yrs</div>
+              <strong>of a proven, replicable model</strong>
+              <p>Not a pilot, not an experiment.</p>
+            </div>
           </div>
-        </div>
-
-        <div class="lp-proof__card">
-          <div class="lp-proof__number">{{stat_years_value}}</div>
-          <div class="lp-proof__label">{{stat_years_label}}</div>
-          <div class="lp-proof__context">
-            {{stat_years_context}}
-          </div>
+          <img class="fd-bento__photo" src="assets/redesign/community.jpg" alt="Teachers and community members of Let's Be Ready" loading="lazy">
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ============================================================
-       OUR PROGRAMS — Two photo doors into the Programs page
-       ============================================================ -->
-  <section class="lp-programs" id="programs">
-    <div class="lp-programs__header reveal">
-      <span class="eyebrow">What We Teach</span>
-      <h2>Our Programs</h2>
-    </div>
-    <div class="lp-programs__grid stagger-children">
-      <a href="programs.html" class="lp-programs__card">
+  <!-- Programs: photo + panel rows -->
+  <section class="fd-programs" id="programs">
+    <div class="fd-container">
+      <div class="fd-section-head reveal">
+        <span class="fd-kicker">What We Teach</span>
+        <h2 class="fd-h2">Our Programs</h2>
+      </div>
+      <div class="fd-prow">
         <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy">
-        <div class="lp-programs__label">
+        <div class="fd-prow__panel">
           <h3>Education+</h3>
-          <span>Curriculum, gardening, art &amp; more &rarr;</span>
+          <p>Curriculum, gardening, art &amp; more</p>
+          <a href="programs.html" class="fd-textlink">Explore the program <span aria-hidden="true">&rarr;</span></a>
         </div>
-      </a>
-      <a href="programs.html#nutrition" class="lp-programs__card">
-        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy">
-        <div class="lp-programs__label">
+      </div>
+      <div class="fd-prow fd-prow--flip">
+        <div class="fd-prow__panel">
           <h3>Nutrition</h3>
-          <span>Every child eats before they learn &rarr;</span>
+          <p>Every child eats before they learn</p>
+          <a href="programs.html#nutrition" class="fd-textlink">Explore the program <span aria-hidden="true">&rarr;</span></a>
         </div>
-      </a>
+        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy" style="object-position: center 10%;">
+      </div>
     </div>
   </section>
 
-
-  <!-- ============================================================
-       THE MAP — See where your donation works
-       ============================================================ -->
-  <section class="lp-map" id="impact-map">
-    <div class="container">
-      <div class="lp-map__layout">
-        <div class="lp-map__text">
-          <span class="eyebrow">{{map_eyebrow}}</span>
-          <h2>{{map_heading}}</h2>
-          <p>
-            {{map_description}}
-          </p>
-          <div class="lp-map__stat-row">
-            <div class="lp-map__stat">
-              <strong id="mapCommunities">45</strong>
-              <span>Communities</span>
-            </div>
-            <div class="lp-map__stat">
-              <strong id="mapTeachers">45</strong>
-              <span>Teachers</span>
-            </div>
-            <div class="lp-map__stat">
-              <strong id="mapChildren">600</strong>
-              <span>Children</span>
-            </div>
-          </div>
+  <!-- The cost of change -->
+  <section class="fd-cost">
+    <div class="fd-container">
+      <div class="fd-cost__split reveal">
+        <div>
+          <span class="fd-kicker">The Cost of Change</span>
+          <div class="fd-cost__figure">$300</div>
+          <div class="fd-cost__unit">Per child &middot; per year</div>
         </div>
-        <div class="lp-map__container">
-          <div id="classroomMap"></div>
+        <div class="fd-cost__body">
+          <p class="fd-cost__lead">$3,800 sponsors an entire classroom of 12 to 15 children for a full school year.</p>
+          <p>Less than a dollar a day. Teachers from the community, classrooms in their homes, every dollar to programs.</p>
+          <a href="donate.html" class="fd-btn fd-btn--blue">Learn How to Help</a>
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ============================================================
-       FROM THE CLASSROOM — curated Instagram posts (renders only
-       when post links are configured in Sanity)
-       ============================================================ -->
+  <!-- From the classroom -->
   {{#if has_instagram}}
-  <section class="lp-instagram" id="from-the-classroom">
-    <div class="lp-instagram__header reveal">
-      <span class="eyebrow">From the Classroom</span>
-      <h2>Moments from our socials</h2>
+  <section class="fd-ig" id="from-the-classroom">
+    <div class="fd-container">
+      <div class="fd-ig__head reveal">
+        <div>
+          <span class="fd-kicker">From the Classroom</span>
+          <h2 class="fd-h2">Moments from our socials</h2>
+        </div>
+        <a href="{{social_instagram}}" class="fd-textlink" target="_blank" rel="noopener">Follow us on Instagram <span aria-hidden="true">&rarr;</span></a>
+      </div>
+      <div class="fd-ig__grid stagger-children">
+        {{#each instagram_posts}}
+        {{#if image}}<a class="fd-ig__tile" href="{{url}}" target="_blank" rel="noopener" aria-label="Open this Instagram post"><img src="{{image}}" alt="{{alt}}" loading="lazy"></a>{{/if}}
+        {{#if needs_embed}}<blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>{{/if}}
+        {{/each}}
+      </div>
     </div>
-    <div class="lp-instagram__grid">
-      {{#each instagram_posts}}
-      <blockquote class="instagram-media" data-instgrm-permalink="{{url}}" data-instgrm-version="14"><a href="{{url}}" target="_blank" rel="noopener">View this post on Instagram</a></blockquote>
-      {{/each}}
-    </div>
-    <p class="lp-instagram__follow">
-      <a href="{{social_instagram}}" target="_blank" rel="noopener">Follow us on Instagram &rarr;</a>
-    </p>
   </section>
+  {{/if}}
+  {{#if has_instagram_fallback}}
   <script async src="https://www.instagram.com/embed.js"></script>
   {{/if}}
 
-
-  <!-- ============================================================
-       FINAL CTA — The ask. One button. Clear stakes.
-       ============================================================ -->
-  <section class="lp-final-cta">
-    <div class="container container--narrow">
-      <div class="lp-final-cta__content reveal">
-        <h2>
-          {{final_cta_heading}}
-        </h2>
-        <p>
-          {{final_cta_text}}
-        </p>
-        <a href="donate.html" class="btn btn-secondary btn-lg">
-          {{final_cta_button}}
-        </a>
-        <div class="lp-final-cta__trust">
+  <!-- The ask -->
+  <section class="fd-ask">
+    <div class="fd-container">
+      <div class="reveal">
+        <h2>Thousands of children are still waiting.</h2>
+        <p>The teachers are ready. The communities are ready. The children are ready. Help us open the next classroom.</p>
+        <a href="donate.html" class="fd-btn fd-btn--yellow">Donate Now</a>
+        <div class="fd-ask__trust">
           <span>501(c)(3) tax-deductible</span>
-          <span>&middot;</span>
+          <span aria-hidden="true">&middot;</span>
           <span>100% funds programs</span>
-          <span>&middot;</span>
+          <span aria-hidden="true">&middot;</span>
           <span>Zero overhead</span>
         </div>
       </div>
     </div>
   </section>
 
-
   {{footer_html}}
-
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
   <script src="main.js"></script>
