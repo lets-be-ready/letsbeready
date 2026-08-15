@@ -933,3 +933,109 @@ body[class*="fd-demo"] .footer {
     transform: none;
   }
 }
+
+/* ---------- Photo hero (demo 3) ---------- */
+
+.fd-phero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 640px;
+  margin-top: var(--nav-height);
+  overflow: hidden;
+  text-align: center;
+}
+.fd-phero > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+}
+.fd-phero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(16, 27, 51, 0.1) 0%,
+    rgba(16, 27, 51, 0.4) 50%,
+    rgba(16, 27, 51, 0.8) 100%
+  );
+}
+.fd-phero__copy {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 clamp(1.25rem, 4vw, 2.5rem) clamp(3rem, 6vw, 4rem);
+  max-width: 900px;
+}
+.fd-phero .fd-hero__kicker {
+  color: rgba(255, 255, 255, 0.85);
+}
+.fd-phero__headline {
+  font-size: clamp(2.4rem, 4.6vw, 3.6rem);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+  color: #fff;
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+.fd-phero__sub {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
+  margin: 0 0 1.6rem;
+  max-width: 52ch;
+}
+
+/* ---------- What every classroom holds (demo 3) ---------- */
+
+.fd-holds {
+  padding-block: clamp(5rem, 9vw, 6.5rem);
+  background: var(--fd-paper);
+}
+.fd-holds__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.fd-hold {
+  background: var(--fd-stone);
+  padding: 2.75rem 3rem;
+}
+.fd-hold__chip {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--fd-soft);
+  margin-bottom: 0.75rem;
+}
+.fd-hold h3 {
+  font-size: 1.55rem;
+  font-weight: 550;
+  letter-spacing: -0.015em;
+  color: var(--fd-ink);
+  margin: 0 0 0.5rem;
+}
+.fd-hold p {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--fd-soft);
+  margin: 0;
+  max-width: none;
+}
+
+@media (max-width: 720px) {
+  .fd-holds__grid {
+    grid-template-columns: 1fr;
+  }
+}
