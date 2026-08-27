@@ -169,7 +169,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // --- Newsletter Form (POSTs to /api/subscribe → Sanity) ---
+  // --- Newsletter Form ---
+  // Submits to Netlify Forms (private, in the site's Netlify dashboard).
+  // Until form detection is switched on for the site, Netlify answers
+  // that POST with a 404 — so the old /api/subscribe path stays as the
+  // fallback, and signups never drop on the floor during the switch.
+  // Once detection is on, the fallback can be deleted along with the
+  // function (see the "Move newsletter signups off Sanity" task).
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
     const msgEl = document.getElementById('newsletterMsg');
@@ -179,10 +185,32 @@ document.addEventListener('DOMContentLoaded', () => {
       msgEl.className = 'footer__newsletter-msg' + (kind ? ' footer__newsletter-msg--' + kind : '');
     };
 
+    const submitToNetlify = async (email, source, hp) => {
+      const body = new URLSearchParams({ 'form-name': 'newsletter', email, source, _hp: hp });
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString(),
+      });
+      return res.ok;
+    };
+
+    const submitToSanity = async (email, source, hp) => {
+      const res = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, source, _hp: hp }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!(res.ok && data.ok)) throw new Error(data.error || 'Subscription failed');
+      return true;
+    };
+
     newsletterForm.addEventListener('submit', async (e) => {
       e.preventDefault();
       const emailInput = newsletterForm.querySelector('input[name="email"]');
       const honeypotInput = newsletterForm.querySelector('input[name="_hp"]');
+      const sourceInput = newsletterForm.querySelector('input[name="source"]');
       const button = newsletterForm.querySelector('button');
       const originalText = button.textContent;
 
@@ -191,37 +219,28 @@ document.addEventListener('DOMContentLoaded', () => {
         setMsg('Please enter a valid email address.', 'error');
         return;
       }
+      const source = window.location.pathname || 'footer';
+      if (sourceInput) sourceInput.value = source;
+      const hp = honeypotInput ? honeypotInput.value : '';
 
       button.disabled = true;
       button.textContent = 'Subscribing…';
       setMsg('', null);
 
       try {
-        const res = await fetch('/api/subscribe', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({
-            email,
-            source: window.location.pathname || 'footer',
-            _hp: honeypotInput ? honeypotInput.value : '',
-          }),
-        });
-        const data = await res.json().catch(() => ({}));
+        const ok = await submitToNetlify(email, source, hp).catch(() => false);
+        if (!ok) await submitToSanity(email, source, hp);
 
-        if (res.ok && data.ok) {
-          button.textContent = 'Subscribed!';
-          button.style.background = 'var(--success)';
-          emailInput.value = '';
-          setMsg("Thanks — we'll be in touch.", 'success');
-          setTimeout(() => {
-            button.textContent = originalText;
-            button.style.background = '';
-            button.disabled = false;
-            setMsg('', null);
-          }, 4000);
-        } else {
-          throw new Error(data.error || 'Subscription failed');
-        }
+        button.textContent = 'Subscribed!';
+        button.style.background = 'var(--success)';
+        emailInput.value = '';
+        setMsg("Thanks — we'll be in touch.", 'success');
+        setTimeout(() => {
+          button.textContent = originalText;
+          button.style.background = '';
+          button.disabled = false;
+          setMsg('', null);
+        }, 4000);
       } catch (err) {
         button.textContent = originalText;
         button.disabled = false;

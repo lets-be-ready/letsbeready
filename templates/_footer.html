@@ -41,7 +41,12 @@
         </div>
         <div>
           <div class="footer__heading">Stay Updated</div>
-          <form class="footer__newsletter-form" id="newsletterForm" novalidate>
+          <!-- Netlify Forms: submissions land privately in the site's Netlify
+               dashboard (Forms → newsletter). The hidden form-name + source
+               fields travel with each submission; _hp is the spam honeypot. -->
+          <form class="footer__newsletter-form" id="newsletterForm" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="_hp" novalidate>
+            <input type="hidden" name="form-name" value="newsletter">
+            <input type="hidden" name="source" value="footer">
             <input type="email" name="email" placeholder="Your email" required aria-label="Email address" autocomplete="email">
             <button type="submit">Subscribe</button>
             <!-- honeypot — humans never see/fill this; bots do -->
