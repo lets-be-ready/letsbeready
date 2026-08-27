@@ -4,18 +4,6 @@ export const deskStructure: StructureResolver = (S) =>
   S.list()
     .title('Content')
     .items([
-      // ==================== INBOX (form submissions) ====================
-      S.listItem()
-        .title('📬 Subscribers')
-        .schemaType('subscriber')
-        .child(
-          S.documentTypeList('subscriber')
-            .title('Subscribers')
-            .defaultOrdering([{field: 'subscribed_at', direction: 'desc'}]),
-        ),
-
-      S.divider(),
-
       // ==================== PAGES ====================
       S.listItem()
         .title('Pages')
