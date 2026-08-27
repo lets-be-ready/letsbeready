@@ -169,13 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // --- Newsletter Form ---
-  // Submits to Netlify Forms (private, in the site's Netlify dashboard).
-  // Until form detection is switched on for the site, Netlify answers
-  // that POST with a 404 — so the old /api/subscribe path stays as the
-  // fallback, and signups never drop on the floor during the switch.
-  // Once detection is on, the fallback can be deleted along with the
-  // function (see the "Move newsletter signups off Sanity" task).
+  // --- Newsletter Form (Netlify Forms — submissions live in the site's Netlify dashboard) ---
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
     const msgEl = document.getElementById('newsletterMsg');
@@ -193,17 +187,6 @@ document.addEventListener('DOMContentLoaded', () => {
         body: body.toString(),
       });
       return res.ok;
-    };
-
-    const submitToSanity = async (email, source, hp) => {
-      const res = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, source, _hp: hp }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!(res.ok && data.ok)) throw new Error(data.error || 'Subscription failed');
-      return true;
     };
 
     newsletterForm.addEventListener('submit', async (e) => {
@@ -228,8 +211,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setMsg('', null);
 
       try {
-        const ok = await submitToNetlify(email, source, hp).catch(() => false);
-        if (!ok) await submitToSanity(email, source, hp);
+        const ok = await submitToNetlify(email, source, hp);
+        if (!ok) throw new Error('Subscription failed');
 
         button.textContent = 'Subscribed!';
         button.style.background = 'var(--success)';

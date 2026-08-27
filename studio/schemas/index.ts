@@ -10,7 +10,6 @@ import teamMember from './teamMember'
 import staffMember from './staffMember'
 import partner from './partner'
 import expenseItem from './expenseItem'
-import subscriber from './subscriber'
 
 export const schemaTypes = [
   // Singletons
@@ -28,5 +27,4 @@ export const schemaTypes = [
   partner,
   expenseItem,
   // Form submissions (captured from website forms)
-  subscriber,
 ]
