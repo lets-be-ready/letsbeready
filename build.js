@@ -737,6 +737,43 @@ ${items.map(i => `              <div class="pie-chart__item"><span class="pie-ch
 }
 
 
+// --- Homepage-only keys ---
+
+/**
+ * A few homepage values are needed in a shape the editor doesn't store:
+ * the map heading on one line, and the animated counters split into the
+ * number that counts up and the suffix that doesn't ("550+" → 550, "+").
+ */
+function deriveHomepageKeys(c) {
+  c.map_heading_inline = String(c.map_heading || '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+  for (const key of ['stat_pass_rate', 'stat_children']) {
+    const m = String(c[key] || '').trim().match(/^([^\d]*)(\d[\d,]*)(.*)$/);
+    c[`${key}_num`] = m ? m[2].replace(/,/g, '') : '0';
+    c[`${key}_prefix`] = m ? m[1].trim() : '';
+    c[`${key}_suffix`] = m ? m[3].trim() : '';
+  }
+}
+
+/**
+ * Preview-only copy overlay. The redesign preview shows the wording proposed
+ * to the editor without writing anything to Sanity: when
+ * HOMEPAGE_COPY_PROPOSAL=1 (set in netlify.toml for the preview branch only)
+ * the values in scripts/homepage-copy.json sit on top of the live content.
+ * On approval, scripts/apply-homepage-copy.js writes the same file into
+ * Sanity and the overlay has nothing left to change.
+ */
+function applyCopyProposal(c) {
+  if (process.env.HOMEPAGE_COPY_PROPOSAL !== '1') return;
+  const file = path.join(__dirname, 'scripts', 'homepage-copy.json');
+  if (!fs.existsSync(file)) return;
+  const proposal = JSON.parse(fs.readFileSync(file, 'utf-8'));
+  Object.assign(c, proposal);
+  console.log(`Copy proposal overlay (preview only): ${Object.keys(proposal).join(', ')}`);
+}
+
 // --- Template engine ---
 
 /**
@@ -942,6 +979,8 @@ async function build() {
   // Programs-page carousels: guarantee at least one slide (the section's
   // single image) and give every slide the section's alt text.
   const c = data.content;
+  applyCopyProposal(c);
+  deriveHomepageKeys(c);
   const withAlt = (slides, alt) => slides.map((s) => ({ ...s, alt: s.alt || alt || '' }));
   data.garden_gallery = withAlt(
     data.garden_gallery && data.garden_gallery.length

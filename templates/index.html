@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
   <link rel="icon" href="{{favicon_url}}">
 </head>
-<body class="fd-demo1">
+<body class="fd-home">
 
   <nav class="nav nav--hero" id="nav">
     <div class="nav__inner">
@@ -50,14 +50,17 @@
     </ul>
   </div>
 
-  <!-- Hero: blue band, photo straddling the edge -->
+  <!-- ============================================================
+       HERO — blue band, headline above the photo so the words never
+       sit on anyone's face. Copy: Home Page → Hero in the editor.
+       ============================================================ -->
   <header class="fd-hero">
     <div class="fd-container fd-hero__copy">
       <span class="fd-hero__kicker">Since 2008 &middot; Rural Guatemala</span>
-      <h1 class="fd-hero__headline">Transforming Preschool<br>Education in Guatemala</h1>
-      <p class="fd-hero__sub">In rural Guatemala, preschools are rare.<br>We're changing that, one village at a time.</p>
+      <h1 class="fd-hero__headline">{{hero_headline}}</h1>
+      <p class="fd-hero__sub">{{hero_sub}}</p>
       <div class="fd-actions">
-        <a href="donate.html" class="fd-btn fd-btn--yellow">Donate Now</a>
+        <a href="donate.html" class="fd-btn fd-btn--yellow">{{hero_cta_text}}</a>
         <a href="programs.html" class="fd-btn fd-btn--outline-white">Our Programs</a>
       </div>
     </div>
@@ -67,11 +70,14 @@
   </header>
   <p class="fd-trust">Verified 501(c)(3) &nbsp;&middot;&nbsp; 100% to programs &nbsp;&middot;&nbsp; All donations tax-deductible</p>
 
-  <!-- The Reality: centered statement -->
+  <!-- ============================================================
+       THE REALITY — Home Page → The Reality (eyebrow + headline).
+       The three fact rows in that tab belong to the About page.
+       ============================================================ -->
   <section class="fd-statement-sec" id="story">
     <div class="fd-container">
-      <span class="fd-kicker fd-kicker--center reveal">The Reality</span>
-      <h2 class="fd-statement reveal">A child born in a rural Mayan village has a <em>1 in 5</em> chance of finishing primary school.</h2>
+      <span class="fd-kicker fd-kicker--center reveal">{{disparity_eyebrow}}</span>
+      <h2 class="fd-statement reveal">{{disparity_headline}}</h2>
       <a href="about.html" class="fd-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
 
       <div class="fd-triptych stagger-children">
@@ -79,52 +85,54 @@
         <img src="{{model_step3_image_url}}" alt="{{model_step3_image_alt}}" loading="lazy">
         <img src="{{model_step2_image_url}}" alt="{{model_step2_image_alt}}" loading="lazy">
       </div>
-
     </div>
   </section>
 
-  <!-- Proof: the impact bento -->
+  <!-- ============================================================
+       PROOF — the impact bento. Numbers: Home Page → Proof / Stats.
+       Map head: Home Page → Map.
+       ============================================================ -->
   <section class="fd-bento-sec" id="impact-map">
     <div class="fd-container">
       <div class="fd-section-head reveal">
-        <span class="fd-kicker">Proof, Not Promises</span>
-        <h2 class="fd-h2">Our model works. Here are the numbers.</h2>
+        <span class="fd-kicker">{{proof_eyebrow}}</span>
+        <h2 class="fd-h2">{{proof_heading}}</h2>
       </div>
       <div class="fd-bento">
         <div class="fd-bento__row">
           <div class="fd-bento__map">
             <div class="fd-bento__map-head">
-              <span class="fd-kicker">See the Impact</span>
-              <strong>45 classrooms. 5 departments.</strong>
+              <span class="fd-kicker">{{map_eyebrow}}</span>
+              <strong>{{map_heading_inline}}</strong>
             </div>
             <div id="classroomMap"></div>
           </div>
           <div class="fd-bento__col">
             <div class="fd-bento__stat">
-              <div class="fd-bento__number"><span data-count="95" data-suffix="%">0</span></div>
-              <strong>of our students pass first grade</strong>
-              <p>The national rural average is under 20%.</p>
+              <div class="fd-bento__number"><span data-count="{{stat_pass_rate_num}}" data-suffix="%">0</span></div>
+              <strong>{{stat_pass_rate_label}}</strong>
+              <p>{{stat_pass_rate_context}}</p>
             </div>
             <div class="fd-bento__stat fd-bento__stat--navy">
-              <div class="fd-bento__number"><span data-count="600">0</span></div>
-              <strong>children learning right now</strong>
-              <p>Ages 4 to 6, learning in small groups.</p>
+              <div class="fd-bento__number"><span data-count="{{stat_children_num}}" data-suffix="{{stat_children_suffix}}">0</span></div>
+              <strong>{{stat_children_label}}</strong>
+              <p>{{stat_children_context}}</p>
             </div>
           </div>
         </div>
         <div class="fd-bento__row">
-          <div class="fd-bento__col" style="width: 34.5%;">
+          <div class="fd-bento__col fd-bento__col--narrow">
             <div class="fd-bento__stat">
-              <div class="fd-bento__number">8 of 10</div>
-              <strong>of our students finish primary school</strong>
-              <p>Most rural children drop out in year one.</p>
+              <div class="fd-bento__number fd-bento__number--words">{{stat_graduation_value}}</div>
+              <strong>{{stat_graduation_label}}</strong>
+              <p>{{stat_graduation_context}}</p>
             </div>
           </div>
           <div class="fd-bento__wide">
             <div class="fd-bento__stat fd-bento__stat--stone">
-              <div class="fd-bento__number">18 yrs</div>
-              <strong>of a proven, replicable model</strong>
-              <p>Not a pilot, not an experiment.</p>
+              <div class="fd-bento__number">{{stat_years_value}}</div>
+              <strong>{{stat_years_label}}</strong>
+              <p>{{stat_years_context}}</p>
             </div>
           </div>
           <img class="fd-bento__photo" src="assets/redesign/community.jpg" alt="Teachers and community members of Let's Be Ready" loading="lazy">
@@ -133,16 +141,21 @@
     </div>
   </section>
 
-  <!-- Mission, over a photograph -->
+  <!-- ============================================================
+       OUR MISSION — over a photograph. Home Page → Founder Quote.
+       ============================================================ -->
   <section class="fd-quoteband" id="mission">
     <img src="{{model_step2_image_url}}" alt="">
     <div class="fd-quoteband__copy reveal">
       <span class="fd-kicker">Our Mission</span>
-      <p>High-quality early education and daily nutrition for indigenous children in rural Guatemala, so they enter first grade healthy, confident, and ready to learn.</p>
+      <p>{{founder_quote}}</p>
     </div>
   </section>
 
-  <!-- Programs: photo + panel rows -->
+  <!-- ============================================================
+       PROGRAMS — two doors into the Programs page. Photos come from
+       the Curriculum and Nutrition pages in the editor.
+       ============================================================ -->
   <section class="fd-programs" id="programs">
     <div class="fd-container">
       <div class="fd-section-head reveal">
@@ -168,57 +181,30 @@
     </div>
   </section>
 
-  <!-- The people (photos live in Sanity; Sanity-driven at ship time) -->
-  <section class="fd-team" id="team">
-    <div class="fd-container">
-      <div class="fd-section-head fd-section-head--center reveal">
-        <span class="fd-kicker fd-kicker--center">The People</span>
-        <h2 class="fd-h2">The team behind the classrooms</h2>
-      </div>
-      <div class="fd-team__grid stagger-children">
-        <div class="fd-team__card">
-          <img src="https://cdn.sanity.io/images/juhmq0dg/production/fb1b46e8c82685ba5048a3a598ed1b09c2b31e94-1080x1058.jpg?w=800" alt="Sara Tun" loading="lazy">
-          <strong>Sara Tun</strong>
-          <span>Program Administrator</span>
-        </div>
-        <div class="fd-team__card">
-          <img src="https://cdn.sanity.io/images/juhmq0dg/production/2ac4baa6fea934e43e1d68bc2ffd87713534b7f7-817x817.jpg?w=800" alt="Lucila Diaz" loading="lazy">
-          <strong>Lucila Diaz</strong>
-          <span>Program Administrator</span>
-        </div>
-        <div class="fd-team__card">
-          <img src="https://cdn.sanity.io/images/juhmq0dg/production/7568cdd14f1e86ffed1ae34d501c710a5feb63b4-2055x2424.jpg?w=800" alt="Janice Stradford" loading="lazy">
-          <strong>Janice Stradford</strong>
-          <span>Board Member</span>
-        </div>
-        <div class="fd-team__card">
-          <img src="https://cdn.sanity.io/images/juhmq0dg/production/32e1a506e7b8584728aab841c8d7b6aacf0cade4-480x640.jpg?w=800" alt="John Reed III" loading="lazy">
-          <strong>John Reed III</strong>
-          <span>Board Member</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- The cost of change -->
+  <!-- ============================================================
+       THE COST OF CHANGE — Home Page → Cost.
+       ============================================================ -->
   <section class="fd-cost">
     <div class="fd-container">
       <div class="fd-cost__split reveal">
         <div>
-          <span class="fd-kicker">The Cost of Change</span>
-          <div class="fd-cost__figure">$300</div>
+          <span class="fd-kicker">{{cost_eyebrow}}</span>
+          <div class="fd-cost__figure">{{cost_per_child}}</div>
           <div class="fd-cost__unit">Per child &middot; per year</div>
         </div>
         <div class="fd-cost__body">
-          <p class="fd-cost__lead">$3,800 sponsors an entire classroom of 12 to 15 children for a full school year.</p>
-          <p>Less than a dollar a day. Teachers from the community, classrooms in their homes, every dollar to programs.</p>
-          <a href="donate.html" class="fd-btn fd-btn--blue">Learn How to Help</a>
+          <p class="fd-cost__lead">{{cost_per_classroom}} {{cost_classroom_desc}}</p>
+          {{#if cost_context}}<p>{{cost_context}}</p>{{/if}}
+          <a href="donate.html" class="fd-btn fd-btn--blue">{{cost_cta_text}}</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- From the classroom (post photos committed; links to the real posts) -->
+  <!-- ============================================================
+       FROM THE CLASSROOM — three post photos, linking to the real
+       posts. Becomes the automatic latest-3 strip in the next step.
+       ============================================================ -->
   <section class="fd-ig" id="from-the-classroom">
     <div class="fd-container">
       <div class="fd-ig__head reveal">
@@ -236,13 +222,15 @@
     </div>
   </section>
 
-  <!-- The ask -->
+  <!-- ============================================================
+       THE ASK — Home Page → Final CTA.
+       ============================================================ -->
   <section class="fd-ask">
     <div class="fd-container">
       <div class="reveal">
-        <h2>Thousands of children are still waiting.</h2>
-        <p>The teachers are ready. The communities are ready. The children are ready. Help us open the next classroom.</p>
-        <a href="donate.html" class="fd-btn fd-btn--yellow">Donate Now</a>
+        <h2>{{final_cta_heading}}</h2>
+        <p>{{final_cta_text}}</p>
+        <a href="donate.html" class="fd-btn fd-btn--yellow">{{final_cta_button}}</a>
         <div class="fd-ask__trust">
           <span>501(c)(3) tax-deductible</span>
           <span aria-hidden="true">&middot;</span>

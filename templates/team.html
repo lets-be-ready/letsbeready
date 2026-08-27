@@ -13,8 +13,9 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="redesign.css">
   <link rel="icon" href="{{favicon_url}}">
 
   <style>
@@ -157,9 +158,8 @@
     }
   </style>
 </head>
-<body>
+<body class="fd-home fd-teampage">
 
-  <!-- NAV -->
   <nav class="nav nav--scrolled" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
@@ -172,7 +172,7 @@
         <li><a href="team.html" class="nav__link nav__link--active">Our Team</a></li>
         <li><a href="partners.html" class="nav__link">Partners</a></li>
       </ul>
-      <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Donate</a>
+      <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Give Now</a>
       <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -185,48 +185,45 @@
       <li><a href="programs.html" class="mobile-menu__link">Our Programs</a></li>
       <li><a href="team.html" class="mobile-menu__link">Our Team</a></li>
       <li><a href="partners.html" class="mobile-menu__link">Partners</a></li>
-      <li><a href="donate.html" class="btn btn-primary btn-lg" style="margin-top:1rem;">Donate</a></li>
+      <li><a href="donate.html" class="btn btn-primary btn-lg" style="margin-top:1.5rem;">Give Now</a></li>
     </ul>
   </div>
 
-
-  <!-- ====== PAGE HERO ====== -->
-  <section class="page-hero">
-    <div class="page-hero__inner">
-      <span class="eyebrow">{{team_eyebrow}}</span>
+  <!-- ============================================================
+       PAGE HEAD — Home Page → Team Section in the editor.
+       ============================================================ -->
+  <header class="fd-pagehead">
+    <div class="fd-container">
+      <span class="fd-kicker">{{team_eyebrow}}</span>
       <h1>{{team_heading}}</h1>
     </div>
-  </section>
-
+  </header>
 
   <!-- ============================================================
-       TEAM — Faces. Real people. Brief.
+       THE PEOPLE — one card per active Team Member in the editor,
+       in their set order. Photo at the homepage-demo size, bio below.
        ============================================================ -->
-  <section class="lp-team" id="team">
-    <div class="container">
-      <div class="lp-team__grid stagger-children">
+  <section class="fd-team" id="team">
+    <div class="fd-container">
+      <div class="fd-team__grid fd-team__grid--page stagger-children">
         {{#each team_members}}
-        <div class="lp-team__card">
-          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" class="lp-team__photo">{{/if}}
-          {{#if no_photo}}<div class="lp-team__photo lp-team__photo--initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
-          <div class="lp-team__name">{{name}}</div>
-          <div class="lp-team__role">{{role}}</div>
-          <p>{{bio}}</p>
+        <div class="fd-team__card">
+          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" loading="lazy">{{/if}}
+          {{#if no_photo}}<div class="fd-team__initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
+          <strong>{{name}}</strong>
+          <span>{{role}}</span>
+          {{#if bio}}<p>{{bio}}</p>{{/if}}
         </div>
         {{/each}}
       </div>
-
-      <div class="lp-team__footer reveal">
-        <p>
-          {{team_footer_text}}
-        </p>
-      </div>
+      {{#if team_footer_text}}
+      <p class="fd-team__note reveal">{{team_footer_text}}</p>
+      {{/if}}
     </div>
   </section>
 
-
   <!-- ============================================================
-       STAFF — appears when the staff toggle is enabled in Sanity
+       STAFF — appears when the staff toggle is enabled in the editor.
        ============================================================ -->
   {{#if show_staff_link}}
   <section class="team-staff" id="staff">
@@ -250,7 +247,6 @@
     </div>
   </section>
   {{/if}}
-
 
   {{footer_html}}
 

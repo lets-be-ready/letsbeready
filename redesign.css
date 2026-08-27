@@ -24,7 +24,8 @@
   --fd-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-body[class*="fd-demo"] {
+body[class*="fd-demo"],
+body.fd-home {
   background: var(--fd-paper);
   color: var(--fd-ink);
 }
@@ -1036,6 +1037,94 @@ body[class*="fd-demo"] .footer {
 
 @media (max-width: 720px) {
   .fd-holds__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ============================================================
+   THE REAL PAGES (fd-home) — additions on top of the demo system
+   ============================================================ */
+
+/* ---------- Bento: the narrow stat card ----------
+   The demo set this column's width inline, which the phone layout could
+   not override — the card kept its desktop width and the number wrapped
+   into a tall ribbon. A class lets the breakpoints below win. */
+
+.fd-bento__col--narrow {
+  width: 34.5%;
+}
+.fd-bento__number--words {
+  font-size: clamp(2.2rem, 2.6vw, 2.75rem);
+  white-space: nowrap;
+}
+
+/* ---------- Our Team page ---------- */
+
+.fd-pagehead {
+  padding-top: calc(var(--nav-height) + clamp(3.5rem, 7vw, 5.5rem));
+  padding-bottom: clamp(2.75rem, 5vw, 3.5rem);
+  text-align: center;
+}
+.fd-pagehead .fd-kicker {
+  text-align: center;
+}
+.fd-pagehead h1 {
+  font-size: clamp(2.4rem, 5vw, 3.75rem);
+  font-weight: 550;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+  margin: 0 auto;
+  max-width: 18ch;
+  color: var(--fd-ink);
+  text-wrap: balance;
+}
+.fd-pagehead h1 em {
+  font-style: normal;
+  color: var(--fd-blue);
+}
+
+.fd-teampage .fd-team {
+  padding-block: 0 clamp(4rem, 8vw, 5.5rem);
+}
+.fd-team__grid--page {
+  gap: 24px 16px;
+  align-items: start;
+}
+.fd-team__initials {
+  width: 100%;
+  aspect-ratio: 1 / 1.1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fd-tint);
+  color: var(--fd-blue);
+  font-size: 2.5rem;
+  font-weight: 550;
+  letter-spacing: 0.02em;
+  margin-bottom: 0.9rem;
+}
+.fd-team__card p {
+  font-size: 0.9rem;
+  line-height: 1.65;
+  color: var(--fd-soft);
+  margin: 0.7rem 0 0;
+}
+.fd-team__note {
+  max-width: 62ch;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--fd-soft);
+}
+
+@media (max-width: 960px) {
+  .fd-bento__col--narrow {
+    width: 100%;
+  }
+}
+@media (max-width: 560px) {
+  .fd-team__grid {
     grid-template-columns: 1fr;
   }
 }
