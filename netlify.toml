@@ -41,6 +41,12 @@
   to = "/programs.html"
   status = 200
 
+# Preview of the restyled Programs page (compare against /programs before it replaces it)
+[[redirects]]
+  from = "/programs-2"
+  to = "/programs2.html"
+  status = 200
+
 [[redirects]]
   from = "/team"
   to = "/team.html"
