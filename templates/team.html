@@ -200,27 +200,17 @@
   </header>
 
   <!-- ============================================================
-       THE PEOPLE — one card per active Team Member in the editor,
-       in their set order. Photo at the homepage-demo size, bio below.
+       THE PEOPLE — every active Team Member, grouped by the role
+       they carry in the editor, in the order roles first appear.
+       Rendered from templates/_team-group.html by build.js.
        ============================================================ -->
-  <section class="fd-team" id="team">
-    <div class="fd-container">
-      <div class="fd-team__grid fd-team__grid--page stagger-children">
-        {{#each team_members}}
-        <div class="fd-team__card">
-          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" loading="lazy">{{/if}}
-          {{#if no_photo}}<div class="fd-team__initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
-          <strong>{{name}}</strong>
-          <span>{{role}}</span>
-          {{#if bio}}<p>{{bio}}</p>{{/if}}
-        </div>
-        {{/each}}
-      </div>
-      {{#if team_footer_text}}
-      <p class="fd-team__note reveal">{{team_footer_text}}</p>
-      {{/if}}
-    </div>
+  {{team_groups_html}}
+
+  {{#if team_footer_text}}
+  <section class="fd-team__notewrap">
+    <div class="fd-container"><p class="fd-team__note reveal">{{team_footer_text}}</p></div>
   </section>
+  {{/if}}
 
   <!-- ============================================================
        STAFF — appears when the staff toggle is enabled in the editor.
@@ -251,5 +241,21 @@
   {{footer_html}}
 
   <script src="main.js"></script>
+  <script>
+    // Bios clamp to four lines; "Read more" appears only when a bio was actually cut.
+    (function () {
+      document.querySelectorAll('[data-clamp]').forEach(function (box) {
+        var p = box.querySelector('p'), btn = box.querySelector('.fd-team__more');
+        if (!p || !btn) return;
+        function check() { if (!box.classList.contains('is-open')) btn.hidden = p.scrollHeight <= p.clientHeight + 2; }
+        btn.addEventListener('click', function () {
+          var open = box.classList.toggle('is-open');
+          btn.textContent = open ? 'Show less' : 'Read more';
+        });
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(check); else check();
+        window.addEventListener('resize', check);
+      });
+    })();
+  </script>
 </body>
 </html>

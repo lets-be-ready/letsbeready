@@ -52,11 +52,11 @@
   to = "/team.html"
   status = 200
 
-# Preview of the reworked Team page (compare against /team before it replaces it)
+# The reworked Team page shipped as /team (Aug 28); keep the preview path pointing at it.
 [[redirects]]
   from = "/team-2"
-  to = "/team2.html"
-  status = 200
+  to = "/team"
+  status = 301
 
 [[redirects]]
   from = "/our-team"
