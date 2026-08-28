@@ -52,6 +52,12 @@
   to = "/team.html"
   status = 200
 
+# Preview of the reworked Team page (compare against /team before it replaces it)
+[[redirects]]
+  from = "/team-2"
+  to = "/team2.html"
+  status = 200
+
 [[redirects]]
   from = "/our-team"
   to = "/team.html"

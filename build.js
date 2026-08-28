@@ -971,6 +971,29 @@ async function build() {
   }
   ensureDir(DIST_DIR);
 
+  // Team page: people grouped by the role they carry in the editor, in the
+  // order roles first appear. Each group renders through the _team-group
+  // partial (the template engine doesn't nest loops). A group of one gets
+  // the featured layout.
+  const groupPath = path.join(TEMPLATES_DIR, '_team-group.html');
+  if (fs.existsSync(groupPath)) {
+    const groupTpl = fs.readFileSync(groupPath, 'utf-8');
+    const groups = [];
+    for (const m of data.team_members) {
+      const role = (m.role || '').trim() || 'Team';
+      let g = groups.find((x) => x.role === role);
+      if (!g) { g = { role, members: [] }; groups.push(g); }
+      g.members.push(m);
+    }
+    data.content.team_groups_html = groups.map((g) => {
+      const plural = g.members.length > 1 && !/s$/i.test(g.role) ? g.role + 's' : g.role;
+      return processTemplate(groupTpl, {
+        content: { label: plural, single: g.members.length === 1 ? '1' : '' },
+        members: g.members,
+      });
+    }).join('\n');
+  }
+
   // 3. Inject canonical footer partial as a content key (so {{footer_html}} works in every template)
   const footerPath = path.join(TEMPLATES_DIR, '_footer.html');
   if (fs.existsSync(footerPath)) {
@@ -978,7 +1001,7 @@ async function build() {
   }
 
   // 4. Process templates (skip files starting with _ — they're partials)
-  const templateFiles = ['index.html', 'about.html', 'programs.html', 'team.html', 'donate.html', 'partners.html', 'staff.html'];
+  const templateFiles = ['index.html', 'about.html', 'programs.html', 'team.html', 'team2.html', 'donate.html', 'partners.html', 'staff.html'];
   for (const file of templateFiles) {
     const templatePath = path.join(TEMPLATES_DIR, file);
     if (!fs.existsSync(templatePath)) {

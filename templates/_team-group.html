@@ -1,0 +1,18 @@
+<section class="fd-tgroup{{#if single}} fd-tgroup--lead{{/if}}">
+  <div class="fd-container">
+    <span class="fd-kicker">{{label}}</span>
+    <div class="fd-team__grid fd-team__grid--page stagger-children">
+      {{#each members}}
+      <div class="fd-team__card">
+        {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" loading="lazy">{{/if}}
+        {{#if no_photo}}<div class="fd-team__initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
+        <div class="fd-team__body">
+          <strong>{{name}}</strong>
+          <span>{{role}}</span>
+          {{#if bio}}<div class="fd-team__bio" data-clamp><p>{{bio}}</p><button class="fd-team__more" type="button" hidden>Read more</button></div>{{/if}}
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>

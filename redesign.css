@@ -1557,3 +1557,89 @@ body[class*="fd-demo"] .footer {
     flex-wrap: wrap;
   }
 }
+
+/* ---------- Team page, grouped by role (fd-teampage) ---------- */
+
+.fd-tgroup {
+  padding-block: 0 clamp(3.5rem, 7vw, 5rem);
+  background: var(--fd-paper);
+}
+.fd-tgroup .fd-kicker {
+  margin-bottom: 1.4rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--fd-hairline);
+}
+.fd-tgroup .fd-team__card span {
+  display: none; /* the group kicker carries the role */
+}
+.fd-team__body strong {
+  margin-bottom: 0.35rem;
+}
+.fd-team__bio p {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.35rem;
+}
+.fd-team__bio.is-open p {
+  display: block;
+  -webkit-line-clamp: unset;
+}
+.fd-team__more {
+  margin-top: 0.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--fd-blue);
+  cursor: pointer;
+}
+.fd-team__more[hidden] {
+  display: none;
+}
+/* A group of one: photo beside the words, bio in full. */
+.fd-tgroup--lead .fd-team__grid {
+  grid-template-columns: 1fr;
+}
+.fd-tgroup--lead .fd-team__card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+.fd-tgroup--lead .fd-team__card img,
+.fd-tgroup--lead .fd-team__initials {
+  margin-bottom: 0;
+}
+.fd-tgroup--lead .fd-team__body strong {
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.fd-tgroup--lead .fd-team__bio p {
+  display: block;
+  -webkit-line-clamp: unset;
+  font-size: 1rem;
+}
+.fd-tgroup--lead .fd-team__more {
+  display: none;
+}
+.fd-team__notewrap {
+  background: var(--fd-paper);
+  padding-bottom: clamp(4rem, 8vw, 5.5rem);
+}
+.fd-team__notewrap .fd-team__note {
+  margin-top: 0;
+}
+
+@media (max-width: 640px) {
+  .fd-tgroup--lead .fd-team__card {
+    grid-template-columns: 1fr;
+  }
+  .fd-tgroup--lead .fd-team__card img,
+  .fd-tgroup--lead .fd-team__initials {
+    margin-bottom: 0.9rem;
+  }
+}
