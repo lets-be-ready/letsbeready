@@ -1504,7 +1504,7 @@ body[class*="fd-demo"] .footer {
 }
 .fd-quote blockquote {
   margin: 0 auto;
-  max-width: 34ch;
+  max-width: 48ch;
 }
 .fd-quote p {
   font-size: clamp(1.5rem, 2.8vw, 2.2rem);
