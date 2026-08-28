@@ -106,7 +106,7 @@ After that I hand-imported 11 historical newsletter subscribers from the old Wix
         └────────────────────────────────────────────────┘
 
            ┌──────────────────┐         ┌──────────────────┐
-           │  GiveLively      │         │  /api/subscribe  │
+           │  GiveLively      │         │  Netlify Forms   │
            │  (donate widget) │         │  (Vercel func)   │
            │  Stripe payments │         │  Writes form     │
            │  → org dashboard │         │  → Sanity docs   │
@@ -151,8 +151,6 @@ npm run studio
 
 ```
 new-site/
-├── api/                    # Vercel serverless functions
-│   └── subscribe.js        # POST /api/subscribe → writes subscriber to Sanity
 ├── assets/                 # Static images, favicon, training screenshots
 ├── docs/                   # Architecture, decisions, migration, process writeups
 │   ├── architecture.md

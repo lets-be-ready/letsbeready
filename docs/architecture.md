@@ -11,10 +11,10 @@ A static HTML site built from a headless CMS, deployed to a CDN, with one tiny s
 ### 1. Sanity (the CMS)
 - Hosted at https://letsbeready.sanity.studio
 - Editors log in with Google
-- Stores all editable content as documents: pages, classrooms, team members, partners, expense items, subscribers
+- Stores all editable content as documents: pages, classrooms, team members, partners, expense items
 - Two kinds of documents:
   - **Singletons** (one per type): siteSettings, homepage, donatePage, curriculumPage, nutritionPage, partnersPage, staffPage
-  - **Collections** (many per type): classroom, teamMember, staffMember, partner, expenseItem, subscriber
+  - **Collections** (many per type): classroom, teamMember, staffMember, partner, expenseItem
 - Free tier handles everything we need (10K docs, 100K API requests, multi-user editing)
 
 ### 2. The build script (`build.js`)
@@ -46,12 +46,11 @@ Plain HTML files with `{{key}}` placeholders. Each one corresponds to a final pa
 - No client-side rendering, no hydration, no React, no anything
 - Lighthouse scores in the high 90s for Performance, Accessibility, Best Practices, SEO
 
-### 6. The form API (`api/subscribe.js`)
-- One Vercel serverless function
-- Validates email, checks for honeypot, dedupes against existing subscribers
-- Writes a `subscriber` document to Sanity using the official client and a write token
-- Editors see the new subscriber in the Studio sidebar within seconds
-- Total surface area: one file, ~80 lines
+### 6. The newsletter form (Netlify Forms)
+- The footer form carries `data-netlify="true"`; Netlify registers it at deploy time and stores every submission privately in the site's dashboard (Forms → newsletter)
+- `main.js` posts it as a normal form submission so the page never reloads; a honeypot field (`_hp`) filters bots
+- No server code, no tokens, no public dataset — the subscriber list is only visible to whoever is logged in to the Netlify account
+- Switched from a Sanity `subscriber` collection in August 2026, because Sanity's free plan only allows public datasets and the list was readable by anyone
 
 ### 7. The donation widget (GiveLively)
 - Hosted at https://secure.givelively.org/donate/lets-be-ready
@@ -110,7 +109,7 @@ The cost of "no framework" is that we hand-rolled a 50-line template engine. The
 | CMS schemas | `studio/schemas/` |
 | Studio config | `studio/sanity.config.ts` |
 | Studio sidebar | `studio/deskStructure.ts` |
-| Form backend | `api/subscribe.js` |
+| Form backend | Netlify Forms (`templates/_footer.html`) |
 | Frontend JS | `main.js`, `map.js` |
 | Styles | `styles.css` |
 | Migration tooling | `scripts/` |
@@ -128,7 +127,7 @@ The cost of "no framework" is that we hand-rolled a 50-line template engine. The
 | Full staff | Sanity `staffMember` collection |
 | Partners | Sanity `partner` collection |
 | Expense pie chart | Sanity `expenseItem` collection |
-| Newsletter signups | Sanity `subscriber` collection (written by `/api/subscribe`) |
+| Newsletter signups | Netlify dashboard → Forms → newsletter |
 | Donations | GiveLively dashboard (not in Sanity) |
 | Photos | Sanity Media library (with sanity-plugin-media) |
 | Site-wide settings (logo, contact, social, footer text) | Sanity `siteSettings` singleton |
