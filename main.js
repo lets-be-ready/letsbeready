@@ -68,7 +68,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, {
-      threshold: 0.15,
+      // Any pixel in view counts. A fraction (0.15) never fires for groups
+      // taller than the viewport — the 8-card team grid on a phone stayed
+      // invisible because 15% of it could never be on screen at once.
+      threshold: 0,
       rootMargin: '0px 0px -50px 0px'
     });
 
