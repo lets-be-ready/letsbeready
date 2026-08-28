@@ -4,940 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Programs — Let's Be Ready</title>
-  <meta name="description" content="Education+ and Nutrition: our preschool curriculum builds the whole child — gardening, art, social-emotional learning, and a daily meal before every lesson.">
+  <meta name="description" content="Education+ and Nutrition: how Let's Be Ready classrooms teach, feed, and grow children in rural Guatemala.">
   <meta property="og:title" content="Our Programs — Let's Be Ready">
-  <meta property="og:description" content="Curriculum, gardening, art, and daily nutrition — everything a classroom needs to build the whole child.">
+  <meta property="og:description" content="Education+ and Nutrition in rural Guatemala.">
   <meta property="og:image" content="{{og_image_url}}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.letsbeready.org/programs">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="redesign.css">
   <link rel="icon" href="{{favicon_url}}">
-
-  <style>
-    /* ========================================
-       PROGRAMS PAGE — Education+ chapter (green)
-       then Nutrition chapter (yellow)
-       ======================================== */
-
-    /* Grain texture overlay for dark sections */
-    .cur-grain::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    @keyframes cur-rise {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes cur-fade {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-    @keyframes cur-widen {
-      from { transform: scaleX(0); }
-      to { transform: scaleX(1); }
-    }
-
-    .cur-animate {
-      opacity: 0;
-      animation: cur-rise 0.9s var(--ease-out) forwards;
-    }
-    .cur-animate--d1 { animation-delay: 0.1s; }
-    .cur-animate--d2 { animation-delay: 0.25s; }
-    .cur-animate--d3 { animation-delay: 0.4s; }
-
-    /* ---- HERO ---- */
-    .cur-hero {
-      position: relative;
-      height: 90vh;
-      min-height: 560px;
-      max-height: 920px;
-      display: flex;
-      align-items: flex-end;
-      overflow: hidden;
-    }
-
-    .cur-hero__img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 35%;
-      transform: scale(1.03);
-      animation: cur-fade 1.2s ease forwards;
-    }
-
-    .cur-hero__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        to top,
-        var(--dark) 0%,
-        rgba(30, 23, 60, 0.85) 25%,
-        rgba(30, 23, 60, 0.4) 55%,
-        rgba(30, 23, 60, 0.1) 100%
-      );
-    }
-
-    .cur-hero__content {
-      position: relative;
-      z-index: 2;
-      padding: 0 var(--space-xl) var(--space-4xl);
-      max-width: var(--max-width);
-      margin: 0 auto;
-      width: 100%;
-    }
-
-    .cur-hero__eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--success);
-      margin-bottom: var(--space-lg);
-    }
-
-    .cur-hero__content h1 {
-      color: var(--white);
-      font-size: clamp(3rem, 7.5vw, 5.75rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.045em;
-      max-width: 760px;
-    }
-
-    .cur-hero__content h1 em {
-      font-style: normal;
-      color: var(--success);
-    }
-
-    .cur-hero__content p {
-      color: rgba(255, 255, 255, 0.7);
-      font-size: clamp(1rem, 1.6vw, 1.15rem);
-      margin-top: var(--space-xl);
-      max-width: 520px;
-      line-height: 1.7;
-    }
-
-    .cur-hero__bar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 4px;
-      background: var(--success);
-      z-index: 3;
-      transform-origin: left;
-      animation: cur-widen 1s 0.6s var(--ease-out) forwards;
-      transform: scaleX(0);
-    }
-
-
-    /* ---- INTRO — Editorial lead-in ---- */
-    .cur-intro {
-      padding: var(--space-5xl) var(--space-xl);
-      background: var(--warm-white);
-    }
-
-    .cur-intro__inner {
-      max-width: var(--max-width-narrow);
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .cur-intro__lead {
-      font-family: var(--font-display);
-      font-size: clamp(1.65rem, 3vw, 2.35rem);
-      font-weight: 600;
-      line-height: 1.35;
-      letter-spacing: -0.025em;
-      color: var(--dark);
-    }
-
-    .cur-intro__lead em {
-      font-style: normal;
-      position: relative;
-      display: inline;
-    }
-    .cur-intro__lead em::after {
-      content: '';
-      position: absolute;
-      left: -4px;
-      right: -4px;
-      bottom: 2px;
-      height: 0.35em;
-      background: var(--success);
-      opacity: 0.25;
-      z-index: -1;
-      border-radius: 2px;
-    }
-
-    .cur-intro__sub {
-      margin-top: var(--space-2xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      max-width: 580px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-    /* ---- PILLARS — Vertical numbered timeline ---- */
-    .cur-pillars {
-      padding: var(--space-4xl) var(--space-xl) var(--space-5xl);
-      background: var(--white);
-    }
-
-    .cur-pillars__inner {
-      max-width: 720px;
-      margin: 0 auto;
-      position: relative;
-    }
-
-    .cur-pillars__inner::before {
-      content: '';
-      position: absolute;
-      left: 31px;
-      top: 32px;
-      bottom: 32px;
-      width: 2px;
-      background: linear-gradient(to bottom, var(--success-light), var(--success), var(--success-light));
-    }
-
-    .cur-pillar {
-      position: relative;
-      display: grid;
-      grid-template-columns: 64px 1fr;
-      gap: var(--space-xl);
-      padding: var(--space-xl) 0;
-      align-items: start;
-    }
-
-    .cur-pillar__number {
-      position: relative;
-      z-index: 2;
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--white);
-      border: 2px solid var(--success);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--success);
-      letter-spacing: -0.02em;
-      box-shadow: 0 0 0 8px var(--white);
-    }
-
-    .cur-pillar__body {
-      padding-top: var(--space-md);
-    }
-
-    .cur-pillar h3 {
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--dark);
-      margin-bottom: var(--space-sm);
-      letter-spacing: -0.02em;
-    }
-
-    .cur-pillar p {
-      font-size: 1rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-      max-width: 520px;
-    }
-
-
-    /* ---- FEATURE BLOCKS — Photo + text alternating ---- */
-    .cur-feature {
-      padding: var(--space-5xl) 0;
-      background: var(--warm-white);
-    }
-
-    .cur-feature--alt {
-      background: var(--white);
-    }
-
-    .cur-feature__grid {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-4xl);
-      align-items: center;
-      padding: 0 var(--space-xl);
-    }
-
-    .cur-feature__grid--reverse {
-      direction: rtl;
-    }
-    .cur-feature__grid--reverse > * {
-      direction: ltr;
-    }
-
-    .cur-feature__media {
-      position: relative;
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      aspect-ratio: 4 / 5;
-      box-shadow: var(--shadow-lg);
-    }
-
-    .cur-feature__media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    /* ---- CAROUSEL — photo boxes cycle through their gallery ---- */
-    .cur-carousel .cur-carousel__slide {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      transition: opacity 0.9s ease;
-    }
-
-    .cur-carousel .cur-carousel__slide.is-active {
-      opacity: 1;
-    }
-
-    .cur-carousel__dots {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 2;
-    }
-
-    .cur-carousel__dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.5);
-      border: none;
-      padding: 0;
-      cursor: pointer;
-      transition: background 0.3s ease, transform 0.3s ease;
-    }
-
-    .cur-carousel__dot.is-active {
-      background: var(--white);
-      transform: scale(1.25);
-    }
-
-    .cur-carousel--single .cur-carousel__dots {
-      display: none;
-    }
-
-    .cur-feature__text .eyebrow {
-      display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--success);
-      margin-bottom: var(--space-md);
-    }
-
-    .cur-feature__text h2 {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      color: var(--dark);
-    }
-
-    .cur-feature__text p {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      max-width: 460px;
-    }
-
-    .cur-feature__list {
-      margin-top: var(--space-xl);
-      list-style: none;
-      padding: 0;
-    }
-
-    .cur-feature__list li {
-      position: relative;
-      padding-left: var(--space-xl);
-      font-size: 0.95rem;
-      color: var(--text);
-      line-height: 1.7;
-      margin-bottom: var(--space-md);
-    }
-
-    .cur-feature__list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.55rem;
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--success);
-    }
-
-
-    /* ---- SUPPLEMENT HIGHLIGHT — The hero callout ---- */
-    .cur-supplement {
-      padding: var(--space-5xl) var(--space-xl);
-      background: var(--dark);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .cur-supplement__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-    }
-
-    .cur-supplement__badge {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-sm);
-      padding: 0.5rem 1rem;
-      background: rgba(255, 229, 0, 0.12);
-      border: 1px solid rgba(255, 229, 0, 0.3);
-      border-radius: var(--radius-full);
-      color: var(--yellow);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      margin-bottom: var(--space-xl);
-    }
-
-    .cur-supplement__badge::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--yellow);
-      box-shadow: 0 0 12px var(--yellow);
-    }
-
-    .cur-supplement__head {
-      max-width: 720px;
-      margin: 0 auto var(--space-4xl);
-      text-align: center;
-    }
-
-    .cur-supplement h2 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--white);
-    }
-
-    .cur-supplement h2 em {
-      font-style: normal;
-      color: var(--yellow);
-    }
-
-    .cur-supplement__text {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: rgba(255, 255, 255, 0.7);
-      line-height: 1.75;
-    }
-
-    .cur-supplement__strip {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-2xl);
-      padding: var(--space-2xl) 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .cur-supplement__stat {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .cur-supplement__medallion {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: var(--space-lg);
-    }
-
-    .cur-supplement__medallion svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      transform: rotate(-90deg);
-    }
-
-    .cur-supplement__medallion svg circle {
-      fill: none;
-      stroke-width: 6;
-    }
-
-    .cur-supplement__medallion svg circle.track {
-      stroke: rgba(255, 255, 255, 0.08);
-    }
-
-    .cur-supplement__medallion svg circle.fill {
-      stroke: var(--yellow);
-      stroke-linecap: round;
-      stroke-dasharray: 314;
-      stroke-dashoffset: 0;
-      filter: drop-shadow(0 0 6px rgba(255, 229, 0, 0.4));
-    }
-
-    .cur-supplement__stat strong {
-      position: relative;
-      z-index: 2;
-      font-family: var(--font-display);
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--yellow);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .cur-supplement__stat span {
-      display: block;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.5;
-      max-width: 220px;
-    }
-
-    .cur-supplement__note {
-      margin-top: var(--space-2xl);
-      text-align: center;
-      font-size: 0.85rem;
-      color: rgba(255, 255, 255, 0.45);
-      font-style: italic;
-    }
-
-
-    /* ---- NUTRITION CHAPTER HEAD ---- */
-    .prog-chapter {
-      padding: var(--space-5xl) var(--space-xl) var(--space-3xl);
-      background: var(--warm-white);
-      text-align: center;
-      scroll-margin-top: calc(var(--nav-height) + 16px);
-    }
-
-    .prog-chapter__inner {
-      max-width: var(--max-width-narrow);
-      margin: 0 auto;
-    }
-
-    .prog-chapter .eyebrow {
-      display: inline-block;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--yellow-dark, #b8a500);
-      margin-bottom: var(--space-md);
-    }
-
-    .prog-chapter h2 {
-      font-size: clamp(2.4rem, 5.5vw, 4rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      color: var(--dark);
-    }
-
-    .prog-chapter h2 em {
-      font-style: normal;
-      color: var(--blue);
-    }
-
-    .prog-chapter p {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-    /* ---- NUTRITION STATS — Massive numbers, dark, staggered ---- */
-    .nut-stats {
-      background: var(--dark);
-      padding: var(--space-5xl) var(--space-xl);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nut-stats__inner {
-      max-width: var(--max-width);
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-4xl);
-      align-items: start;
-    }
-
-    .nut-stat {
-      position: relative;
-      padding-left: var(--space-xl);
-    }
-
-    .nut-stat::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 3px;
-      height: 100%;
-      background: var(--yellow);
-      border-radius: 2px;
-    }
-
-    .nut-stat:nth-child(2) {
-      margin-top: var(--space-3xl);
-    }
-
-    .nut-stat__number {
-      font-family: var(--font-display);
-      font-size: clamp(5rem, 12vw, 8.5rem);
-      font-weight: 800;
-      line-height: 0.9;
-      letter-spacing: -0.05em;
-      color: var(--yellow);
-    }
-
-    .nut-stat__text {
-      font-size: clamp(0.95rem, 1.4vw, 1.1rem);
-      color: rgba(255, 255, 255, 0.5);
-      line-height: 1.6;
-      max-width: 320px;
-      margin-top: var(--space-md);
-    }
-
-
-    /* ---- NUTRITION TURN — Dramatic split ---- */
-    .nut-turn {
-      background: var(--warm-white);
-    }
-
-    .nut-turn__grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      min-height: 75vh;
-    }
-
-    .nut-turn__photo {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nut-turn__photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .nut-turn__text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: var(--space-4xl) var(--space-3xl);
-      position: relative;
-    }
-
-    .nut-turn__text h2 {
-      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
-      font-weight: 800;
-      line-height: 1.05;
-      letter-spacing: -0.035em;
-      color: var(--dark);
-    }
-
-    .nut-turn__text h2 em {
-      font-style: normal;
-      position: relative;
-      display: inline;
-    }
-    .nut-turn__text h2 em::after {
-      content: '';
-      position: absolute;
-      left: -4px;
-      right: -4px;
-      bottom: 2px;
-      height: 0.35em;
-      background: var(--yellow);
-      opacity: 0.5;
-      z-index: -1;
-      border-radius: 2px;
-    }
-
-    .nut-turn__text p {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.75;
-      max-width: 420px;
-    }
-
-    .nut-turn__numbers {
-      display: flex;
-      gap: var(--space-2xl);
-      margin-top: var(--space-3xl);
-      padding-top: var(--space-xl);
-      border-top: 1px solid var(--border);
-    }
-
-    .nut-turn__num-block strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 2.25rem;
-      font-weight: 800;
-      color: var(--blue);
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .nut-turn__num-block span {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 0.35rem;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-weight: 600;
-    }
-
-
-    /* ---- NUTRITION QUOTE — Dark, intimate ---- */
-    .nut-quote {
-      background: var(--dark);
-      padding: var(--space-5xl) var(--space-xl);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .nut-quote__mark {
-      position: absolute;
-      top: -0.1em;
-      left: 6%;
-      font-size: clamp(18rem, 35vw, 30rem);
-      font-family: var(--font-display);
-      font-weight: 800;
-      color: var(--yellow);
-      opacity: 0.06;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-    }
-
-    .nut-quote__inner {
-      max-width: var(--max-width-narrow);
-      margin: 0 auto;
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    .nut-quote__yellow-bar {
-      width: 48px;
-      height: 3px;
-      background: var(--yellow);
-      margin-bottom: var(--space-2xl);
-      border-radius: 2px;
-    }
-
-    .nut-quote__inner blockquote {
-      border: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .nut-quote__inner blockquote p {
-      font-family: var(--font-display);
-      font-size: clamp(1.4rem, 2.8vw, 2.15rem);
-      font-weight: 500;
-      line-height: 1.45;
-      color: var(--white);
-      font-style: italic;
-      max-width: none;
-    }
-
-    .nut-quote__inner cite {
-      display: block;
-      margin-top: var(--space-xl);
-      font-size: 0.9rem;
-      font-style: normal;
-      color: var(--yellow);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-
-    /* ---- CTA ---- */
-    .cur-cta {
-      padding: var(--space-5xl) var(--space-xl);
-      text-align: center;
-      background: var(--warm-white);
-    }
-
-    .cur-cta__inner {
-      max-width: 620px;
-      margin: 0 auto;
-    }
-
-    .cur-cta h2 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.05;
-      color: var(--dark);
-    }
-
-    .cur-cta h2 em {
-      font-style: normal;
-      color: var(--success);
-    }
-
-    .cur-cta p {
-      margin-top: var(--space-xl);
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .cur-cta .btn {
-      margin-top: var(--space-2xl);
-      padding: 1rem 3rem;
-      font-size: 1.05rem;
-      font-weight: 700;
-    }
-
-    .cur-cta__trust {
-      margin-top: var(--space-xl);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      justify-content: center;
-      gap: var(--space-md);
-    }
-
-    .cur-cta__trust span:nth-child(2) {
-      opacity: 0.4;
-    }
-
-
-    /* ---- Responsive ---- */
-    @media (max-width: 900px) {
-      .cur-feature__grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-
-      .cur-feature__grid--reverse {
-        direction: ltr;
-      }
-
-      .cur-feature__media {
-        aspect-ratio: 16 / 11;
-        max-height: 480px;
-      }
-
-      .cur-supplement__strip {
-        grid-template-columns: 1fr;
-        gap: var(--space-3xl);
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nut-stats__inner {
-        grid-template-columns: 1fr;
-        gap: var(--space-2xl);
-      }
-
-      .nut-stat:nth-child(2) {
-        margin-top: 0;
-      }
-
-      .nut-turn__grid {
-        grid-template-columns: 1fr;
-        min-height: auto;
-      }
-
-      .nut-turn__photo {
-        height: 55vh;
-        max-height: 400px;
-      }
-
-      .nut-turn__text {
-        padding: var(--space-2xl) var(--space-xl);
-      }
-
-      .nut-turn__numbers {
-        flex-direction: column;
-        gap: var(--space-lg);
-      }
-    }
-
-    @media (max-width: 600px) {
-      .cur-hero {
-        height: 80vh;
-        min-height: 480px;
-      }
-
-      .cur-pillars__inner::before {
-        left: 23px;
-      }
-      .cur-pillar {
-        grid-template-columns: 48px 1fr;
-        gap: var(--space-lg);
-      }
-      .cur-pillar__number {
-        width: 48px;
-        height: 48px;
-        font-size: 1.1rem;
-      }
-      .cur-pillar h3 {
-        font-size: 1.15rem;
-      }
-    }
-  </style>
 </head>
-<body>
+<body class="fd-home fd-programs">
 
-  <!-- NAV -->
   <nav class="nav nav--hero" id="nav">
     <div class="nav__inner">
       <a href="index.html" class="nav__logo">
@@ -950,7 +32,7 @@
         <li><a href="team.html" class="nav__link">Our Team</a></li>
         <li><a href="partners.html" class="nav__link">Partners</a></li>
       </ul>
-      <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Donate</a>
+      <a href="donate.html" class="btn btn-primary btn-sm nav__cta">Give Now</a>
       <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
       </button>
@@ -963,352 +45,237 @@
       <li><a href="programs.html" class="mobile-menu__link">Our Programs</a></li>
       <li><a href="team.html" class="mobile-menu__link">Our Team</a></li>
       <li><a href="partners.html" class="mobile-menu__link">Partners</a></li>
-      <li><a href="donate.html" class="btn btn-primary btn-lg" style="margin-top:1rem;">Donate</a></li>
+      <li><a href="donate.html" class="btn btn-primary btn-lg" style="margin-top:1.5rem;">Give Now</a></li>
     </ul>
   </div>
 
-
-  <!-- ====== HERO — Education+ ====== -->
-  <section class="cur-hero">
-    <img
-      src="{{curriculum_hero_image}}"
-      alt="{{curriculum_hero_image_alt}}"
-      class="cur-hero__img"
-      loading="eager"
-    >
-    <div class="cur-hero__overlay"></div>
-    <div class="cur-hero__content">
-      <span class="cur-hero__eyebrow cur-animate cur-animate--d1">Our Programs &middot; Education+</span>
-      <h1 class="cur-animate cur-animate--d2">{{curriculum_headline}}</h1>
-      <p class="cur-animate cur-animate--d3">{{curriculum_subheadline}}</p>
+  <!-- ============================================================
+       HERO — Curriculum Page → Hero. Headline above the photo, never on a face.
+       ============================================================ -->
+  <header class="fd-hero">
+    <div class="fd-container fd-hero__copy">
+      <span class="fd-hero__kicker">Our Programs &middot; Education+</span>
+      <h1 class="fd-hero__headline">{{curriculum_headline}}</h1>
+      <p class="fd-hero__sub">{{curriculum_subheadline}}</p>
     </div>
-    <div class="cur-hero__bar"></div>
-  </section>
+    <div class="fd-hero__straddle">
+      <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="eager">
+    </div>
+  </header>
 
-
-  <!-- ====== INTRO ====== -->
-  <section class="cur-intro">
-    <div class="cur-intro__inner">
-      <p class="cur-intro__lead">{{curriculum_intro_lead}}</p>
-      {{#if curriculum_intro_sub}}<p class="cur-intro__sub">{{curriculum_intro_sub}}</p>{{/if}}
+  <!-- ============================================================
+       INTRO — Curriculum Page → Intro.
+       ============================================================ -->
+  <section class="fd-statement-sec fd-statement-sec--tight">
+    <div class="fd-container">
+      <h2 class="fd-statement reveal">{{curriculum_intro_lead}}</h2>
+      {{#if curriculum_intro_sub}}<p class="fd-statement__sub">{{curriculum_intro_sub}}</p>{{/if}}
     </div>
   </section>
 
-
-  <!-- ====== PILLARS — Vertical numbered timeline ====== -->
-  <section class="cur-pillars">
-    <div class="cur-pillars__inner">
-      <div class="cur-pillar">
-        <div class="cur-pillar__number">01</div>
-        <div class="cur-pillar__body">
-          <h3>{{curriculum_pillar1_title}}</h3>
-          <p>{{curriculum_pillar1_desc}}</p>
-        </div>
-      </div>
-      <div class="cur-pillar">
-        <div class="cur-pillar__number">02</div>
-        <div class="cur-pillar__body">
-          <h3>{{curriculum_pillar2_title}}</h3>
-          <p>{{curriculum_pillar2_desc}}</p>
-        </div>
-      </div>
-      <div class="cur-pillar">
-        <div class="cur-pillar__number">03</div>
-        <div class="cur-pillar__body">
-          <h3>{{curriculum_pillar3_title}}</h3>
-          <p>{{curriculum_pillar3_desc}}</p>
-        </div>
-      </div>
-      <div class="cur-pillar">
-        <div class="cur-pillar__number">04</div>
-        <div class="cur-pillar__body">
-          <h3>{{curriculum_pillar4_title}}</h3>
-          <p>{{curriculum_pillar4_desc}}</p>
-        </div>
+  <!-- ============================================================
+       PILLARS — Curriculum Page → Pillars (four).
+       ============================================================ -->
+  <section class="fd-pillars">
+    <div class="fd-container">
+      <div class="fd-pillars__grid stagger-children">
+        <div class="fd-pillar"><span class="fd-pillar__n">01</span><h3>{{curriculum_pillar1_title}}</h3><p>{{curriculum_pillar1_desc}}</p></div>
+        <div class="fd-pillar"><span class="fd-pillar__n">02</span><h3>{{curriculum_pillar2_title}}</h3><p>{{curriculum_pillar2_desc}}</p></div>
+        <div class="fd-pillar"><span class="fd-pillar__n">03</span><h3>{{curriculum_pillar3_title}}</h3><p>{{curriculum_pillar3_desc}}</p></div>
+        <div class="fd-pillar"><span class="fd-pillar__n">04</span><h3>{{curriculum_pillar4_title}}</h3><p>{{curriculum_pillar4_desc}}</p></div>
       </div>
     </div>
   </section>
 
-
-  <!-- ====== GARDENING ====== -->
-  <section class="cur-feature">
-    <div class="cur-feature__grid">
-      <div class="cur-feature__media cur-carousel" data-carousel>
-        {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="cur-carousel__slide">{{/each}}
-        <div class="cur-carousel__dots"></div>
+  <!-- ============================================================
+       GARDENING + NUTRITIONAL EDUCATION — Curriculum Page → Garden / NutEd.
+       Photos: the section's gallery (carousel) or its single image.
+       ============================================================ -->
+  <section class="fd-model">
+    <div class="fd-container">
+      <div class="fd-prow">
+        <div class="fd-prow__media fd-carousel" data-carousel>
+          {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide">{{/each}}
+          <div class="fd-carousel__dots"></div>
+        </div>
+        <div class="fd-prow__panel">
+          <span class="fd-kicker">{{curriculum_garden_eyebrow}}</span>
+          <h3>{{curriculum_garden_heading}}</h3>
+          <p>{{curriculum_garden_text}}</p>
+          <ul class="fd-list">
+            <li>{{curriculum_garden_point1}}</li>
+            <li>{{curriculum_garden_point2}}</li>
+            <li>{{curriculum_garden_point3}}</li>
+          </ul>
+        </div>
       </div>
-      <div class="cur-feature__text">
-        <span class="eyebrow">{{curriculum_garden_eyebrow}}</span>
-        <h2>{{curriculum_garden_heading}}</h2>
-        <p>{{curriculum_garden_text}}</p>
-        <ul class="cur-feature__list">
-          <li>{{curriculum_garden_point1}}</li>
-          <li>{{curriculum_garden_point2}}</li>
-          <li>{{curriculum_garden_point3}}</li>
-        </ul>
+      <div class="fd-prow fd-prow--flip">
+        <div class="fd-prow__panel">
+          <span class="fd-kicker">{{curriculum_nuted_eyebrow}}</span>
+          <h3>{{curriculum_nuted_heading}}</h3>
+          <p>{{curriculum_nuted_text}}</p>
+          <ul class="fd-list">
+            <li>{{curriculum_nuted_point1}}</li>
+            <li>{{curriculum_nuted_point2}}</li>
+            <li>{{curriculum_nuted_point3}}</li>
+          </ul>
+        </div>
+        <div class="fd-prow__media fd-carousel" data-carousel>
+          {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide">{{/each}}
+          <div class="fd-carousel__dots"></div>
+        </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ====== NUTRITIONAL EDUCATION ====== -->
-  <section class="cur-feature cur-feature--alt">
-    <div class="cur-feature__grid cur-feature__grid--reverse">
-      <div class="cur-feature__media cur-carousel" data-carousel>
-        {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="cur-carousel__slide">{{/each}}
-        <div class="cur-carousel__dots"></div>
+  <!-- ============================================================
+       THE SUPPLEMENT — Curriculum Page → Supplement Highlight.
+       ============================================================ -->
+  <section class="fd-supp">
+    <div class="fd-container">
+      <div class="fd-section-head fd-section-head--center reveal">
+        <span class="fd-kicker fd-kicker--center">{{curriculum_supplement_badge}}</span>
+        <h2 class="fd-h2">{{curriculum_supplement_heading}}</h2>
+        <p class="fd-section-head__sub">{{curriculum_supplement_text}}</p>
       </div>
-      <div class="cur-feature__text">
-        <span class="eyebrow">{{curriculum_nuted_eyebrow}}</span>
-        <h2>{{curriculum_nuted_heading}}</h2>
-        <p>{{curriculum_nuted_text}}</p>
-        <ul class="cur-feature__list">
-          <li>{{curriculum_nuted_point1}}</li>
-          <li>{{curriculum_nuted_point2}}</li>
-          <li>{{curriculum_nuted_point3}}</li>
-        </ul>
+      <div class="fd-stats fd-stats--3 stagger-children">
+        <div class="fd-stats__item"><div class="fd-stats__number">{{curriculum_supplement_stat1_value}}</div><p>{{curriculum_supplement_stat1_label}}</p></div>
+        <div class="fd-stats__item"><div class="fd-stats__number">{{curriculum_supplement_stat2_value}}</div><p>{{curriculum_supplement_stat2_label}}</p></div>
+        <div class="fd-stats__item"><div class="fd-stats__number">{{curriculum_supplement_stat3_value}}</div><p>{{curriculum_supplement_stat3_label}}</p></div>
       </div>
+      {{#if curriculum_supplement_note}}<p class="fd-supp__note">{{curriculum_supplement_note}}</p>{{/if}}
     </div>
   </section>
 
-
-  <!-- ====== SUPPLEMENT — Horizontal infographic strip ====== -->
-  <section class="cur-supplement cur-grain">
-    <div class="cur-supplement__inner">
-      <div class="cur-supplement__head">
-        <span class="cur-supplement__badge">{{curriculum_supplement_badge}}</span>
-        <h2>{{curriculum_supplement_heading}}</h2>
-        <p class="cur-supplement__text">{{curriculum_supplement_text}}</p>
-      </div>
-      <div class="cur-supplement__strip">
-        <div class="cur-supplement__stat">
-          <div class="cur-supplement__medallion">
-            <svg viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="track" cx="60" cy="60" r="50"></circle>
-              <circle class="fill" cx="60" cy="60" r="50" style="stroke-dashoffset: 0;"></circle>
-            </svg>
-            <strong>{{curriculum_supplement_stat1_value}}</strong>
-          </div>
-          <span>{{curriculum_supplement_stat1_label}}</span>
-        </div>
-        <div class="cur-supplement__stat">
-          <div class="cur-supplement__medallion">
-            <svg viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="track" cx="60" cy="60" r="50"></circle>
-              <circle class="fill" cx="60" cy="60" r="50" style="stroke-dashoffset: 0;"></circle>
-            </svg>
-            <strong>{{curriculum_supplement_stat2_value}}</strong>
-          </div>
-          <span>{{curriculum_supplement_stat2_label}}</span>
-        </div>
-        <div class="cur-supplement__stat">
-          <div class="cur-supplement__medallion">
-            <svg viewBox="0 0 120 120" aria-hidden="true">
-              <circle class="track" cx="60" cy="60" r="50"></circle>
-              <circle class="fill" cx="60" cy="60" r="50" style="stroke-dashoffset: 0;"></circle>
-            </svg>
-            <strong>{{curriculum_supplement_stat3_value}}</strong>
-          </div>
-          <span>{{curriculum_supplement_stat3_label}}</span>
-        </div>
-      </div>
-      {{#if curriculum_supplement_note}}<p class="cur-supplement__note">{{curriculum_supplement_note}}</p>{{/if}}
-    </div>
-  </section>
-
-
-  <!-- ====== NUTRITION CHAPTER ====== -->
-  <section class="prog-chapter" id="nutrition">
-    <div class="prog-chapter__inner">
-      <span class="eyebrow">Nutrition Program</span>
+  <!-- ============================================================
+       NUTRITION — Nutrition Page → Hero, Stats, The Turn, Quote.
+       ============================================================ -->
+  <section class="fd-chapter" id="nutrition">
+    <div class="fd-container">
+      <span class="fd-kicker fd-kicker--center">Nutrition Program</span>
       <h2>{{nutrition_headline}}</h2>
       <p>{{nutrition_subheadline}}</p>
     </div>
   </section>
 
-
-  <!-- ====== NUTRITION STATS — Massive yellow numbers on dark ====== -->
-  <section class="nut-stats cur-grain">
-    <div class="nut-stats__inner">
-      <div class="nut-stat">
-        <div class="nut-stat__number" data-countup="{{nutrition_stat1_value}}">{{nutrition_stat1_value}}</div>
-        <div class="nut-stat__text">{{nutrition_stat1_context}}</div>
-      </div>
-      <div class="nut-stat">
-        <div class="nut-stat__number" data-countup="{{nutrition_stat2_value}}">{{nutrition_stat2_value}}</div>
-        <div class="nut-stat__text">{{nutrition_stat2_context}}</div>
+  <section class="fd-nstats">
+    <div class="fd-container">
+      <div class="fd-nstats__grid stagger-children">
+        <div class="fd-bento__stat">
+          <div class="fd-bento__number" data-countup="{{nutrition_stat1_value}}">{{nutrition_stat1_value}}</div>
+          <p>{{nutrition_stat1_context}}</p>
+        </div>
+        <div class="fd-bento__stat fd-bento__stat--navy">
+          <div class="fd-bento__number" data-countup="{{nutrition_stat2_value}}">{{nutrition_stat2_value}}</div>
+          <p>{{nutrition_stat2_context}}</p>
+        </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ====== NUTRITION TURN — Photo + text ====== -->
-  <section class="nut-turn">
-    <div class="nut-turn__grid">
-      <div class="nut-turn__photo">
-        <img
-          src="{{nutrition_turn_image}}"
-          alt="{{nutrition_turn_image_alt}}"
-          loading="lazy"
-        >
-      </div>
-      <div class="nut-turn__text">
-        <h2>{{nutrition_turn_heading}}</h2>
-        <p>{{nutrition_turn_text}}</p>
-        <div class="nut-turn__numbers">
-          <div class="nut-turn__num-block">
-            <strong>{{nutrition_feed_stat1_value}}</strong>
-            <span>{{nutrition_feed_stat1_label}}</span>
-          </div>
-          <div class="nut-turn__num-block">
-            <strong>{{nutrition_feed_stat2_value}}</strong>
-            <span>{{nutrition_feed_stat2_label}}</span>
-          </div>
-          <div class="nut-turn__num-block">
-            <strong>{{nutrition_feed_stat3_value}}</strong>
-            <span>{{nutrition_feed_stat3_label}}</span>
+  <section class="fd-model fd-model--top">
+    <div class="fd-container">
+      <div class="fd-prow">
+        <img src="{{nutrition_turn_image}}" alt="{{nutrition_turn_image_alt}}" loading="lazy">
+        <div class="fd-prow__panel">
+          <h3>{{nutrition_turn_heading}}</h3>
+          <p>{{nutrition_turn_text}}</p>
+          <div class="fd-prow__nums">
+            <div><strong>{{nutrition_feed_stat1_value}}</strong><span>{{nutrition_feed_stat1_label}}</span></div>
+            <div><strong>{{nutrition_feed_stat2_value}}</strong><span>{{nutrition_feed_stat2_label}}</span></div>
+            <div><strong>{{nutrition_feed_stat3_value}}</strong><span>{{nutrition_feed_stat3_label}}</span></div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-
-  <!-- ====== NUTRITION QUOTE — Dark, intimate ====== -->
-  <section class="nut-quote cur-grain">
-    <div class="nut-quote__mark" aria-hidden="true">&ldquo;</div>
-    <div class="nut-quote__inner">
-      <div class="nut-quote__yellow-bar"></div>
-      <blockquote>
+  <section class="fd-quote">
+    <div class="fd-container">
+      <blockquote class="reveal">
         <p>{{nutrition_quote}}</p>
         <cite>{{nutrition_quote_cite}}</cite>
       </blockquote>
     </div>
   </section>
 
-
-  <!-- ====== CTA ====== -->
-  <section class="cur-cta">
-    <div class="cur-cta__inner">
-      <h2>{{curriculum_cta_heading}}</h2>
-      <p>{{curriculum_cta_text}}</p>
-      <a href="donate.html" class="btn btn-secondary btn-lg">
-        {{curriculum_cta_button}}
-      </a>
-      <div class="cur-cta__trust">
-        <span>501(c)(3) tax-deductible</span>
-        <span>&middot;</span>
-        <span>100% funds programs</span>
+  <!-- ============================================================
+       THE ASK — Curriculum Page → CTA.
+       ============================================================ -->
+  <section class="fd-ask">
+    <div class="fd-container">
+      <div class="reveal">
+        <h2>{{curriculum_cta_heading}}</h2>
+        <p>{{curriculum_cta_text}}</p>
+        <a href="donate.html" class="fd-btn fd-btn--yellow">{{curriculum_cta_button}}</a>
+        <div class="fd-ask__trust">
+          <span>501(c)(3) tax-deductible</span>
+          <span aria-hidden="true">&middot;</span>
+          <span>100% funds programs</span>
+        </div>
       </div>
     </div>
   </section>
-
 
   {{footer_html}}
 
   <script src="main.js"></script>
   <script>
-    // Scroll-triggered animations + count-up stats (from the nutrition page)
-    (function() {
-      var revealObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('nut-visible');
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.15 });
-
-      document.querySelectorAll('.nut-stat, .nut-turn__text, .nut-quote__inner, .cur-cta__inner').forEach(function(el) {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(32px)';
-        el.style.transition = 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
-        revealObserver.observe(el);
-      });
-
-      var stats = document.querySelectorAll('.nut-stat');
-      if (stats[1]) stats[1].style.transitionDelay = '0.15s';
-
-      var style = document.createElement('style');
-      style.textContent = '.nut-visible { opacity: 1 !important; transform: translateY(0) !important; }';
-      document.head.appendChild(style);
-
-      // Count-up animation for [data-countup] elements
+    (function () {
+      // Count-up for the two nutrition numbers.
       function animateCountUp(el, finalText) {
-        var match = String(finalText).match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
-        if (!match) return;
-        var prefix = match[1] || '';
-        var target = parseFloat(match[2]);
-        var suffix = match[3] || '';
-        var duration = 1400;
-        var startTime = null;
+        var m = String(finalText).match(/^(\D*)(\d+(?:\.\d+)?)(.*)$/);
+        if (!m) return;
+        var prefix = m[1] || '', target = parseFloat(m[2]), suffix = m[3] || '';
+        var start = null, duration = 1400;
         function frame(now) {
-          if (!startTime) startTime = now;
-          var elapsed = now - startTime;
-          var progress = Math.min(elapsed / duration, 1);
-          var eased = 1 - Math.pow(1 - progress, 3);
-          var current = target * eased;
-          var display = (target % 1 === 0) ? Math.round(current) : current.toFixed(1);
-          el.textContent = prefix + display + suffix;
-          if (progress < 1) requestAnimationFrame(frame);
+          if (!start) start = now;
+          var p = Math.min((now - start) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          var cur = target * eased;
+          el.textContent = prefix + ((target % 1 === 0) ? Math.round(cur) : cur.toFixed(1)) + suffix;
+          if (p < 1) requestAnimationFrame(frame);
         }
         requestAnimationFrame(frame);
       }
-
-      var countObserver = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            var finalText = el.getAttribute('data-countup') || el.textContent;
-            el.textContent = '0';
-            animateCountUp(el, finalText);
-            countObserver.unobserve(el);
-          }
+      var countObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          var finalText = el.getAttribute('data-countup') || el.textContent;
+          el.textContent = '0';
+          animateCountUp(el, finalText);
+          countObserver.unobserve(el);
         });
-      }, { threshold: 0.4 });
+      }, { threshold: 0 });
+      document.querySelectorAll('[data-countup]').forEach(function (el) { countObserver.observe(el); });
 
-      document.querySelectorAll('[data-countup]').forEach(function(el) {
-        countObserver.observe(el);
-      });
-
-      // ---- Photo carousels: crossfade through each gallery ----
+      // Photo carousels: crossfade through each gallery.
       var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('[data-carousel]').forEach(function(box) {
-        var slides = Array.prototype.slice.call(box.querySelectorAll('.cur-carousel__slide'));
-        if (slides.length === 0) return;
-        if (slides.length === 1) {
-          box.classList.add('cur-carousel--single');
-          slides[0].classList.add('is-active');
-          return;
-        }
-        var dotsWrap = box.querySelector('.cur-carousel__dots');
-        var current = 0;
-        var timer = null;
-        var dots = slides.map(function(_, i) {
+      document.querySelectorAll('[data-carousel]').forEach(function (box) {
+        var slides = Array.prototype.slice.call(box.querySelectorAll('.fd-carousel__slide'));
+        if (!slides.length) return;
+        if (slides.length === 1) { box.classList.add('fd-carousel--single'); slides[0].classList.add('is-active'); return; }
+        var dotsWrap = box.querySelector('.fd-carousel__dots');
+        var current = 0, timer = null;
+        var dots = slides.map(function (_, i) {
           var b = document.createElement('button');
-          b.className = 'cur-carousel__dot';
+          b.className = 'fd-carousel__dot';
           b.setAttribute('aria-label', 'Photo ' + (i + 1) + ' of ' + slides.length);
-          b.addEventListener('click', function() { go(i); restart(); });
+          b.addEventListener('click', function () { go(i); restart(); });
           dotsWrap.appendChild(b);
           return b;
         });
         function go(i) {
-          slides[current].classList.remove('is-active');
-          dots[current].classList.remove('is-active');
+          slides[current].classList.remove('is-active'); dots[current].classList.remove('is-active');
           current = i;
-          slides[current].classList.add('is-active');
-          dots[current].classList.add('is-active');
+          slides[current].classList.add('is-active'); dots[current].classList.add('is-active');
         }
         function next() { go((current + 1) % slides.length); }
-        function restart() {
-          if (reducedMotion) return;
-          clearInterval(timer);
-          timer = setInterval(next, 4500);
-        }
-        box.addEventListener('mouseenter', function() { clearInterval(timer); });
+        function restart() { if (reducedMotion) return; clearInterval(timer); timer = setInterval(next, 4500); }
+        box.addEventListener('mouseenter', function () { clearInterval(timer); });
         box.addEventListener('mouseleave', restart);
-        go(0);
-        restart();
+        go(0); restart();
       });
     })();
   </script>
