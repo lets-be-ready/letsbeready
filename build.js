@@ -721,6 +721,12 @@ function deriveHomepageKeys(c) {
     .replace(/<br\s*\/?>/gi, ' ')
     .replace(/\s+/g, ' ')
     .trim();
+  // The About page sets its statement as one sentence; the editor's field
+  // carries line breaks meant for the old centered stack.
+  c.turn_question_inline = String(c.turn_question || '')
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
   for (const key of ['stat_pass_rate', 'stat_children']) {
     const m = String(c[key] || '').trim().match(/^([^\d]*)(\d[\d,]*)(.*)$/);
     c[`${key}_num`] = m ? m[2].replace(/,/g, '') : '0';
@@ -972,7 +978,7 @@ async function build() {
   }
 
   // 4. Process templates (skip files starting with _ — they're partials)
-  const templateFiles = ['index.html', 'about.html', 'programs.html', 'team.html', 'donate.html', 'partners.html', 'staff.html'];
+  const templateFiles = ['index.html', 'about.html', 'about2.html', 'programs.html', 'team.html', 'donate.html', 'partners.html', 'staff.html'];
   for (const file of templateFiles) {
     const templatePath = path.join(TEMPLATES_DIR, file);
     if (!fs.existsSync(templatePath)) {

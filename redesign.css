@@ -1128,3 +1128,156 @@ body[class*="fd-demo"] .footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- About page (fd-about) ---------- */
+
+.fd-pagehead__sub {
+  margin: 1.1rem auto 0;
+  max-width: 44ch;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fd-soft);
+}
+.fd-facts {
+  padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(4.5rem, 8vw, 6rem);
+  background: var(--fd-paper);
+}
+.fd-facts__inner {
+  max-width: 760px;
+}
+.fd-facts .fd-fact strong {
+  white-space: nowrap;
+}
+.fd-turn {
+  background: var(--fd-stone);
+  padding-block: clamp(4.5rem, 8vw, 6.5rem);
+}
+.fd-turn .fd-statement {
+  max-width: 24ch;
+  font-size: clamp(1.9rem, 3.4vw, 2.9rem);
+}
+.fd-model {
+  padding-block: clamp(5rem, 9vw, 6.5rem);
+  background: var(--fd-paper);
+}
+.fd-cost__lead--cap::first-letter {
+  text-transform: uppercase;
+}
+.fd-money {
+  padding-block: clamp(5rem, 9vw, 6.5rem);
+  background: var(--fd-paper);
+}
+.fd-money__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 clamp(2.5rem, 6vw, 5rem);
+}
+.fd-money__item {
+  border-top: 1px solid var(--fd-hairline);
+  padding-block: 1.6rem 1.9rem;
+}
+.fd-money__item h3 {
+  font-size: 1.15rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--fd-ink);
+  margin: 0 0 0.45rem;
+}
+.fd-money__item p {
+  font-size: 0.98rem;
+  line-height: 1.7;
+  color: var(--fd-soft);
+  margin: 0;
+  max-width: none;
+}
+.fd-fin {
+  background: var(--fd-stone);
+  padding-block: clamp(5rem, 9vw, 6.5rem);
+}
+.fd-fin__split {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+}
+.fd-fin__text p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fd-soft);
+  margin: 1rem 0 0;
+  max-width: 46ch;
+}
+.fd-fin__contact a {
+  color: var(--fd-blue);
+  font-weight: 700;
+  text-decoration: none;
+}
+.fd-fin__panel {
+  background: var(--fd-paper);
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+}
+.fd-fin__chart {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.25rem, 3vw, 2.25rem);
+}
+.fd-fin__chart .pie-chart {
+  flex-shrink: 0;
+}
+.fd-fin__chart .pie-chart__legend {
+  flex-grow: 1;
+  display: grid;
+  gap: 0.35rem;
+}
+.fd-fin__chart .pie-chart__item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--fd-soft);
+}
+.fd-fin__chart .pie-chart__item strong {
+  margin-left: auto;
+  color: var(--fd-ink);
+  font-variant-numeric: tabular-nums;
+}
+.fd-fin__chart .pie-chart__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.fd-fin__totals {
+  margin-top: 1.5rem;
+  border-top: 1px solid var(--fd-hairline);
+  padding-top: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+.fd-fin__totals div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.92rem;
+  color: var(--fd-soft);
+}
+.fd-fin__totals strong {
+  color: var(--fd-ink);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 960px) {
+  .fd-fin__split {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .fd-money__grid {
+    grid-template-columns: 1fr;
+  }
+  .fd-fin__chart {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
