@@ -14,12 +14,6 @@
 [functions]
   directory = "netlify/functions"
 
-# The redesign preview shows the proposed homepage wording without writing
-# anything to the editor (see applyCopyProposal in build.js). Branch-scoped,
-# so production never sees it.
-[context."redesign/final".environment]
-  HOMEPAGE_COPY_PROPOSAL = "1"
-
 # Clean URLs.
 [[redirects]]
   from = "/donate"
