@@ -896,9 +896,25 @@ async function resolveInstagramTiles(posts) {
       }
       const html = await res.text();
       const imgTag = (html.match(/<meta[^>]+og:image[^>]*>/) || [])[0];
-      const src = imgTag && (imgTag.match(/content="([^"]+)"/) || [])[1];
+      const ogSrc = imgTag && (imgTag.match(/content="([^"]+)"/) || [])[1];
+
+      // og:image is a 640px square crop. The post's embed page (served to the
+      // same crawler UA) carries the full-size original at its real aspect
+      // ratio, so prefer that and keep og:image as the fallback.
+      let src = '';
+      try {
+        const embedRes = await fetch(`https://www.instagram.com/p/${code}/embed/`, {
+          headers: { 'User-Agent': IG_CRAWLER_UA, 'Accept-Language': 'en-US,en;q=0.9' },
+        });
+        if (embedRes.ok) {
+          const embedHtml = await embedRes.text();
+          const embedSrc = (embedHtml.match(/class="EmbeddedMediaImage"[^>]*src="([^"]+)"/) || [])[1];
+          if (embedSrc) src = embedSrc;
+        }
+      } catch (_) { /* fall through to og:image */ }
+      if (!src) src = ogSrc || '';
       if (!src) {
-        console.warn(`Instagram tile: no og:image served for ${post.url}`);
+        console.warn(`Instagram tile: no image served for ${post.url}`);
         continue;
       }
       const imgRes = await fetch(src.replace(/&amp;/g, '&'), {
