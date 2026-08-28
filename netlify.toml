@@ -30,11 +30,11 @@
   to = "/about.html"
   status = 200
 
-# Preview of the restyled About page (compare against /about before it replaces it)
+# The restyled About page shipped as /about (Aug 28); keep the preview path pointing at it.
 [[redirects]]
   from = "/about-us-2"
-  to = "/about2.html"
-  status = 200
+  to = "/about"
+  status = 301
 
 [[redirects]]
   from = "/programs"
