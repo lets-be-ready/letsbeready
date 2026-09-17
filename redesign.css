@@ -482,6 +482,7 @@ body[class*="fd-demo"] .footer {
   width: 300px;
   flex-shrink: 0;
   object-fit: cover;
+  object-position: 50% 70%;
   display: block;
 }
 .fd-bento__wide {
