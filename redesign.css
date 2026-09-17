@@ -420,6 +420,14 @@ body[class*="fd-demo"] .footer {
   letter-spacing: -0.02em;
   color: var(--fd-ink);
 }
+.fd-bento__map-head p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--fd-soft);
+  margin: 0.5rem 0 0;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
 .fd-bento__map #classroomMap {
   height: 380px;
   width: 100%;
