@@ -945,6 +945,14 @@ async function build() {
   const data = SANITY_PROJECT_ID ? await fetchSanityData() : getFallbackData();
   console.log(`Content keys: ${Object.keys(data.content).length}`);
   console.log(`Team members: ${data.team_members.length}`);
+
+  // Partners logo strip: balanced rows, at most five to a row, so any count
+  // lays out evenly (6 → 3+3, 7 → 4+3, 8 → 4+4, 11 → 4+4+3). The CSS reads
+  // the column count from --logo-cols; a short last row centers itself.
+  {
+    const n = Math.max(1, data.partners.length);
+    data.content.partners_cols = String(Math.ceil(n / Math.ceil(n / 5)));
+  }
   console.log(`Expense items: ${data.expense_allocation.length}`);
 
   // Generate pie chart SVG and inject into content

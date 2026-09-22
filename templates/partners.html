@@ -66,7 +66,7 @@
        ============================================================ -->
   <section class="fd-logos">
     <div class="fd-container">
-      <div class="fd-logos__row stagger-children">
+      <div class="fd-logos__row stagger-children" style="--logo-cols: {{partners_cols}}">
         {{#each partners}}
         <div class="fd-logos__item">
           {{#if logo_url}}<div class="fd-logos__mark"><img src="{{logo_url}}" alt="{{name}} logo" loading="lazy"></div>{{/if}}

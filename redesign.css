@@ -1679,23 +1679,32 @@ body[class*="fd-demo"] .footer {
   background: var(--fd-paper);
   padding-block: clamp(1.5rem, 3vw, 2.5rem) clamp(5rem, 9vw, 6.5rem);
 }
+/* Logo strip that holds its shape at any count. Each cell draws a 1px ring
+   around itself; cells sit 1px apart so the rings meet as single lines
+   between cells and between rows. The strip's own top and bottom lines run
+   full width, and its sides are clipped open. A short last row centers.
+   The build sets --logo-cols so rows stay balanced (at most five to a row). */
 .fd-logos__row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  --logo-cols: 5;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1px;
   border-top: 1px solid var(--fd-hairline);
   border-bottom: 1px solid var(--fd-hairline);
+  overflow: clip;
 }
 .fd-logos__item {
+  --logo-cell: calc((100% - (var(--logo-cols) - 1) * 1px) / var(--logo-cols));
+  flex: 1 1 calc(var(--logo-cell) - 0.5px);
+  max-width: var(--logo-cell);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   gap: 1.1rem;
   padding: 2.5rem 1.25rem;
-  border-left: 1px solid var(--fd-hairline);
-}
-.fd-logos__item:first-child {
-  border-left: none;
+  box-shadow: 0 0 0 1px var(--fd-hairline);
 }
 .fd-logos__mark {
   height: 76px;
@@ -1731,17 +1740,11 @@ body[class*="fd-demo"] .footer {
 }
 
 @media (max-width: 960px) {
-  .fd-logos__row {
-    grid-template-columns: 1fr 1fr;
-    border-top: none;
-  }
-  .fd-logos__item {
-    border-left: none;
-    border-top: 1px solid var(--fd-hairline);
-  }
+  .fd-logos__row { --logo-cols: 3 !important; }
+}
+@media (max-width: 640px) {
+  .fd-logos__row { --logo-cols: 2 !important; }
 }
 @media (max-width: 480px) {
-  .fd-logos__row {
-    grid-template-columns: 1fr;
-  }
+  .fd-logos__row { --logo-cols: 1 !important; }
 }
