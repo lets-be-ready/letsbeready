@@ -64,7 +64,6 @@ function getFallbackData() {
 
       // Footer trust pills
       trust_pill_1: 'Verified 501(c)(3)',
-      trust_pill_2: '100% to Programs',
       trust_pill_3: 'Since 2008',
 
       // Hero
