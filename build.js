@@ -528,6 +528,35 @@ async function fetchSanityData() {
     ...flattenImages(staffPageDoc || {}),
   };
 
+  // Photos picked from the org's own Sanity library for slots that have no
+  // editor field yet (Jasmin, Sept 16: About reused the homepage trio and the
+  // Programs header reused a homepage photo). A Sanity value wins once the
+  // fields exist; ship day adds them to the schema and writes these in.
+  const PHOTO_PICKS = {
+    about_step1_image: {
+      url: 'https://cdn.sanity.io/images/juhmq0dg/production/1fa9c8b327034d3f2c80773cb18ced63900bfa24-4032x3024.jpg',
+      alt: "A Let's Be Ready teacher reading a picture book with two students",
+    },
+    about_step2_image: {
+      url: 'https://cdn.sanity.io/images/juhmq0dg/production/bea95cb5f65cc3de09ac7700264e2d12f1285ce3-4032x3024.jpg',
+      alt: 'A full preschool class with their three teachers',
+    },
+    about_step3_image: {
+      url: 'https://cdn.sanity.io/images/juhmq0dg/production/1fcea43c10cee3db3792a03ab19c15e2b1c5d772-1920x1443.jpg',
+      alt: 'A small group of children working on the floor with their teacher',
+    },
+    programs_hero_image: {
+      url: 'https://cdn.sanity.io/images/juhmq0dg/production/3bdb98bc962502b3ebc9ed3269385c7f67eaf793-4032x3024.jpg',
+      alt: 'An open-air classroom in rural Guatemala, a facilitator teaching at the board',
+    },
+  };
+  for (const [key, pick] of Object.entries(PHOTO_PICKS)) {
+    if (!content[`${key}_url`]) {
+      content[`${key}_url`] = pick.url;
+      if (!content[`${key}_alt`]) content[`${key}_alt`] = pick.alt;
+    }
+  }
+
   // Any remaining key a template might reference resolves to an empty string.
   // Without this the substitution pass leaves the literal {{key}} on the page
   // (see processTemplate), and {{#if key}} blocks correctly render nothing.
