@@ -1,4 +1,4 @@
-<section class="fd-tgroup{{#if single}} fd-tgroup--lead{{/if}}">
+<section class="fd-tgroup{{#if lead}} fd-tgroup--lead{{/if}}{{#if single}} fd-tgroup--single{{/if}}">
   <div class="fd-container">
     <span class="fd-kicker">{{label}}</span>
     <div class="fd-team__grid fd-team__grid--page stagger-children">
@@ -8,7 +8,7 @@
         {{#if no_photo}}<div class="fd-team__initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
         <div class="fd-team__body">
           <strong>{{name}}</strong>
-          <span>{{role}}</span>
+          {{#if show_role}}<span>{{role}}</span>{{/if}}
           {{#if bio}}<div class="fd-team__bio" data-clamp><p>{{bio}}</p><button class="fd-team__more" type="button" hidden>Read more</button></div>{{/if}}
         </div>
       </div>

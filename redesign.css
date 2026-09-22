@@ -1579,7 +1579,13 @@ body[class*="fd-demo"] .footer {
   border-bottom: 1px solid var(--fd-hairline);
 }
 .fd-tgroup .fd-team__card span {
-  display: none; /* the group kicker carries the role */
+  /* the group kicker carries the role; the partial prints it under a name
+     only when someone sits in a group under a different title */
+  display: block;
+  margin-top: -0.15rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--fd-soft);
 }
 .fd-team__body strong {
   margin-bottom: 0.35rem;
@@ -1609,19 +1615,15 @@ body[class*="fd-demo"] .footer {
 .fd-team__more[hidden] {
   display: none;
 }
-/* A group of one: photo beside the words, bio in full. */
+/* The first group gets the spotlight: two big cards to a row, bios in full. */
 .fd-tgroup--lead .fd-team__grid {
-  grid-template-columns: 1fr;
-}
-.fd-tgroup--lead .fd-team__card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: center;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 24px;
 }
 .fd-tgroup--lead .fd-team__card img,
 .fd-tgroup--lead .fd-team__initials {
-  margin-bottom: 0;
+  aspect-ratio: 1 / 1;
+  margin-bottom: 1.1rem;
 }
 .fd-tgroup--lead .fd-team__body strong {
   font-size: 1.5rem;
@@ -1635,6 +1637,21 @@ body[class*="fd-demo"] .footer {
 .fd-tgroup--lead .fd-team__more {
   display: none;
 }
+/* A spotlight of one: photo beside the words. */
+.fd-tgroup--single .fd-team__grid {
+  grid-template-columns: 1fr;
+}
+.fd-tgroup--single .fd-team__card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.36fr) minmax(0, 0.64fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+.fd-tgroup--single .fd-team__card img,
+.fd-tgroup--single .fd-team__initials {
+  aspect-ratio: 1 / 1.1;
+  margin-bottom: 0;
+}
 .fd-team__notewrap {
   background: var(--fd-paper);
   padding-bottom: clamp(4rem, 8vw, 5.5rem);
@@ -1644,11 +1661,14 @@ body[class*="fd-demo"] .footer {
 }
 
 @media (max-width: 640px) {
-  .fd-tgroup--lead .fd-team__card {
+  .fd-tgroup--lead .fd-team__grid {
     grid-template-columns: 1fr;
   }
-  .fd-tgroup--lead .fd-team__card img,
-  .fd-tgroup--lead .fd-team__initials {
+  .fd-tgroup--single .fd-team__card {
+    grid-template-columns: 1fr;
+  }
+  .fd-tgroup--single .fd-team__card img,
+  .fd-tgroup--single .fd-team__initials {
     margin-bottom: 0.9rem;
   }
 }

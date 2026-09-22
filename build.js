@@ -988,22 +988,36 @@ async function build() {
 
   // Team page: people grouped by the role they carry in the editor, in the
   // order roles first appear. Each group renders through the _team-group
-  // partial (the template engine doesn't nest loops). A group of one gets
-  // the featured layout.
+  // partial (the template engine doesn't nest loops). The FIRST group gets
+  // the spotlight: bigger cards, bios in full. One exception (Jasmin,
+  // Sept 16): the Executive Director doesn't want the spotlight, so that
+  // role folds into the Board Members group, at its end, with the role
+  // shown under the name.
+  const TEAM_FOLD_INTO = { 'Executive Director': 'Board Member' };
   const groupPath = path.join(TEMPLATES_DIR, '_team-group.html');
   if (fs.existsSync(groupPath)) {
     const groupTpl = fs.readFileSync(groupPath, 'utf-8');
     const groups = [];
-    for (const m of data.team_members) {
-      const role = (m.role || '').trim() || 'Team';
+    const folded = [];
+    const groupFor = (role) => {
       let g = groups.find((x) => x.role === role);
       if (!g) { g = { role, members: [] }; groups.push(g); }
-      g.members.push(m);
+      return g;
+    };
+    for (const m of data.team_members) {
+      const role = (m.role || '').trim() || 'Team';
+      if (TEAM_FOLD_INTO[role]) { folded.push({ ...m, role, into: TEAM_FOLD_INTO[role] }); continue; }
+      groupFor(role).members.push(m);
     }
-    data.content.team_groups_html = groups.map((g) => {
+    for (const m of folded) groupFor(m.into).members.push({ ...m, show_role: true });
+    data.content.team_groups_html = groups.map((g, i) => {
       const plural = g.members.length > 1 && !/s$/i.test(g.role) ? g.role + 's' : g.role;
       return processTemplate(groupTpl, {
-        content: { label: plural, single: g.members.length === 1 ? '1' : '' },
+        content: {
+          label: plural,
+          lead: i === 0 ? '1' : '',
+          single: i === 0 && g.members.length === 1 ? '1' : '',
+        },
         members: g.members,
       });
     }).join('\n');
