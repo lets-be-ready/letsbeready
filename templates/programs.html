@@ -95,7 +95,7 @@
     <div class="fd-container">
       <div class="fd-prow">
         <div class="fd-prow__media fd-carousel" data-carousel>
-          {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide">{{/each}}
+          {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
           <div class="fd-carousel__dots"></div>
         </div>
         <div class="fd-prow__panel">
@@ -121,7 +121,7 @@
           </ul>
         </div>
         <div class="fd-prow__media fd-carousel" data-carousel>
-          {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide">{{/each}}
+          {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
           <div class="fd-carousel__dots"></div>
         </div>
       </div>

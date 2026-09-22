@@ -994,16 +994,34 @@ async function build() {
   const c = data.content;
   deriveHomepageKeys(c);
   const withAlt = (slides, alt) => slides.map((s) => ({ ...s, alt: s.alt || alt || '' }));
+
+  // Carousel slides picked from the org's own Sanity library while the two
+  // gallery boxes in the editor are empty (Jasmin, Sept 16: "we have so many
+  // great photos to share"). Photos in the editor win the moment she adds
+  // any; ship day writes these into the boxes. `pos` is the crop focus.
+  const GALLERY_PICKS = {
+    garden: [
+      { url: c.curriculum_garden_image, pos: '', alt: "Children and a teacher digging a classroom garden bed" },
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/6507646ef1ea0bd0e8aa61cb5c1c1a63ae32fdb4-3024x4032.jpg', pos: 'center 15%', alt: "A teacher kneeling with children as they plant seeds" },
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/a30daa6b799bd5c2c25aabad158cabf6c69647cf-1197x1600.jpg', pos: 'center 30%', alt: "A girl planting a seedling in the classroom garden" },
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/ce29533bb0d531c2ef5076bbc5436beadcfca4c2-1280x960.jpg', pos: '', alt: "Children's hands planting a seedling together" },
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/3e6c6ae0a88a604e405beed7d420574b07cf44dc-1280x960.jpg', pos: '', alt: "A boy crouched in the garden, smiling" },
+    ],
+    nuted: [
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/e6ca7ca27a5081ed4ec4a20c146dd9afcb5c059b-3024x4032.jpg', pos: 'center 35%', alt: "A teacher pouring drinks for children at snack time" },
+      { url: 'https://cdn.sanity.io/images/juhmq0dg/production/d52b25f731587f0ffed3e38051f135c85b1f5d91-1698x2048.jpg', pos: 'center 40%', alt: "A girl drinking from a cup during a nutrition lesson" },
+    ],
+  };
   data.garden_gallery = withAlt(
     data.garden_gallery && data.garden_gallery.length
       ? data.garden_gallery
-      : [{ url: c.curriculum_garden_image }],
+      : GALLERY_PICKS.garden.length ? GALLERY_PICKS.garden : [{ url: c.curriculum_garden_image }],
     c.curriculum_garden_image_alt,
   );
   data.nuted_gallery = withAlt(
     data.nuted_gallery && data.nuted_gallery.length
       ? data.nuted_gallery
-      : [{ url: c.curriculum_nuted_image }],
+      : GALLERY_PICKS.nuted.length ? GALLERY_PICKS.nuted : [{ url: c.curriculum_nuted_image }],
     c.curriculum_nuted_image_alt,
   );
 
