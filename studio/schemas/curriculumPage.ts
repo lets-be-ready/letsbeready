@@ -29,6 +29,30 @@ export default defineType({
       group: 'hero',
     }),
     defineField({
+      name: 'programs_hero_image',
+      title: 'Programs Header Photo',
+      type: 'image',
+      options: {hotspot: true},
+      description:
+        'The wide photo under the Programs page headline. Landscape photos work best. Empty means the site shows its built-in pick.',
+      group: 'hero',
+    }),
+    defineField({
+      name: 'programs_hero_image_alt',
+      title: 'Programs Header Photo Alt',
+      type: 'string',
+      group: 'hero',
+    }),
+    defineField({
+      name: 'programs_hero_gallery',
+      title: 'Programs Header Gallery',
+      type: 'array',
+      description:
+        'Photos for the header slideshow. With photos here, the header scrolls through them automatically; empty means it shows the Programs Header Photo above.',
+      of: [{type: 'image', options: {hotspot: true}}],
+      group: 'hero',
+    }),
+    defineField({
       name: 'curriculum_headline',
       title: 'Headline (HTML allowed)',
       type: 'text',

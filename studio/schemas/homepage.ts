@@ -106,6 +106,37 @@ export default defineType({
     defineField({name: 'model_step3_title', title: 'Step 3 Title', type: 'text', rows: 2, group: 'model'}),
     defineField({name: 'model_step3_text', title: 'Step 3 Text', type: 'text', rows: 4, group: 'model'}),
 
+    // ============ MODEL — ABOUT PAGE PHOTOS ============
+    // The About page tells the same three steps with its own photos, so the
+    // homepage trio isn't repeated (Jasmin, Sept 16). Empty = the site's built-in pick.
+    defineField({
+      name: 'about_step1_image',
+      title: 'About Page — Step 1 Photo',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Shows beside Step 1 on the About page. Empty means the site shows its built-in pick.',
+      group: 'model',
+    }),
+    defineField({name: 'about_step1_image_alt', title: 'About Page — Step 1 Photo Alt', type: 'string', group: 'model'}),
+    defineField({
+      name: 'about_step2_image',
+      title: 'About Page — Step 2 Photo',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Shows beside Step 2 on the About page. Empty means the site shows its built-in pick.',
+      group: 'model',
+    }),
+    defineField({name: 'about_step2_image_alt', title: 'About Page — Step 2 Photo Alt', type: 'string', group: 'model'}),
+    defineField({
+      name: 'about_step3_image',
+      title: 'About Page — Step 3 Photo',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Shows beside Step 3 on the About page. Empty means the site shows its built-in pick.',
+      group: 'model',
+    }),
+    defineField({name: 'about_step3_image_alt', title: 'About Page — Step 3 Photo Alt', type: 'string', group: 'model'}),
+
     // ============ PROOF ============
     defineField({name: 'proof_eyebrow', title: 'Eyebrow', type: 'string', group: 'proof'}),
     defineField({name: 'proof_heading', title: 'Heading', type: 'string', group: 'proof'}),

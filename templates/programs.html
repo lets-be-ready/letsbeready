@@ -50,7 +50,9 @@
   </div>
 
   <!-- ============================================================
-       HERO — Curriculum Page → Hero. Headline above the photo, never on a face.
+       HERO — Curriculum Page → Programs Header Photo + Gallery. Headline above
+       the photo, never on a face. The photo box crossfades through the gallery
+       (same mechanism as the Garden row); one photo shows still, no dots.
        ============================================================ -->
   <header class="fd-hero">
     <div class="fd-container fd-hero__copy">
@@ -59,7 +61,10 @@
       <p class="fd-hero__sub">{{curriculum_subheadline}}</p>
     </div>
     <div class="fd-hero__straddle">
-      <img src="{{programs_hero_image_url}}" alt="{{programs_hero_image_alt}}" loading="eager">
+      <div class="fd-carousel fd-carousel--hero" data-carousel>
+        {{#each hero_gallery}}<img src="{{url}}" alt="{{alt}}" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
+        <div class="fd-carousel__dots"></div>
+      </div>
     </div>
   </header>
 
