@@ -34,7 +34,7 @@ export default defineType({
       type: 'image',
       options: {hotspot: true},
       description:
-        'The wide photo under the Programs page headline. Landscape photos work best. Empty means the site shows its built-in pick.',
+        'The wide photo under the Programs page headline, and the first slide of the header slideshow. Landscape photos work best.',
       group: 'hero',
     }),
     defineField({
@@ -48,7 +48,7 @@ export default defineType({
       title: 'Programs Header Gallery',
       type: 'array',
       description:
-        'Photos for the header slideshow. With photos here, the header scrolls through them automatically; empty means it shows the Programs Header Photo above.',
+        'More photos for the header slideshow. The Programs Header Photo above shows first, then these, one after another. Drag the focus point on each photo to choose what stays in view.',
       of: [{type: 'image', options: {hotspot: true}}],
       group: 'hero',
     }),

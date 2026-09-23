@@ -657,11 +657,18 @@ async function fetchSanityData() {
 
   // Carousel galleries on the Programs page. Each is an array of images
   // in Sanity; build() falls back to the section's single image when empty.
+  // `pos` carries the editor's hotspot as an object-position, so a crop focus
+  // set in the Studio survives the carousel's cover crop.
+  const hotspotPos = (img) =>
+    img && img.hotspot && typeof img.hotspot.x === 'number' && typeof img.hotspot.y === 'number'
+      ? `${Math.round(img.hotspot.x * 100)}% ${Math.round(img.hotspot.y * 100)}%`
+      : '';
   const toGallery = (arr) =>
-    (arr || []).map((img) => ({ url: sanityImageUrl(img) })).filter((g) => g.url);
+    (arr || []).map((img) => ({ url: sanityImageUrl(img), pos: hotspotPos(img) })).filter((g) => g.url);
   const garden_gallery = toGallery((curriculumPage || {}).curriculum_garden_gallery);
   const nuted_gallery = toGallery((curriculumPage || {}).curriculum_nuted_gallery);
   const hero_gallery = toGallery((curriculumPage || {}).programs_hero_gallery);
+  const hero_photo_pos = hotspotPos((curriculumPage || {}).programs_hero_image);
 
   // Instagram post links for the homepage "From the Classroom" band.
   // Editors paste URLs as the browser shows them (instagram.com/account/p/CODE/),
@@ -684,6 +691,7 @@ async function fetchSanityData() {
     garden_gallery,
     nuted_gallery,
     hero_gallery,
+    hero_photo_pos,
     instagram_posts,
   };
 }
@@ -1029,13 +1037,13 @@ async function build() {
     c.curriculum_nuted_image_alt,
   );
 
-  // Programs header: the same crossfade, seeded from the org's library until
-  // the Programs Header Gallery box in the editor has photos (Jasmin, Sept 22:
-  // "can the first/main image also be like that so we can add more photos of
-  // the classrooms and activities?"). Slides are served at 1600px wide — the
-  // library holds phone originals of several MB each.
+  // Programs header slideshow: the Programs Header Photo leads, then the
+  // Programs Header Gallery (Jasmin, Sept 22: "can the first/main image also
+  // be like that so we can add more photos of the classrooms and activities?").
+  // Both boxes were written Sept 23 with these same photos, so the picks below
+  // only fire if the gallery box is ever emptied. Slides are served at 1600px
+  // wide — the library holds phone originals of several MB each.
   const HERO_PICKS = [
-    { url: c.programs_hero_image_url, pos: '', alt: c.programs_hero_image_alt },
     { url: 'https://cdn.sanity.io/images/juhmq0dg/production/551f8a9f49a73229cf626285106fd7da38c03065-2560x1920.jpg', pos: 'center 45%', alt: 'A teacher reading a picture book to the whole class' },
     { url: 'https://cdn.sanity.io/images/juhmq0dg/production/a12ee2c7fa2fc3faed2a9429027e45a026fbb766-2560x1920.jpg', pos: 'center 40%', alt: 'A boy smiling at his desk during a writing lesson' },
     { url: 'https://cdn.sanity.io/images/juhmq0dg/production/bfd967c2080e1b1539628a63e7e94a61f8e9d95e-4032x3024.jpg', pos: 'center 55%', alt: 'Children waving from their tables in a classroom' },
@@ -1043,10 +1051,10 @@ async function build() {
   ];
   const heroSrc = (url) =>
     /^https:\/\/cdn\.sanity\.io\//.test(url || '') && !/\?/.test(url) ? `${url}?w=1600&auto=format&q=80` : url;
+  const heroFirst = { url: c.programs_hero_image_url, pos: data.hero_photo_pos || '', alt: c.programs_hero_image_alt };
+  const heroRest = data.hero_gallery && data.hero_gallery.length ? data.hero_gallery : HERO_PICKS;
   data.hero_gallery = withAlt(
-    (data.hero_gallery && data.hero_gallery.length ? data.hero_gallery : HERO_PICKS)
-      .filter((s) => s.url)
-      .map((s) => ({ ...s, url: heroSrc(s.url) })),
+    [heroFirst, ...heroRest].filter((s) => s.url).map((s) => ({ ...s, url: heroSrc(s.url) })),
     c.programs_hero_image_alt,
   );
 
