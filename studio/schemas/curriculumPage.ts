@@ -103,7 +103,7 @@ export default defineType({
       name: 'curriculum_garden_gallery',
       title: 'Photo Gallery',
       description:
-        'Add extra photos — the photo box scrolls through them automatically. If empty, only the single Image above shows.',
+        'The photos this section scrolls through, in order. Drag the focus point on each photo to choose what stays in view. Empty means only the Image above shows.',
       type: 'array',
       of: [{type: 'image', options: {hotspot: true}}],
       group: 'garden',
@@ -128,7 +128,7 @@ export default defineType({
       name: 'curriculum_nuted_gallery',
       title: 'Photo Gallery',
       description:
-        'Add extra photos — the photo box scrolls through them automatically. If empty, only the single Image above shows.',
+        'The photos this section scrolls through, in order. Drag the focus point on each photo to choose what stays in view. Empty means only the Image above shows.',
       type: 'array',
       of: [{type: 'image', options: {hotspot: true}}],
       group: 'nuted',
