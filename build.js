@@ -189,16 +189,8 @@ function getFallbackData() {
       sponsor_description: 'Fund a teacher, materials, meals, and education for 12&ndash;15 children for a full year.',
       sponsor_button_text: 'Sponsor a Classroom',
       donate_transparency_heading: 'Where your donation goes',
-      donate_bar1_label: 'Teacher compensation',
-      donate_bar1_amount: '62%',
-      donate_bar2_label: 'Truck &amp; maintenance',
-      donate_bar2_amount: '10%',
-      donate_bar3_label: 'Training &amp; development',
-      donate_bar3_amount: '9%',
-      donate_bar4_label: 'Administrator compensation',
-      donate_bar4_amount: '6%',
-      donate_bar5_label: 'Nutrition, water &amp; upgrades',
-      donate_bar5_amount: '6%',
+      // The bars under that heading render from expense_allocation below —
+      // the same list the About donut draws — so the two pages can't drift.
       mail_heading: 'Mail a check',
       mail_address: 'Let\'s Be Ready #3259-6581<br>Charles Schwab &amp; Co Inc<br>PO Box 982600, El Paso, TX 79998',
       other_platforms_heading: 'Other platforms',
@@ -350,14 +342,14 @@ function getFallbackData() {
       { name: 'Charles Schwab Foundation', description: 'Financial services partner providing secure fund management and transfers.', logo_url: '' },
     ],
     expense_allocation: [
-      { label: 'Teacher compensation', percent: 62, color: '#146BF6' },
-      { label: 'Truck & maintenance', percent: 10, color: '#8b5cf6' },
+      { label: 'Teacher compensation', percent: 70, color: '#146BF6' },
       { label: 'Training & development', percent: 9, color: '#FFE500' },
       { label: 'Administrator compensation', percent: 6, color: '#16a34a' },
       { label: 'Other operating', percent: 5, color: '#F59E0B' },
       { label: 'Classroom upgrades', percent: 3, color: '#EC4899' },
       { label: 'Nutrition & water', percent: 3, color: '#06B6D4' },
       { label: 'Administration expenses', percent: 2, color: '#64748b' },
+      { label: 'Truck & maintenance', percent: 2, color: '#8b5cf6' },
     ],
     classrooms: null, // Will be loaded from classrooms.json or Classrooms tab
     staff_members: [
@@ -988,6 +980,16 @@ async function build() {
   const pieChart = generatePieChart(data.expense_allocation);
   data.content.pie_chart_svg = pieChart.svg;
   data.content.pie_chart_legend = pieChart.legend;
+
+  // Donate's "Where your donation goes" bars: the same Expense Items, in the
+  // same order and colours as the About donut. They used to be five separate
+  // hand-typed boxes on the Donate Page and drifted from the donut (Jasmin,
+  // Sept 16 + 22: "the circle graph is correct").
+  data.expense_bars = data.expense_allocation.map((i) => ({
+    label: String(i.label).replace(/&/g, '&amp;'),
+    percent: i.percent,
+    color: i.color,
+  }));
 
   // Programs-page carousels: guarantee at least one slide (the section's
   // single image) and give every slide the section's alt text.

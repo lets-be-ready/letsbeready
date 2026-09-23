@@ -131,18 +131,10 @@ export default defineType({
       name: 'donate_transparency_heading',
       title: 'Transparency Heading',
       type: 'string',
+      description:
+        'The bars under this heading come from Expense Items — the same list as the About page chart. Edit the numbers there and both pages update.',
       group: 'transparency',
     }),
-    defineField({name: 'donate_bar1_label', title: 'Bar 1 Label', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar1_amount', title: 'Bar 1 Amount', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar2_label', title: 'Bar 2 Label', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar2_amount', title: 'Bar 2 Amount', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar3_label', title: 'Bar 3 Label', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar3_amount', title: 'Bar 3 Amount', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar4_label', title: 'Bar 4 Label', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar4_amount', title: 'Bar 4 Amount', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar5_label', title: 'Bar 5 Label', type: 'string', group: 'transparency'}),
-    defineField({name: 'donate_bar5_amount', title: 'Bar 5 Amount', type: 'string', group: 'transparency'}),
     defineField({name: 'fee_note', title: 'Fee Note (HTML allowed)', type: 'text', rows: 2, group: 'transparency'}),
 
     // MAIL

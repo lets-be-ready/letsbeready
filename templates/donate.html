@@ -149,43 +149,16 @@
     <div class="container container--narrow">
       <h2 class="dp-transparency__title">{{donate_transparency_heading}}</h2>
 
+      <!-- One bar per Expense Item, the same list (order + colours) as the About donut. -->
       <div class="dp-transparency__bars">
-        <div class="dp-bar">
+        {{#each expense_bars}}<div class="dp-bar">
           <div class="dp-bar__top">
-            <span>{{donate_bar1_label}}</span>
-            <strong>{{donate_bar1_amount}}</strong>
+            <span>{{label}}</span>
+            <strong>{{percent}}%</strong>
           </div>
-          <div class="dp-bar__track"><div class="dp-bar__fill" style="width:55%;"></div></div>
+          <div class="dp-bar__track"><div class="dp-bar__fill" style="width:{{percent}}%; background:{{color}};"></div></div>
         </div>
-        <div class="dp-bar">
-          <div class="dp-bar__top">
-            <span>{{donate_bar2_label}}</span>
-            <strong>{{donate_bar2_amount}}</strong>
-          </div>
-          <div class="dp-bar__track"><div class="dp-bar__fill dp-bar__fill--yellow" style="width:21%;"></div></div>
-        </div>
-        <div class="dp-bar">
-          <div class="dp-bar__top">
-            <span>{{donate_bar3_label}}</span>
-            <strong>{{donate_bar3_amount}}</strong>
-          </div>
-          <div class="dp-bar__track"><div class="dp-bar__fill dp-bar__fill--green" style="width:13%;"></div></div>
-        </div>
-        <div class="dp-bar">
-          <div class="dp-bar__top">
-            <span>{{donate_bar4_label}}</span>
-            <strong>{{donate_bar4_amount}}</strong>
-          </div>
-          <div class="dp-bar__track"><div class="dp-bar__fill dp-bar__fill--gray" style="width:9%;"></div></div>
-        </div>
-        <div class="dp-bar">
-          <div class="dp-bar__top">
-            <span>{{donate_bar5_label}}</span>
-            <strong>{{donate_bar5_amount}}</strong>
-          </div>
-          <div class="dp-bar__track"><div class="dp-bar__fill dp-bar__fill--light" style="width:5.15%;"></div></div>
-        </div>
-      </div>
+        {{/each}}      </div>
 
     </div>
   </section>

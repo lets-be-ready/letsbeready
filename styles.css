@@ -1786,10 +1786,6 @@ section {
   border-radius: var(--radius-full);
 }
 
-.dp-bar__fill--yellow { background: var(--yellow); }
-.dp-bar__fill--green { background: var(--success); }
-.dp-bar__fill--gray { background: #A8B5C8; }
-.dp-bar__fill--light { background: #D1D5DB; }
 
 /* Fee comparison rows */
 .dp-fees {
