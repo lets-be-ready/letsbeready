@@ -116,6 +116,9 @@ function getFallbackData() {
       stat_years_value: '17 yrs',
       stat_years_label: 'proven track record',
       stat_years_context: 'Founded in 2008. Not a pilot. Not an experiment. A proven, replicable model.',
+      stat_years_image_url: 'assets/redesign/community-centered.jpg',
+      stat_years_image_alt: "Teachers and community members of Let's Be Ready",
+      stat_years_image_pos: '',
 
       // Map
       map_eyebrow: 'See the Impact',
@@ -403,6 +406,36 @@ function sanityImageUrl(image) {
 }
 
 /**
+ * An editor image the way she framed it in the Studio: her crop is applied
+ * by the CDN (rect), and her hotspot comes back as an object-position
+ * measured inside that crop.
+ *
+ * @param {object} image - A Sanity image field value
+ * @param {number} width - Widest the slot ever renders, in px (never upscaled)
+ * @returns {{url: string, pos: string}} Empty strings when there is no image
+ */
+function editorPhoto(image, width) {
+  const base = sanityImageUrl(image);
+  if (!base) return { url: '', pos: '' };
+  const [w, h] = image.asset._ref.match(/-(\d+)x(\d+)-/).slice(1).map(Number);
+  const c = { top: 0, bottom: 0, left: 0, right: 0, ...(image.crop || {}) };
+  const cw = 1 - c.left - c.right;
+  const ch = 1 - c.top - c.bottom;
+  const framed = cw > 0 && ch > 0;
+  const params = [];
+  if (framed && (cw < 1 || ch < 1)) {
+    params.push(`rect=${Math.round(c.left * w)},${Math.round(c.top * h)},${Math.round(cw * w)},${Math.round(ch * h)}`);
+  }
+  params.push(`w=${width}`, 'fit=max', 'auto=format');
+  const hs = image.hotspot;
+  const pct = (n) => Math.min(100, Math.max(0, Math.round(n * 100)));
+  const pos = framed && hs && typeof hs.x === 'number' && typeof hs.y === 'number'
+    ? `${pct((hs.x - c.left) / cw)}% ${pct((hs.y - c.top) / ch)}%`
+    : '50% 50%';
+  return { url: `${base}?${params.join('&')}`, pos };
+}
+
+/**
  * Walk a Sanity document and replace any image-field objects with their
  * CDN URL string. Mutates nothing; returns a flat copy with the same
  * field names. This is what lets templates use {{hero_image}} as a
@@ -547,6 +580,17 @@ async function fetchSanityData() {
       content[`${key}_url`] = pick.url;
       if (!content[`${key}_alt`]) content[`${key}_alt`] = pick.alt;
     }
+  }
+
+  // The photo beside the years stat (Jasmin, Oct 3: she couldn't find it in
+  // her editor because it lived in the template). It reads her Home Page box,
+  // framed the way she cropped it; an empty box shows the built-in photo.
+  const yearsPhoto = editorPhoto((homepage || {}).stat_years_image, 1200);
+  if (yearsPhoto.url) {
+    content.stat_years_image_url = yearsPhoto.url;
+    content.stat_years_image_pos = yearsPhoto.pos;
+  } else {
+    content.stat_years_image_alt = fallback.content.stat_years_image_alt;
   }
 
   // Any remaining key a template might reference resolves to an empty string.

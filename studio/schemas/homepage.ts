@@ -176,6 +176,15 @@ export default defineType({
       rows: 2,
       group: 'proof',
     }),
+    defineField({
+      name: 'stat_years_image',
+      title: '18 Years Photo',
+      type: 'image',
+      options: {hotspot: true},
+      description: 'Shows beside the years stat on the home page. Crop it and drag the circle onto the part that should stay in view. Empty means the site shows its built-in photo.',
+      group: 'proof',
+    }),
+    defineField({name: 'stat_years_image_alt', title: '18 Years Photo Alt Text', type: 'string', group: 'proof'}),
 
     // ============ MAP ============
     defineField({name: 'map_eyebrow', title: 'Eyebrow', type: 'string', group: 'map'}),
