@@ -1123,8 +1123,9 @@ async function build() {
   // partial (the template engine doesn't nest loops). The FIRST group gets
   // the spotlight: bigger cards, bios in full. One exception (Jasmin,
   // Sept 16): the Executive Director doesn't want the spotlight, so that
-  // role folds into the Board Members group, at its end, with the role
-  // shown under the name.
+  // role folds into the Board Members group with the role shown under the
+  // name. Inside a group everyone sits in the editor's Display Order, the
+  // folded role included (Jasmin, Oct 3: Garrett at the top of the board).
   const TEAM_FOLD_INTO = { 'Executive Director': 'Board Member' };
   const groupPath = path.join(TEMPLATES_DIR, '_team-group.html');
   if (fs.existsSync(groupPath)) {
@@ -1136,12 +1137,17 @@ async function build() {
       if (!g) { g = { role, members: [] }; groups.push(g); }
       return g;
     };
-    for (const m of data.team_members) {
+    // team_members arrives in Display Order, so the index is the rank.
+    data.team_members.forEach((m, rank) => {
       const role = (m.role || '').trim() || 'Team';
-      if (TEAM_FOLD_INTO[role]) { folded.push({ ...m, role, into: TEAM_FOLD_INTO[role] }); continue; }
-      groupFor(role).members.push(m);
+      if (TEAM_FOLD_INTO[role]) { folded.push({ ...m, role, rank, into: TEAM_FOLD_INTO[role] }); return; }
+      groupFor(role).members.push({ ...m, rank });
+    });
+    for (const m of folded) {
+      const g = groupFor(m.into);
+      g.members.push({ ...m, show_role: true });
+      g.members.sort((a, b) => a.rank - b.rank);
     }
-    for (const m of folded) groupFor(m.into).members.push({ ...m, show_role: true });
     data.content.team_groups_html = groups.map((g, i) => {
       const plural = g.members.length > 1 && !/s$/i.test(g.role) ? g.role + 's' : g.role;
       return processTemplate(groupTpl, {
