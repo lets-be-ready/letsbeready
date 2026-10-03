@@ -65,7 +65,7 @@
       </div>
     </div>
     <div class="fd-hero__straddle">
-      <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager">
+      <img src="{{hero_image_url}}" alt="{{hero_image_alt}}" loading="eager"{{#if hero_image_style}} style="{{hero_image_style}}"{{/if}}>
     </div>
   </header>
   <p class="fd-trust">Verified 501(c)(3) &nbsp;&middot;&nbsp; All donations tax-deductible</p>
@@ -81,9 +81,9 @@
       <a href="about.html" class="fd-textlink">Read the full story <span aria-hidden="true">&rarr;</span></a>
 
       <div class="fd-triptych stagger-children">
-        <img src="{{model_step1_image_url}}" alt="{{model_step1_image_alt}}" loading="lazy">
-        <img src="{{model_step3_image_url}}" alt="{{model_step3_image_alt}}" loading="lazy">
-        <img src="{{model_step2_image_url}}" alt="{{model_step2_image_alt}}" loading="lazy">
+        <img src="{{model_step1_image_url}}" alt="{{model_step1_image_alt}}" loading="lazy"{{#if model_step1_image_style}} style="{{model_step1_image_style}}"{{/if}}>
+        <img src="{{model_step3_image_url}}" alt="{{model_step3_image_alt}}" loading="lazy"{{#if model_step3_image_style}} style="{{model_step3_image_style}}"{{/if}}>
+        <img src="{{model_step2_image_url}}" alt="{{model_step2_image_alt}}" loading="lazy"{{#if model_step2_image_style}} style="{{model_step2_image_style}}"{{/if}}>
       </div>
     </div>
   </section>
@@ -136,7 +136,7 @@
               <p>{{stat_years_context}}</p>
             </div>
           </div>
-          <img class="fd-bento__photo" src="{{stat_years_image_url}}" alt="{{stat_years_image_alt}}" loading="lazy"{{#if stat_years_image_pos}} style="object-position: {{stat_years_image_pos}}"{{/if}}>
+          <img class="fd-bento__photo" src="{{stat_years_image_url}}" alt="{{stat_years_image_alt}}" loading="lazy"{{#if stat_years_image_style}} style="{{stat_years_image_style}}"{{/if}}>
         </div>
       </div>
     </div>
@@ -146,7 +146,7 @@
        OUR MISSION — over a photograph. Home Page → Founder Quote.
        ============================================================ -->
   <section class="fd-quoteband" id="mission">
-    <img src="{{model_step2_image_url}}" alt="">
+    <img src="{{quote_image_url}}" alt=""{{#if quote_image_style}} style="{{quote_image_style}}"{{/if}}>
     <div class="fd-quoteband__copy reveal">
       <span class="fd-kicker">Our Mission</span>
       <p>{{founder_quote}}</p>
@@ -164,7 +164,7 @@
         <h2 class="fd-h2">Our Programs</h2>
       </div>
       <div class="fd-prow">
-        <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy">
+        <img src="{{curriculum_hero_image}}" alt="{{curriculum_hero_image_alt}}" loading="lazy"{{#if curriculum_hero_image_style}} style="{{curriculum_hero_image_style}}"{{/if}}>
         <div class="fd-prow__panel">
           <h3>Education+</h3>
           <p>Curriculum, gardening, art &amp; more</p>
@@ -177,7 +177,7 @@
           <p>Every child eats before they learn</p>
           <a href="programs.html#nutrition" class="fd-textlink">Explore the program <span aria-hidden="true">&rarr;</span></a>
         </div>
-        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy" style="object-position: center 10%;">
+        <img src="{{nutrition_hero_image}}" alt="{{nutrition_hero_image_alt}}" loading="lazy"{{#if nutrition_hero_image_style}} style="{{nutrition_hero_image_style}}"{{/if}}>
       </div>
     </div>
   </section>

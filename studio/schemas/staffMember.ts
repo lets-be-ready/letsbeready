@@ -34,7 +34,9 @@ export default defineType({
       name: 'photo',
       title: 'Photo',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Staff page circle', aspectRatio: 1}]}},
+      description:
+        'Shows as a small circle on the staff page. Open the crop tool on the photo to see exactly how it will show.',
     }),
     defineField({
       name: 'active',

@@ -62,7 +62,7 @@
     </div>
     <div class="fd-hero__straddle">
       <div class="fd-carousel fd-carousel--hero" data-carousel>
-        {{#each hero_gallery}}<img src="{{url}}" alt="{{alt}}" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
+        {{#each hero_gallery}}<img src="{{url}}" alt="{{alt}}" class="fd-carousel__slide"{{#if style}} style="{{style}}"{{/if}}>{{/each}}
         <div class="fd-carousel__dots"></div>
       </div>
     </div>
@@ -100,7 +100,7 @@
     <div class="fd-container">
       <div class="fd-prow">
         <div class="fd-prow__media fd-carousel" data-carousel>
-          {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
+          {{#each garden_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if style}} style="{{style}}"{{/if}}>{{/each}}
           <div class="fd-carousel__dots"></div>
         </div>
         <div class="fd-prow__panel">
@@ -126,7 +126,7 @@
           </ul>
         </div>
         <div class="fd-prow__media fd-carousel" data-carousel>
-          {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if pos}} style="object-position: {{pos}}"{{/if}}>{{/each}}
+          {{#each nuted_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy" class="fd-carousel__slide"{{#if style}} style="{{style}}"{{/if}}>{{/each}}
           <div class="fd-carousel__dots"></div>
         </div>
       </div>
@@ -181,7 +181,7 @@
   <section class="fd-model fd-model--top">
     <div class="fd-container">
       <div class="fd-prow">
-        <img src="{{nutrition_turn_image}}" alt="{{nutrition_turn_image_alt}}" loading="lazy">
+        <img src="{{nutrition_turn_image}}" alt="{{nutrition_turn_image_alt}}" loading="lazy"{{#if nutrition_turn_image_style}} style="{{nutrition_turn_image_style}}"{{/if}}>
         <div class="fd-prow__panel">
           <h3>{{nutrition_turn_heading}}</h3>
           <p>{{nutrition_turn_text}}</p>

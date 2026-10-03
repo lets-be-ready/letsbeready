@@ -226,7 +226,7 @@
       <div class="staff-card">
         <div class="staff-card__photo-wrap">
           <span class="staff-card__placeholder">{{initials}}</span>
-          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" class="staff-card__photo">{{/if}}
+          {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" class="staff-card__photo" style="object-position: {{photo_pos}}">{{/if}}
         </div>
         <div class="staff-card__name">{{name}}</div>
         {{#if role}}<div class="staff-card__role">{{role}}</div>{{/if}}

@@ -118,7 +118,6 @@ function getFallbackData() {
       stat_years_context: 'Founded in 2008. Not a pilot. Not an experiment. A proven, replicable model.',
       stat_years_image_url: 'assets/redesign/community-centered.jpg',
       stat_years_image_alt: "Teachers and community members of Let's Be Ready",
-      stat_years_image_pos: '',
 
       // Map
       map_eyebrow: 'See the Impact',
@@ -406,33 +405,68 @@ function sanityImageUrl(image) {
 }
 
 /**
+ * Where an editor's hotspot lands in a slot of a given shape: centred while
+ * the photo has room to move, pinned to an edge once it runs out. The
+ * Studio's crop previews follow the same rule, so the site shows what she saw.
+ *
+ * @param {number} hx - Hotspot centre, 0..1 across the (cropped) photo
+ * @param {number} hy - Hotspot centre, 0..1 down the (cropped) photo
+ * @param {number} imageAspect - Cropped photo's width / height
+ * @param {number} slotAspect - Slot's width / height
+ * @returns {string} A CSS object-position value
+ */
+function focusPosition(hx, hy, imageAspect, slotAspect) {
+  // r = how many slots long the photo is on that axis once it covers the slot.
+  const along = (h, r) => (r > 1.001 ? Math.min(1, Math.max(0, (h * r - 0.5) / (r - 1))) : 0.5);
+  const x = along(hx, imageAspect / slotAspect);
+  const y = along(hy, slotAspect / imageAspect);
+  return `${Math.round(x * 100)}% ${Math.round(y * 100)}%`;
+}
+
+/**
  * An editor image the way she framed it in the Studio: her crop is applied
- * by the CDN (rect), and her hotspot comes back as an object-position
- * measured inside that crop.
+ * by the CDN (rect), and her hotspot becomes the object-position inside that
+ * crop for the slot's shape.
  *
  * @param {object} image - A Sanity image field value
- * @param {number} width - Widest the slot ever renders, in px (never upscaled)
- * @returns {{url: string, pos: string}} Empty strings when there is no image
+ * @param {object} [slot]
+ * @param {number} [slot.width=1600] - Widest the slot renders, in px (never upscaled)
+ * @param {number[]} [slot.aspects] - Slot shape as width / height: [computer, phone]
+ * @returns {{url: string, pos: string, style: string}} Empty strings when there
+ *   is no image; pos and style are empty when she hasn't moved the hotspot.
+ *   `style` carries --pos (and --pos-m when the phone shape lands differently),
+ *   which redesign.css turns into object-position.
  */
-function editorPhoto(image, width) {
+function editorPhoto(image, { width = 1600, aspects } = {}) {
   const base = sanityImageUrl(image);
-  if (!base) return { url: '', pos: '' };
+  if (!base) return { url: '', pos: '', style: '' };
   const [w, h] = image.asset._ref.match(/-(\d+)x(\d+)-/).slice(1).map(Number);
   const c = { top: 0, bottom: 0, left: 0, right: 0, ...(image.crop || {}) };
-  const cw = 1 - c.left - c.right;
-  const ch = 1 - c.top - c.bottom;
-  const framed = cw > 0 && ch > 0;
+  let cw = 1 - c.left - c.right;
+  let ch = 1 - c.top - c.bottom;
+  if (!(cw > 0 && ch > 0)) { c.top = c.left = 0; cw = ch = 1; }
   const params = [];
-  if (framed && (cw < 1 || ch < 1)) {
+  if (cw < 0.999 || ch < 0.999) {
     params.push(`rect=${Math.round(c.left * w)},${Math.round(c.top * h)},${Math.round(cw * w)},${Math.round(ch * h)}`);
   }
   params.push(`w=${width}`, 'fit=max', 'auto=format');
+  const url = `${base}?${params.join('&')}`;
+
   const hs = image.hotspot;
-  const pct = (n) => Math.min(100, Math.max(0, Math.round(n * 100)));
-  const pos = framed && hs && typeof hs.x === 'number' && typeof hs.y === 'number'
-    ? `${pct((hs.x - c.left) / cw)}% ${pct((hs.y - c.top) / ch)}%`
-    : '50% 50%';
-  return { url: `${base}?${params.join('&')}`, pos };
+  if (!hs || typeof hs.x !== 'number' || typeof hs.y !== 'number') return { url, pos: '', style: '' };
+  const hx = Math.min(1, Math.max(0, (hs.x - c.left) / cw));
+  const hy = Math.min(1, Math.max(0, (hs.y - c.top) / ch));
+  // A hotspot still at its default (centred, as big as the crop) means she
+  // cropped but never dragged the circle. There is no focus to honor, so the
+  // slot keeps the framing the design gave it.
+  const untouched =
+    Math.abs(hx - 0.5) < 0.02 && Math.abs(hy - 0.5) < 0.02 && (hs.width || 0) / cw > 0.95 && (hs.height || 0) / ch > 0.95;
+  if (untouched) return { url, pos: '', style: '' };
+  const imageAspect = (cw * w) / (ch * h);
+  const [desk, phone] = aspects && aspects.length ? aspects : [imageAspect];
+  const pos = focusPosition(hx, hy, imageAspect, desk);
+  const posM = phone ? focusPosition(hx, hy, imageAspect, phone) : pos;
+  return { url, pos, style: `--pos: ${pos}` + (posM !== pos ? `; --pos-m: ${posM}` : '') };
 }
 
 /**
@@ -582,15 +616,48 @@ async function fetchSanityData() {
     }
   }
 
-  // The photo beside the years stat (Jasmin, Oct 3: she couldn't find it in
-  // her editor because it lived in the template). It reads her Home Page box,
-  // framed the way she cropped it; an empty box shows the built-in photo.
-  const yearsPhoto = editorPhoto((homepage || {}).stat_years_image, 1200);
-  if (yearsPhoto.url) {
-    content.stat_years_image_url = yearsPhoto.url;
-    content.stat_years_image_pos = yearsPhoto.pos;
-  } else {
+  // Every editor photo, framed the way she set it in the Studio (Jasmin,
+  // Oct 3: "she can't tell what aspect ratio or size each image will show
+  // at"). Until now only the carousels listened to her hotspot and nothing
+  // listened to her crop. Each row: content key, source photo, widest px, and
+  // the slot's shape as width / height on [computer, phone]. The same shapes
+  // are the crop previews in studio/schemas, so keep the two in step.
+  const hp = homepage || {};
+  const cp = curriculumPage || {};
+  const np = nutritionPage || {};
+  const PHOTO_SLOTS = [
+    ['hero_image', hp.hero_image, 1600, [2.1, 2.1]],
+    ['model_step1_image', hp.model_step1_image, 900, [1.25, 1.25]],
+    ['model_step2_image', hp.model_step2_image, 900, [1.25, 1.25]],
+    ['model_step3_image', hp.model_step3_image, 900, [1.25, 1.25]],
+    // The quote band reuses the Step 2 photo, full-bleed.
+    ['quote_image', hp.model_step2_image, 2000, [2.15, 0.73]],
+    ['stat_years_image', hp.stat_years_image, 1200, [1, 1.35]],
+    ['about_step1_image', hp.about_step1_image, 1200, [1.55, 1.55]],
+    ['about_step2_image', hp.about_step2_image, 1200, [1.55, 1.55]],
+    ['about_step3_image', hp.about_step3_image, 1200, [1.55, 1.55]],
+    ['curriculum_hero_image', cp.curriculum_hero_image, 1200, [1.55, 1.55]],
+    ['programs_hero_image', cp.programs_hero_image, 1600, [2.1, 2.1]],
+    ['curriculum_garden_image', cp.curriculum_garden_image, 1600, [1.08, 1.55]],
+    ['curriculum_nuted_image', cp.curriculum_nuted_image, 1600, [1.28, 1.55]],
+    ['nutrition_hero_image', np.nutrition_hero_image, 1200, [1.55, 1.55]],
+    ['nutrition_turn_image', np.nutrition_turn_image, 1200, [1.5, 1.55]],
+    // Shown whole at its own shape, so only her crop applies.
+    ['donate_image', (donatePage || {}).donate_image, 1400, null],
+  ];
+  for (const [key, image, width, aspects] of PHOTO_SLOTS) {
+    const photo = editorPhoto(image, { width, aspects });
+    content[`${key}_style`] = aspects ? photo.style : '';
+    if (!photo.url) continue;
+    content[key] = photo.url;
+    content[`${key}_url`] = photo.url;
+  }
+  // Photos without a hotspot keep the framing the design gave them.
+  if (!content.nutrition_hero_image_style) content.nutrition_hero_image_style = 'object-position: center 10%';
+  if (!content.quote_image_url) content.quote_image_url = content.model_step2_image_url;
+  if (!hp.stat_years_image) {
     content.stat_years_image_alt = fallback.content.stat_years_image_alt;
+    content.stat_years_image_style = 'object-position: 50% 70%';
   }
 
   // Any remaining key a template might reference resolves to an empty string.
@@ -640,12 +707,17 @@ async function fetchSanityData() {
   // as a broken image. Supply the same initials so it can do the same.
   const team_members = (teamDocs || []).map((t) => {
     const name = t.name || '';
-    const photo_url = sanityImageUrl(t.photo) || '';
+    // Featured cards are square, board cards a touch taller; the Team page
+    // picks the style that matches the card each person lands in.
+    const lead = editorPhoto(t.photo, { width: 1100, aspects: [1, 1] });
+    const photo_url = lead.url;
     return {
       name,
       role: t.role || '',
       bio: t.bio || '',
       photo_url,
+      photo_style: editorPhoto(t.photo, { width: 1100, aspects: [0.91, 0.91] }).style,
+      photo_style_lead: lead.style,
       no_photo: !photo_url,
       initials: name.split(/\s+/).filter(Boolean).map((n) => n[0]).join('').toUpperCase().substring(0, 2),
     };
@@ -658,7 +730,8 @@ async function fetchSanityData() {
       role: s.role || '',
       region: s.region || '',
       bio: s.bio || '',
-      photo_url: sanityImageUrl(s.photo) || '',
+      photo_url: editorPhoto(s.photo, { width: 400, aspects: [1, 1] }).url,
+      photo_pos: editorPhoto(s.photo, { width: 400, aspects: [1, 1] }).pos,
       initials: name.split(/\s+/).filter(Boolean).map((n) => n[0]).join('').toUpperCase().substring(0, 2),
     };
   });
@@ -666,7 +739,7 @@ async function fetchSanityData() {
   const partners = (partnerDocs || []).map((p) => ({
     name: p.name || '',
     description: p.description || '',
-    logo_url: sanityImageUrl(p.logo) || '',
+    logo_url: editorPhoto(p.logo, { width: 600 }).url,
   }));
 
   const expense_allocation = (expenseDocs || []).map((e) => ({
@@ -701,18 +774,16 @@ async function fetchSanityData() {
 
   // Carousel galleries on the Programs page. Each is an array of images
   // in Sanity; build() falls back to the section's single image when empty.
-  // `pos` carries the editor's hotspot as an object-position, so a crop focus
-  // set in the Studio survives the carousel's cover crop.
-  const hotspotPos = (img) =>
-    img && img.hotspot && typeof img.hotspot.x === 'number' && typeof img.hotspot.y === 'number'
-      ? `${Math.round(img.hotspot.x * 100)}% ${Math.round(img.hotspot.y * 100)}%`
-      : '';
-  const toGallery = (arr) =>
-    (arr || []).map((img) => ({ url: sanityImageUrl(img), pos: hotspotPos(img) })).filter((g) => g.url);
-  const garden_gallery = toGallery((curriculumPage || {}).curriculum_garden_gallery);
-  const nuted_gallery = toGallery((curriculumPage || {}).curriculum_nuted_gallery);
-  const hero_gallery = toGallery((curriculumPage || {}).programs_hero_gallery);
-  const hero_photo_pos = hotspotPos((curriculumPage || {}).programs_hero_image);
+  // Each slide carries the editor's crop in its URL and her hotspot as
+  // `style`, worked out for that carousel's shape on [computer, phone].
+  const toGallery = (arr, aspects) =>
+    (arr || [])
+      .map((img) => editorPhoto(img, { width: 1600, aspects }))
+      .map(({ url, style }) => ({ url, style }))
+      .filter((g) => g.url);
+  const garden_gallery = toGallery(cp.curriculum_garden_gallery, [1.08, 1.55]);
+  const nuted_gallery = toGallery(cp.curriculum_nuted_gallery, [1.28, 1.55]);
+  const hero_gallery = toGallery(cp.programs_hero_gallery, [2.1, 2.1]);
 
   // Instagram post links for the homepage "From the Classroom" band.
   // Editors paste URLs as the browser shows them (instagram.com/account/p/CODE/),
@@ -735,7 +806,6 @@ async function fetchSanityData() {
     garden_gallery,
     nuted_gallery,
     hero_gallery,
-    hero_photo_pos,
     instagram_posts,
   };
 }
@@ -1049,7 +1119,9 @@ async function build() {
   // single image) and give every slide the section's alt text.
   const c = data.content;
   deriveHomepageKeys(c);
-  const withAlt = (slides, alt) => slides.map((s) => ({ ...s, alt: s.alt || alt || '' }));
+  // The built-in picks carry a plain `pos`; editor slides arrive with `style`.
+  const withAlt = (slides, alt) =>
+    slides.map((s) => ({ ...s, alt: s.alt || alt || '', style: s.style || (s.pos ? `--pos: ${s.pos}` : '') }));
 
   // Carousel slides picked from the org's own Sanity library while the two
   // gallery boxes in the editor are empty (Jasmin, Sept 16: "we have so many
@@ -1095,7 +1167,7 @@ async function build() {
   ];
   const heroSrc = (url) =>
     /^https:\/\/cdn\.sanity\.io\//.test(url || '') && !/\?/.test(url) ? `${url}?w=1600&auto=format&q=80` : url;
-  const heroFirst = { url: c.programs_hero_image_url, pos: data.hero_photo_pos || '', alt: c.programs_hero_image_alt };
+  const heroFirst = { url: c.programs_hero_image_url, style: c.programs_hero_image_style || '', alt: c.programs_hero_image_alt };
   const heroRest = data.hero_gallery && data.hero_gallery.length ? data.hero_gallery : HERO_PICKS;
   data.hero_gallery = withAlt(
     [heroFirst, ...heroRest].filter((s) => s.url).map((s) => ({ ...s, url: heroSrc(s.url) })),
@@ -1156,7 +1228,7 @@ async function build() {
           lead: i === 0 ? '1' : '',
           single: i === 0 && g.members.length === 1 ? '1' : '',
         },
-        members: g.members,
+        members: i === 0 ? g.members.map((m) => ({ ...m, photo_style: m.photo_style_lead })) : g.members,
       });
     }).join('\n');
   }

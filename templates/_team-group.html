@@ -4,7 +4,7 @@
     <div class="fd-team__grid fd-team__grid--page stagger-children">
       {{#each members}}
       <div class="fd-team__card">
-        {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" loading="lazy">{{/if}}
+        {{#if photo_url}}<img src="{{photo_url}}" alt="{{name}}" loading="lazy" style="{{photo_style}}">{{/if}}
         {{#if no_photo}}<div class="fd-team__initials" role="img" aria-label="{{name}}">{{initials}}</div>{{/if}}
         <div class="fd-team__body">
           <strong>{{name}}</strong>

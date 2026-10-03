@@ -27,7 +27,9 @@ export default defineType({
       name: 'photo',
       title: 'Photo',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Featured card', aspectRatio: 1}, {title: 'Board card', aspectRatio: 0.91}]}},
+      description:
+        'Square in the large featured cards, a little taller in the board cards. Open the crop tool on the photo to see both.',
     }),
     defineField({
       name: 'active',

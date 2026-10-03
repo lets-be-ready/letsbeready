@@ -17,7 +17,9 @@ export default defineType({
       name: 'nutrition_hero_image',
       title: 'Hero Image',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Home page, Our Programs', aspectRatio: 1.55}]}},
+      description:
+        'Shows on the home page, beside Nutrition in the Our Programs section. Open the crop tool on the photo to see exactly how it will show.',
       group: 'hero',
     }),
     defineField({name: 'nutrition_hero_image_alt', title: 'Hero Image Alt', type: 'string', group: 'hero'}),
@@ -59,7 +61,9 @@ export default defineType({
       name: 'nutrition_turn_image',
       title: 'Turn Image',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Programs page', aspectRatio: 1.55}]}},
+      description:
+        'Shows in the nutrition section of the Programs page. Open the crop tool on the photo to see exactly how it will show.',
       group: 'turn',
     }),
     defineField({name: 'nutrition_turn_image_alt', title: 'Turn Image Alt', type: 'string', group: 'turn'}),

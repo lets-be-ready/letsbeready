@@ -22,6 +22,8 @@ export default defineType({
       title: 'Logo',
       type: 'image',
       options: {hotspot: true},
+      description:
+        'Shows whole. Crop only to trim empty space around the logo.',
     }),
     defineField({
       name: 'order',

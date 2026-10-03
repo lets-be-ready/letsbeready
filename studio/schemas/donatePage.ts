@@ -28,6 +28,8 @@ export default defineType({
       title: 'Image',
       type: 'image',
       options: {hotspot: true},
+      description:
+        'Shows whole on the Donate page, at whatever shape you crop it to.',
       group: 'hero',
     }),
     defineField({name: 'donate_image_alt', title: 'Image Alt', type: 'string', group: 'hero'}),

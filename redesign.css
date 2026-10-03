@@ -502,7 +502,6 @@ body[class*="fd-demo"] .footer {
   width: 300px;
   flex-shrink: 0;
   object-fit: cover;
-  object-position: 50% 70%;
   display: block;
 }
 .fd-bento__wide {
@@ -1759,4 +1758,17 @@ body[class*="fd-demo"] .footer {
 }
 @media (max-width: 480px) {
   .fd-logos__row { --logo-cols: 1 !important; }
+}
+
+/* ============ EDITOR FOCUS POINTS ============ */
+/* When she drags the circle in the Studio's crop tool, the build writes --pos
+   on that photo (and --pos-m where the slot changes shape on a phone). Her
+   focus point outranks whatever framing the slot's own rule sets. */
+img[style*="--pos"] {
+  object-position: var(--pos) !important;
+}
+@media (max-width: 960px) {
+  img[style*="--pos-m"] {
+    object-position: var(--pos-m) !important;
+  }
 }

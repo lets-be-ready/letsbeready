@@ -19,7 +19,9 @@ export default defineType({
       name: 'curriculum_hero_image',
       title: 'Hero Image',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Home page, Our Programs', aspectRatio: 1.55}]}},
+      description:
+        'Shows on the home page, beside Curriculum in the Our Programs section. Open the crop tool on the photo to see exactly how it will show.',
       group: 'hero',
     }),
     defineField({
@@ -32,9 +34,9 @@ export default defineType({
       name: 'programs_hero_image',
       title: 'Programs Header Photo',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Programs header', aspectRatio: 2.1}]}},
       description:
-        'The wide photo under the Programs page headline, and the first slide of the header slideshow. Landscape photos work best.',
+        'The wide photo under the Programs page headline, and the first slide of the header slideshow. Landscape photos work best. Open the crop tool on the photo to see exactly how it will show.',
       group: 'hero',
     }),
     defineField({
@@ -49,7 +51,7 @@ export default defineType({
       type: 'array',
       description:
         'More photos for the header slideshow. The Programs Header Photo above shows first, then these, one after another. Drag the focus point on each photo to choose what stays in view.',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: {previews: [{title: 'Programs header', aspectRatio: 2.1}]}}}],
       group: 'hero',
     }),
     defineField({
@@ -95,7 +97,7 @@ export default defineType({
       name: 'curriculum_garden_image',
       title: 'Image',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Computer', aspectRatio: 1.08}, {title: 'Phone', aspectRatio: 1.55}]}},
       group: 'garden',
     }),
     defineField({name: 'curriculum_garden_image_alt', title: 'Image Alt', type: 'string', group: 'garden'}),
@@ -105,7 +107,7 @@ export default defineType({
       description:
         'The photos this section scrolls through, in order. Drag the focus point on each photo to choose what stays in view. Empty means only the Image above shows.',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: {previews: [{title: 'Computer', aspectRatio: 1.08}, {title: 'Phone', aspectRatio: 1.55}]}}}],
       group: 'garden',
     }),
     defineField({name: 'curriculum_garden_point1', title: 'Bullet Point 1', type: 'string', group: 'garden'}),
@@ -120,7 +122,7 @@ export default defineType({
       name: 'curriculum_nuted_image',
       title: 'Image',
       type: 'image',
-      options: {hotspot: true},
+      options: {hotspot: {previews: [{title: 'Computer', aspectRatio: 1.28}, {title: 'Phone', aspectRatio: 1.55}]}},
       group: 'nuted',
     }),
     defineField({name: 'curriculum_nuted_image_alt', title: 'Image Alt', type: 'string', group: 'nuted'}),
@@ -130,7 +132,7 @@ export default defineType({
       description:
         'The photos this section scrolls through, in order. Drag the focus point on each photo to choose what stays in view. Empty means only the Image above shows.',
       type: 'array',
-      of: [{type: 'image', options: {hotspot: true}}],
+      of: [{type: 'image', options: {hotspot: {previews: [{title: 'Computer', aspectRatio: 1.28}, {title: 'Phone', aspectRatio: 1.55}]}}}],
       group: 'nuted',
     }),
     defineField({name: 'curriculum_nuted_point1', title: 'Bullet Point 1', type: 'string', group: 'nuted'}),
