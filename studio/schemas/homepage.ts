@@ -18,6 +18,7 @@ export default defineType({
     {name: 'quote', title: 'Founder Quote'},
     {name: 'instagram', title: 'Instagram'},
     {name: 'finalCta', title: 'Final CTA'},
+    {name: 'stay', title: 'Stay Updated'},
   ],
   fields: [
     // ============ INSTAGRAM ============
@@ -277,6 +278,24 @@ export default defineType({
     }),
     defineField({name: 'final_cta_text', title: 'Body Text', type: 'text', rows: 3, group: 'finalCta'}),
     defineField({name: 'final_cta_button', title: 'Button Text', type: 'string', group: 'finalCta'}),
+
+    // ============ STAY UPDATED ============
+    // The email signup's own section on the homepage, under the Final CTA (Jasmin, Oct 7).
+    defineField({
+      name: 'stay_updated_heading',
+      title: 'Heading',
+      description: 'The line above the email box, e.g. "Hear from the classrooms."',
+      type: 'string',
+      group: 'stay',
+    }),
+    defineField({
+      name: 'stay_updated_text',
+      title: 'Body Text',
+      description: 'One short line on what people get and how often.',
+      type: 'text',
+      rows: 2,
+      group: 'stay',
+    }),
   ],
   preview: {
     prepare: () => ({title: 'Home Page'}),

@@ -245,6 +245,29 @@
     </div>
   </section>
 
+  <!-- ============================================================
+       STAY UPDATED — Home Page → Stay Updated. The email signup's own
+       section under the ask (Jasmin, Oct 7); the footer keeps its small form.
+       Same Netlify form as the footer, tagged "homepage".
+       ============================================================ -->
+  <section class="fd-stay" id="stay-updated">
+    <div class="fd-container">
+      <div class="fd-stay__inner reveal">
+        <span class="fd-kicker fd-kicker--center">Stay updated</span>
+        <h2 class="fd-h2">{{stay_updated_heading}}</h2>
+        <p class="fd-stay__sub">{{stay_updated_text}}</p>
+        <form class="fd-stay__form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="_hp" data-source="homepage" novalidate>
+          <input type="hidden" name="form-name" value="newsletter">
+          <input type="hidden" name="source" value="homepage">
+          <input type="email" name="email" placeholder="Your email" required aria-label="Email address" autocomplete="email">
+          <button type="submit" class="fd-btn fd-btn--yellow">Subscribe</button>
+          <input type="text" name="_hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        </form>
+        <p class="fd-stay__msg" aria-live="polite"></p>
+      </div>
+    </div>
+  </section>
+
   {{footer_html}}
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

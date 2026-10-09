@@ -172,14 +172,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-  // --- Newsletter Form (Netlify Forms — submissions live in the site's Netlify dashboard) ---
-  const newsletterForm = document.getElementById('newsletterForm');
-  if (newsletterForm) {
-    const msgEl = document.getElementById('newsletterMsg');
+  // --- Newsletter forms (Netlify Forms — submissions live in the site's Netlify dashboard) ---
+  // One handler for every signup on the page: the footer's, and on the
+  // homepage the Stay updated band's. Each form's status line is the
+  // aria-live element right after it; its class names its own modifiers.
+  document.querySelectorAll('form[name="newsletter"]').forEach((newsletterForm) => {
+    const next = newsletterForm.nextElementSibling;
+    const msgEl = next && next.hasAttribute('aria-live') ? next : null;
+    const msgBase = msgEl ? msgEl.className : '';
     const setMsg = (text, kind) => {
       if (!msgEl) return;
       msgEl.textContent = text || '';
-      msgEl.className = 'footer__newsletter-msg' + (kind ? ' footer__newsletter-msg--' + kind : '');
+      msgEl.className = msgBase + (kind ? ' ' + msgBase.split(' ')[0] + '--' + kind : '');
     };
 
     const submitToNetlify = async (email, source, hp) => {
@@ -205,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
         setMsg('Please enter a valid email address.', 'error');
         return;
       }
-      const source = window.location.pathname || 'footer';
+      // The band names itself (data-source); the footer reports the page it's on.
+      const source = newsletterForm.dataset.source || window.location.pathname || 'footer';
       if (sourceInput) sourceInput.value = source;
       const hp = honeypotInput ? honeypotInput.value : '';
 
@@ -218,7 +223,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!ok) throw new Error('Subscription failed');
 
         button.textContent = 'Subscribed!';
-        button.style.background = 'var(--success)';
+        // The footer's blue button turns green; the band's yellow one keeps its colour.
+        if (!button.classList.contains('fd-btn')) button.style.background = 'var(--success)';
         emailInput.value = '';
         setMsg("Thanks — we'll be in touch.", 'success');
         setTimeout(() => {
@@ -236,7 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
         );
       }
     });
-  }
+  });
 
   // --- Tracker Progress Bar Animation (Donate page) ---
   const progressFill = document.getElementById('progressFill');
