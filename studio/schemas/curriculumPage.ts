@@ -203,6 +203,16 @@ export default defineType({
       type: 'string',
       group: 'supplement',
     }),
+    defineField({
+      name: 'curriculum_supplement_gallery',
+      title: 'Supplement Photos',
+      description:
+        'One or two photos under the numbers, like people holding the bags of Chispuditos. Drag the focus point on each to choose what stays in view. Empty means no photos.',
+      type: 'array',
+      of: [{type: 'image', options: {hotspot: {previews: [{title: 'Computer', aspectRatio: 1.33}, {title: 'Phone', aspectRatio: 1.33}]}}}],
+      validation: (Rule) => Rule.max(2),
+      group: 'supplement',
+    }),
 
     // CTA
     defineField({

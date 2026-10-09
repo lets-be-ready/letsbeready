@@ -1440,6 +1440,23 @@ body[class*="fd-demo"] .footer {
 .fd-supp .fd-stats__item p {
   font-size: 0.95rem;
 }
+.fd-supp__photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  max-width: 900px;
+  margin: clamp(2.5rem, 5vw, 3.5rem) auto 0;
+}
+.fd-supp__photos--1 {
+  grid-template-columns: 1fr;
+  max-width: 600px;
+}
+.fd-supp__photos img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
 .fd-supp__note {
   margin: 2.5rem auto 0;
   max-width: 60ch;
@@ -1539,6 +1556,10 @@ body[class*="fd-demo"] .footer {
   }
   .fd-nstats__grid {
     grid-template-columns: 1fr;
+  }
+  .fd-supp__photos {
+    grid-template-columns: 1fr;
+    max-width: 600px;
   }
 }
 @media (max-width: 640px) {

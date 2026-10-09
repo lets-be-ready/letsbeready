@@ -175,6 +175,9 @@
         <div class="fd-stats__item"><div class="fd-stats__number">{{curriculum_supplement_stat2_value}}</div><p>{{curriculum_supplement_stat2_label}}</p></div>
         <div class="fd-stats__item"><div class="fd-stats__number">{{curriculum_supplement_stat3_value}}</div><p>{{curriculum_supplement_stat3_label}}</p></div>
       </div>
+      {{#if supplement_photos_on}}<div class="{{supplement_photos_class}} stagger-children">
+        {{#each supplement_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy"{{#if style}} style="{{style}}"{{/if}}>{{/each}}
+      </div>{{/if}}
       {{#if curriculum_supplement_note}}<p class="fd-supp__note">{{curriculum_supplement_note}}</p>{{/if}}
     </div>
   </section>

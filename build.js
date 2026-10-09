@@ -784,6 +784,9 @@ async function fetchSanityData() {
   const garden_gallery = toGallery(cp.curriculum_garden_gallery, [1.08, 1.55]);
   const nuted_gallery = toGallery(cp.curriculum_nuted_gallery, [1.28, 1.55]);
   const hero_gallery = toGallery(cp.programs_hero_gallery, [2.1, 2.1]);
+  // Supplement Photos (Jasmin, Oct 7: room for a pic or two, like the
+  // Chispuditos bags). 4:3 slots on every screen, at most two.
+  const supplement_gallery = toGallery(cp.curriculum_supplement_gallery, [1.33, 1.33]).slice(0, 2);
 
   // Instagram post links for the homepage "From the Classroom" band.
   // Editors paste URLs as the browser shows them (instagram.com/account/p/CODE/),
@@ -806,6 +809,7 @@ async function fetchSanityData() {
     garden_gallery,
     nuted_gallery,
     hero_gallery,
+    supplement_gallery,
     instagram_posts,
   };
 }
@@ -1152,6 +1156,13 @@ async function build() {
       : GALLERY_PICKS.nuted.length ? GALLERY_PICKS.nuted : [{ url: c.curriculum_nuted_image }],
     c.curriculum_nuted_image_alt,
   );
+
+  // Supplement Photos: her box is the only source, so an empty box means the
+  // band ends at the numbers. One photo sits alone at a narrower width, two
+  // share a row.
+  data.supplement_gallery = withAlt(data.supplement_gallery || [], 'Chispuditos, the fortified supplement, in a classroom community');
+  c.supplement_photos_on = data.supplement_gallery.length ? '1' : '';
+  c.supplement_photos_class = data.supplement_gallery.length === 1 ? 'fd-supp__photos fd-supp__photos--1' : 'fd-supp__photos';
 
   // Programs header slideshow: the Programs Header Photo leads, then the
   // Programs Header Gallery (Jasmin, Sept 22: "can the first/main image also
