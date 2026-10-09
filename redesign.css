@@ -1489,9 +1489,6 @@ body[class*="fd-demo"] .footer {
   font-size: 1rem;
   max-width: 30ch;
 }
-.fd-model--top {
-  padding-top: 0;
-}
 .fd-prow__nums {
   display: flex;
   gap: clamp(1.5rem, 3vw, 2.5rem);
