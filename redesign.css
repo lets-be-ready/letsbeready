@@ -1268,6 +1268,7 @@ body[class*="fd-demo"] .footer {
   padding-block: clamp(5rem, 9vw, 6.5rem);
   background: var(--fd-paper);
 }
+.fd-model--top { padding-top: 0; }
 .fd-cost__lead--cap::first-letter {
   text-transform: uppercase;
 }

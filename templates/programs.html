@@ -159,9 +159,21 @@
     </div>
   </section>
 
+  <section class="fd-model fd-model--top">
+    <div class="fd-container">
+      <div class="fd-prow">
+        <img src="{{nutrition_turn_image}}" alt="{{nutrition_turn_image_alt}}" loading="lazy"{{#if nutrition_turn_image_style}} style="{{nutrition_turn_image_style}}"{{/if}}>
+        <div class="fd-prow__panel">
+          <h3>{{nutrition_turn_heading}}</h3>
+          <p>{{nutrition_turn_text}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============================================================
        THE SUPPLEMENT — Curriculum Page → Supplement Highlight.
-       Lives inside the Nutrition chapter (Jasmin, Oct 7), after its two big numbers.
+       Lives inside the Nutrition chapter (Jasmin, Oct 7), after "So we feed them" (Jasmin, Oct 10).
        ============================================================ -->
   <section class="fd-supp">
     <div class="fd-container">
@@ -179,18 +191,6 @@
         {{#each supplement_gallery}}<img src="{{url}}" alt="{{alt}}" loading="lazy"{{#if style}} style="{{style}}"{{/if}}>{{/each}}
       </div>{{/if}}
       {{#if curriculum_supplement_note}}<p class="fd-supp__note">{{curriculum_supplement_note}}</p>{{/if}}
-    </div>
-  </section>
-
-  <section class="fd-model">
-    <div class="fd-container">
-      <div class="fd-prow">
-        <img src="{{nutrition_turn_image}}" alt="{{nutrition_turn_image_alt}}" loading="lazy"{{#if nutrition_turn_image_style}} style="{{nutrition_turn_image_style}}"{{/if}}>
-        <div class="fd-prow__panel">
-          <h3>{{nutrition_turn_heading}}</h3>
-          <p>{{nutrition_turn_text}}</p>
-        </div>
-      </div>
     </div>
   </section>
 
